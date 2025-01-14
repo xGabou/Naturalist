@@ -84,20 +84,30 @@ public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
-        if (!useContext.getItemInHand().is(this.asItem())) {
-            BlockPos pos = useContext.getClickedPos();
-            Level level = useContext.getLevel();
-            if (!level.isClientSide()) {
-                this.decreaseGoop(level, pos, state);
-                int goop = state.getValue(GOOP);
-                for (int i = 0; i < goop; i++) {
-                    popResource(level, pos, new ItemStack(NaturalistRegistry.GLOW_GOOP.get()));
-                }
-            }
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        ItemStack stack = context.getItemInHand();
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        int currentGoop = state.getValue(GOOP);
+
+        if (stack.is(this.asItem()) && !context.isSecondaryUseActive() && currentGoop < MAX_GOOP) {
+            return true;
         }
-        return !useContext.isSecondaryUseActive() && useContext.getItemInHand().is(this.asItem()) && state.getValue(GOOP) < MAX_GOOP || super.canBeReplaced(state, useContext);
+
+        if (!stack.is(this.asItem())) {
+            if (!level.isClientSide()) {
+                ItemStack itemStack = new ItemStack(NaturalistRegistry.GLOW_GOOP.get(), currentGoop);
+                popResource(level, pos, itemStack);
+
+                level.removeBlock(pos, false);
+            }
+            return true;
+        }
+
+        return super.canBeReplaced(state, context);
     }
+
+
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
