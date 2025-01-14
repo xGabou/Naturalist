@@ -117,11 +117,11 @@ public class NaturalistFabric implements ModInitializer {
         FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.TORTOISE.get(), Tortoise.createAttributes());
         FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.DUCK.get(), Duck.createAttributes());
 
-        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.TOUCAN.get(), Toucan.createAttributes());
-        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.CRAB.get(), Crab.createAttributes());
-        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.MOOSE.get(), Moose.createAttributes());
-        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.CAPYBARA.get(), Capybara.createAttributes());
-        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.EMPEROR_PENGUIN.get(), EmperorPenguin.createAttributes());
+//        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.TOUCAN.get(), Toucan.createAttributes());
+//        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.CRAB.get(), Crab.createAttributes());
+//        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.MOOSE.get(), Moose.createAttributes());
+//        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.CAPYBARA.get(), Capybara.createAttributes());
+//        FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.EMPEROR_PENGUIN.get(), EmperorPenguin.createAttributes());
     }
 
     void addSpawns() {

@@ -30,6 +30,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.GeckoLib;
 
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +53,7 @@ public class Naturalist {
 
     public static void registerDispenserBehaviors() {
         DispenserBlock.registerBehavior(NaturalistRegistry.DUCK_EGG.get(), new AbstractProjectileDispenseBehavior() {
-            protected Projectile getProjectile(Level level, Position position, ItemStack stack) {
+            protected @NotNull Projectile getProjectile(@NotNull Level level, @NotNull Position position, @NotNull ItemStack stack) {
                 return Util.make(new ThrownDuckEgg(level, position.x(), position.y(), position.z()), (thrownDuckEgg) -> {
                     thrownDuckEgg.setItem(stack);
                 });
@@ -61,7 +62,7 @@ public class Naturalist {
         DispenseItemBehavior dispenseItemBehavior = new DefaultDispenseItemBehavior() {
             private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
-            public ItemStack execute(BlockSource source, ItemStack stack) {
+            public @NotNull ItemStack execute(BlockSource source, ItemStack stack) {
                 DispensibleContainerItem dispensibleContainerItem = (DispensibleContainerItem)stack.getItem();
                 BlockPos blockPos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
                 Level level = source.getLevel();
