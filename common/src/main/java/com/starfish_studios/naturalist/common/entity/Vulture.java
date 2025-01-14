@@ -37,6 +37,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -56,7 +57,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
     private int ticksSinceEaten;
 
     protected static final RawAnimation FLY = RawAnimation.begin().thenLoop("animation.sf_nba.vulture.fly");
-    
+
 
     public Vulture(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
@@ -91,6 +92,22 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
     public static boolean checkVultureSpawnRules(EntityType<Vulture> entityType, LevelAccessor state, MobSpawnType type, BlockPos pos, RandomSource random) {
         return state.getBlockState(pos.below()).is(NaturalistTags.BlockTags.VULTURES_SPAWNABLE_ON) && state.getRawBrightness(pos, 0) > 8;
     }
+
+    @Override
+    protected void dropAllDeathLoot(@NotNull DamageSource damageSource) {
+        super.dropAllDeathLoot(damageSource);
+        
+        if (!this.level().isClientSide()) {
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                ItemStack itemStack = this.getItemBySlot(slot);
+                if (!itemStack.isEmpty()) {
+                    this.spawnAtLocation(itemStack);
+                    this.setItemSlot(slot, ItemStack.EMPTY);
+                }
+            }
+        }
+    }
+
 
     @Override
     public boolean isFlying() {
