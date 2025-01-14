@@ -72,6 +72,7 @@ public class Lion extends Animal implements NaturalistGeoEntity, SleepingAnimal 
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
         AgeableMobGroupData ageableMobGroupData;
         if (spawnData == null) {
             spawnData = new AgeableMobGroupData(true);
