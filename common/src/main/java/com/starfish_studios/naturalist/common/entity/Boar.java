@@ -5,14 +5,20 @@ import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,9 +32,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -63,7 +70,7 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob otherParent) {
         return NaturalistEntityTypes.BOAR.get().create(level);
     }
 
@@ -89,7 +96,7 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     }
 
     @Override
-    public boolean isFood(ItemStack stack) {
+    public boolean isFood(@NotNull ItemStack stack) {
         return FOOD_ITEMS.test(stack);
     }
 
@@ -102,6 +109,17 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
             }
             this.updatePersistentAnger((ServerLevel)this.level(), true);
         }
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+
+        /// Testing whether or not Boars spawn at all or if they just can't be found
+        pLevel.players().forEach(player -> player.sendSystemMessage(Component.literal("Boar has spawned!").withStyle(ChatFormatting.ITALIC)));
+        this.addEffect(new MobEffectInstance(MobEffects.GLOWING, Integer.MAX_VALUE, 0, false, false));
+
+        return pSpawnData;
     }
 
     @Override
@@ -122,7 +140,7 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
 
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
         return NaturalistSoundEvents.BOAR_HURT.get();
     }
 
@@ -133,7 +151,7 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
+    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) {
         this.playSound(SoundEvents.PIG_STEP, 0.15f, 1.0f);
     }
 
@@ -143,9 +161,10 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     }
 
     @Override
-    public void thunderHit(ServerLevel level, LightningBolt lightning) {
+    public void thunderHit(ServerLevel level, @NotNull LightningBolt lightning) {
         if (level.getDifficulty() != Difficulty.PEACEFUL) {
             Zoglin zoglin = EntityType.ZOGLIN.create(level);
+            assert zoglin != null;
             zoglin.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
             zoglin.setNoAi(this.isNoAi());
             zoglin.setBaby(this.isBaby());
