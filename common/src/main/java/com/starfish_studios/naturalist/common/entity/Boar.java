@@ -115,9 +115,9 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
 
-        /// Testing whether or not Boars spawn at all or if they just can't be found
-        pLevel.players().forEach(player -> player.sendSystemMessage(Component.literal("Boar has spawned!").withStyle(ChatFormatting.ITALIC)));
-        this.addEffect(new MobEffectInstance(MobEffects.GLOWING, Integer.MAX_VALUE, 0, false, false));
+        /// Spawn Testing (saving for the future)
+//        pLevel.players().forEach(player -> player.sendSystemMessage(Component.literal("Boar has spawned!").withStyle(ChatFormatting.ITALIC)));
+//        this.addEffect(new MobEffectInstance(MobEffects.GLOWING, Integer.MAX_VALUE, 0, false, false));
 
         return pSpawnData;
     }
