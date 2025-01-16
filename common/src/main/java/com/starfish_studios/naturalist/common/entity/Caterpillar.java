@@ -1,9 +1,7 @@
 package com.starfish_studios.naturalist.common.entity;
 
 import com.starfish_studios.naturalist.common.block.ChrysalisBlock;
-import com.starfish_studios.naturalist.common.entity.core.Catchable;
-import com.starfish_studios.naturalist.common.entity.core.ClimbingAnimal;
-import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
+import com.starfish_studios.naturalist.common.entity.core.*;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -54,7 +52,7 @@ public class Caterpillar extends ClimbingAnimal implements NaturalistGeoEntity, 
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.caterpillar.idle");
     protected static final RawAnimation CRAWL = RawAnimation.begin().thenLoop("animation.sf_nba.caterpillar.crawl");
 
-    public Caterpillar(EntityType<? extends Animal> entityType, Level level) {
+    public Caterpillar(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -203,7 +201,7 @@ public class Caterpillar extends ClimbingAnimal implements NaturalistGeoEntity, 
 
     private static class CocoonGoal extends MoveToBlockGoal {
         private final Caterpillar caterpillar;
-        private Direction facing = Direction.NORTH;
+        private @NotNull Direction facing = Direction.NORTH;
         private BlockPos logPos = BlockPos.ZERO;
 
         public CocoonGoal(Caterpillar pMob, double pSpeedModifier, int pSearchRange, int pVerticalSearchRange) {

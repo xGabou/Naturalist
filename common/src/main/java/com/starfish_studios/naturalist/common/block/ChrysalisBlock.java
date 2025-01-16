@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ChrysalisBlock extends HorizontalDirectionalBlock {
@@ -43,7 +44,7 @@ public class ChrysalisBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+    public void randomTick(@NotNull BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         int age = pState.getValue(AGE);
         if (age < 3) {
             if (pLevel.random.nextInt(5) == 0) {
@@ -62,13 +63,13 @@ public class ChrysalisBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+    public boolean canSurvive(BlockState pState, @NotNull LevelReader pLevel, @NotNull BlockPos pPos) {
         BlockState facingState = pLevel.getBlockState(pPos.relative(pState.getValue(FACING)));
         return facingState.is(BlockTags.LOGS);
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    public VoxelShape getShape(@NotNull BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         int age = pState.getValue(AGE);
         switch (pState.getValue(FACING)) {
             case SOUTH:
@@ -85,7 +86,7 @@ public class ChrysalisBlock extends HorizontalDirectionalBlock {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = this.defaultBlockState();
         LevelReader level = pContext.getLevel();
         BlockPos pos = pContext.getClickedPos();

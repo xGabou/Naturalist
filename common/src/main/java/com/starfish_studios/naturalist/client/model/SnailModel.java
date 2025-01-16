@@ -8,6 +8,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -17,12 +19,14 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class SnailModel extends GeoModel<Snail> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Snail snail) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/snail.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Snail snail) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getTextureResource(@NotNull Snail snail) {
         if (snail.getName().getString().contains("Gary")) {
             return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/snail/gary.png");
         } else if (snail.getSnailColor() != null) {
@@ -38,7 +42,7 @@ public class SnailModel extends GeoModel<Snail> {
     }
 
     @Override
-    public void setCustomAnimations(Snail animatable, long instanceId, AnimationState<Snail> animationState) {
+    public void setCustomAnimations(Snail animatable, long instanceId, @Nullable AnimationState<Snail> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
 
         if (animationState == null) return;

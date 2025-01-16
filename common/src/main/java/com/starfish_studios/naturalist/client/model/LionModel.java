@@ -6,6 +6,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,11 +17,13 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class LionModel extends GeoModel<Lion> {
     @Override
-    public ResourceLocation getModelResource(Lion entity) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getModelResource(Lion entity) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/lion.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Lion entity) {
         return (entity.isSleeping() && entity.hasMane()) && !entity.isBaby() ? new ResourceLocation(Naturalist.MOD_ID, "textures/entity/lion/lion_sleep.png") :
                 (!entity.hasMane() && entity.isSleeping() || entity.isBaby() && entity.isSleeping()) ? new ResourceLocation(Naturalist.MOD_ID, "textures/entity/lion/lioness_sleep.png") :
@@ -35,7 +39,7 @@ public class LionModel extends GeoModel<Lion> {
     }
 
     @Override
-    public void setCustomAnimations(Lion entity, long instanceId, AnimationState<Lion> animationState) {
+    public void setCustomAnimations(Lion entity, long instanceId, @Nullable AnimationState<Lion> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

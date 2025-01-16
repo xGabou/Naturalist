@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TurtleEggBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class AlligatorEggBlock extends TurtleEggBlock {
     public AlligatorEggBlock(Properties properties) {
@@ -58,7 +59,7 @@ public class AlligatorEggBlock extends TurtleEggBlock {
     }
 
     @Override
-    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+    public void stepOn(Level level, BlockPos pos, BlockState state, @NotNull Entity entity) {
         if (!entity.isSteppingCarefully()) {
             this.destroyEgg(level, state, pos, entity, 100);
         }
@@ -73,7 +74,7 @@ public class AlligatorEggBlock extends TurtleEggBlock {
         super.fallOn(level, state, pos, entity, fallDistance);
     }
 
-    private void destroyEgg(Level level, BlockState state, BlockPos pos, Entity entity, int chance) {
+    private void destroyEgg(@NotNull Level level, BlockState state, @NotNull BlockPos pos, Entity entity, int chance) {
         if (!this.canDestroyEgg(level, entity)) {
             return;
         }
@@ -94,7 +95,7 @@ public class AlligatorEggBlock extends TurtleEggBlock {
         }
     }
 
-    private void decreaseEggs(Level level, BlockPos pos, BlockState state) {
+    private void decreaseEggs(@NotNull Level level, BlockPos pos, BlockState state) {
         level.playSound(null, pos, NaturalistSoundEvents.GATOR_EGG_BREAK.get(), SoundSource.BLOCKS, 0.7f, 0.9f + level.random.nextFloat() * 0.2f);
         int i = state.getValue(EGGS);
         if (i <= 1) {

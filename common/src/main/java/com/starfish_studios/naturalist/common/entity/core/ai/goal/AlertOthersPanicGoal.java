@@ -11,6 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.List;
@@ -54,7 +55,7 @@ public class AlertOthersPanicGoal extends Goal {
         }
     }
 
-    protected boolean findRandomPosAway(LivingEntity entity) {
+    protected boolean findRandomPosAway(@NotNull LivingEntity entity) {
         Vec3 vec3 = LandRandomPos.getPosAway(this.mob, 16, 7, entity.position());
         if (vec3 == null) {
             return false;

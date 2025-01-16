@@ -2,9 +2,10 @@ package com.starfish_studios.naturalist.common.entity.core.ai.goal;
 
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
+import org.jetbrains.annotations.NotNull;
 
 public class BabyPanicGoal extends PanicGoal {
-    public BabyPanicGoal(PathfinderMob pMob, double pSpeedModifier) {
+    public BabyPanicGoal(@NotNull PathfinderMob pMob, double pSpeedModifier) {
         super(pMob, pSpeedModifier);
     }
 

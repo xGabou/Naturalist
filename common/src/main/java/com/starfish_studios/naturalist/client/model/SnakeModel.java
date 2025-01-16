@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -16,12 +17,14 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class SnakeModel extends GeoModel<Snake> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Snake snake) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/snake.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Snake snake) {
+    @SuppressWarnings("removal")
+    public ResourceLocation getTextureResource(@NotNull Snake snake) {
         if (snake.getType().equals(NaturalistEntityTypes.CORAL_SNAKE.get())) {
             return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/snake/coral_snake.png");
         } else if (snake.getType().equals(NaturalistEntityTypes.RATTLESNAKE.get())) {

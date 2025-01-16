@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,11 +16,13 @@ import software.bernie.geckolib.model.GeoModel;
 @Environment(EnvType.CLIENT)
 public class DuckModel extends GeoModel<Duck> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Duck animal) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/duck.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Duck animal) {
         if (animal.getName().getString().equalsIgnoreCase("Queso")) {
             return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/duck/queso.png");
@@ -30,7 +33,7 @@ public class DuckModel extends GeoModel<Duck> {
     }
 
     @Override
-    public ResourceLocation getAnimationResource(Duck animal) {
+    public @NotNull ResourceLocation getAnimationResource(Duck animal) {
         return new ResourceLocation(Naturalist.MOD_ID, "animations/duck.rp_anim.json");
     }
 

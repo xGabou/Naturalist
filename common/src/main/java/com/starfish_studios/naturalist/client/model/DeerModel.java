@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,11 +16,13 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class DeerModel extends GeoModel<Deer> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Deer deer) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/deer.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Deer deer) {
         if (deer.isBaby()) {
             return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/deer.png");
@@ -34,7 +37,7 @@ public class DeerModel extends GeoModel<Deer> {
     }
 
     @Override
-    public void setCustomAnimations(Deer entity, long instanceId, AnimationState<Deer> animationState) {
+    public void setCustomAnimations(@NotNull Deer entity, long instanceId, AnimationState<Deer> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

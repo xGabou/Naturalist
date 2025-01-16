@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyHurtByTargetGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.DistancedFollowParentGoal;
@@ -52,7 +53,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.EnumSet;
 import java.util.List;
 
-public class Hippo extends Animal implements NaturalistGeoEntity {
+public class Hippo extends NaturalistAnimal implements NaturalistGeoEntity {
 
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.hippo.idle");
     protected static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.sf_nba.hippo.walk");
@@ -65,7 +66,7 @@ public class Hippo extends Animal implements NaturalistGeoEntity {
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Blocks.MELON.asItem());
     private int eatingTicks;
 
-    public Hippo(EntityType<? extends Animal> entityType, Level level) {
+    public Hippo(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.setMaxUpStep(1.0f);
@@ -76,7 +77,7 @@ public class Hippo extends Animal implements NaturalistGeoEntity {
         return new MMPathNavigatorGround(this, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.FOLLOW_RANGE, 20.0D)
@@ -85,7 +86,7 @@ public class Hippo extends Animal implements NaturalistGeoEntity {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.6D);
     }
 
-    public static boolean checkHippoSpawnRules(EntityType<? extends Animal> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
+    public static boolean checkHippoSpawnRules(EntityType<? extends NaturalistAnimal> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
         if (levelAccessor.getBlockState(blockPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && Animal.isBrightEnoughToSpawn(levelAccessor, blockPos)) {
             for (int x = -16; x <= 16; x++) {
@@ -142,7 +143,7 @@ public class Hippo extends Animal implements NaturalistGeoEntity {
     }
 
     @Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(@NotNull Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         if (this.isFood(itemStack)) {
             int age = this.getAge();
@@ -234,7 +235,7 @@ public class Hippo extends Animal implements NaturalistGeoEntity {
         return this.geoCache;
     }
 
-    private <E extends Hippo> PlayState predicate(final AnimationState<E> event) {
+    private <E extends Hippo> PlayState predicate(final @NotNull AnimationState<E> event) {
         event.getController().setAnimationSpeed(0.8D + event.getLimbSwingAmount());
         if (this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6) {
             if (!this.isInWater()) {

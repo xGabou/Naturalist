@@ -5,6 +5,7 @@ import com.starfish_studios.naturalist.common.advancements.criterion.CaughtEntit
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class NaturalistCriteriaTriggers {
     public void CriteriaTriggers() {
     }
 
-    public static <T extends CriterionTrigger<?>> T register(T criterion) {
+    public static <T extends CriterionTrigger<?>> @NotNull T register(T criterion) {
         if (CRITERIA.containsKey(criterion.getId())) {
             throw new IllegalArgumentException("Duplicate criterion id " + criterion.getId());
         } else {

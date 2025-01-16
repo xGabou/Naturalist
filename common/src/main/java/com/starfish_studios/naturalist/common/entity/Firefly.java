@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.FlyingWanderGoal;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
@@ -44,7 +45,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class Firefly extends Animal implements FlyingAnimal, NaturalistGeoEntity {
+public class Firefly extends NaturalistAnimal implements FlyingAnimal, NaturalistGeoEntity {
     // region VARIABLES
     private static final EntityDataAccessor<Integer> GLOW_TICKS_REMAINING = SynchedEntityData.defineId(Firefly.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SUN_TICKS = SynchedEntityData.defineId(Firefly.class, EntityDataSerializers.INT);
@@ -59,7 +60,7 @@ public class Firefly extends Animal implements FlyingAnimal, NaturalistGeoEntity
         return MobType.ARTHROPOD;
     }
 
-    public Firefly(EntityType<? extends Animal> entityType, Level level) {
+    public Firefly(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
@@ -70,7 +71,7 @@ public class Firefly extends Animal implements FlyingAnimal, NaturalistGeoEntity
     }
 
     @Override
-    protected PathNavigation createNavigation(Level pLevel) {
+    protected @NotNull PathNavigation createNavigation(Level pLevel) {
         FlyingPathNavigation navigation = new FlyingPathNavigation(this, pLevel) {
             public boolean isStableDestination(BlockPos pPos) {
                 return !level().getBlockState(pPos.below()).isAir();
@@ -83,7 +84,7 @@ public class Firefly extends Animal implements FlyingAnimal, NaturalistGeoEntity
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pPose, EntityDimensions pSize) {
+    protected float getStandingEyeHeight(Pose pPose, @NotNull EntityDimensions pSize) {
         return pSize.height * 0.5F;
     }
 
@@ -104,7 +105,7 @@ public class Firefly extends Animal implements FlyingAnimal, NaturalistGeoEntity
         this.goalSelector.addGoal(3, new FloatGoal(this));
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.FLYING_SPEED, 0.6F).add(Attributes.MOVEMENT_SPEED, 0.3F);
     }
 
@@ -239,7 +240,7 @@ public class Firefly extends Animal implements FlyingAnimal, NaturalistGeoEntity
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
     // endregion

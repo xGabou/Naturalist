@@ -21,18 +21,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 public class NoFluidMobBucketWithVariantsItem extends MobBucketItem {
     private final int colorCount;
-    private final Supplier<? extends EntityType<?>> typeSup;
+    private final @NotNull Supplier<? extends EntityType<?>> typeSup;
 
     private EntityType<?> type() {
         return this.typeSup.get();
     }
-    public NoFluidMobBucketWithVariantsItem(Supplier<? extends EntityType<?>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, Properties properties, int colorCount) {
+    public NoFluidMobBucketWithVariantsItem(Supplier<? extends EntityType<?>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, @NotNull Properties properties, int colorCount) {
         super(entitySupplier, fluidSupplier, soundSupplier, properties);
         this.colorCount = colorCount;
         this.typeSup = entitySupplier;

@@ -1,9 +1,9 @@
 package com.starfish_studios.naturalist.common.entity;
 
 import com.starfish_studios.naturalist.common.entity.core.EggLayingAnimal;
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.*;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
-import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
@@ -22,7 +22,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -46,7 +45,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingAnimal {
+public class Alligator extends NaturalistAnimal implements NaturalistGeoEntity, EggLayingAnimal {
     // region VARIABLES
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(NaturalistTags.ItemTags.ALLIGATOR_FOOD_ITEMS);
@@ -62,7 +61,7 @@ public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingA
     boolean isDigging;
     // endregion
 
-    public Alligator(EntityType<? extends Animal> entityType, Level level) {
+    public Alligator(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.setMaxUpStep(1.0F);
@@ -79,7 +78,7 @@ public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingA
     
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return this.isBaby() ? NaturalistSoundEvents.GATOR_AMBIENT_BABY.get() : NaturalistSoundEvents.GATOR_HURT.get();
     }
 
@@ -106,7 +105,7 @@ public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingA
         return NaturalistEntityTypes.ALLIGATOR.get().create(level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.MAX_HEALTH, 30.0)
@@ -183,7 +182,7 @@ public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingA
     }
 
     @Override
-    public TagKey<Block> getEggLayableBlockTag() {
+    public @NotNull TagKey<Block> getEggLayableBlockTag() {
         return NaturalistTags.BlockTags.ALLIGATOR_EGG_LAYABLE_ON;
     }
 
@@ -207,13 +206,13 @@ public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingA
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("HasEgg", this.hasEgg());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setHasEgg(compound.getBoolean("HasEgg"));
     }
@@ -287,7 +286,7 @@ public class Alligator extends Animal implements NaturalistGeoEntity, EggLayingA
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         controllers.add(new AnimationController<>(this, "attackController", 2, this::attackPredicate));
     }

@@ -10,11 +10,13 @@ import software.bernie.geckolib.model.GeoModel;
 @Environment(EnvType.CLIENT)
 public class FireflyModel extends GeoModel<Firefly> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Firefly firefly) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/firefly.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Firefly firefly) {
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/firefly/firefly.png");
     }

@@ -6,12 +6,13 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.*;
+import org.jetbrains.annotations.NotNull;
 
 //TODO: give this a better, shorter name
 public class CaughtMobWithVariantsItem extends CaughtMobItem {
     private final int variantCount;
 
-    public CaughtMobWithVariantsItem(EntityType<?> entitySupplier, Fluid fluid, SoundEvent emptyingSound, int variantCount, Properties settings) {
+    public CaughtMobWithVariantsItem(@NotNull EntityType<?> entitySupplier, @NotNull Fluid fluid, SoundEvent emptyingSound, int variantCount, @NotNull Properties settings) {
         super(entitySupplier, fluid, emptyingSound, settings);
         this.variantCount = variantCount;
     }

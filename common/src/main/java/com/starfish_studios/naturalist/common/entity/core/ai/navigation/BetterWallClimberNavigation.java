@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.Path;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // Credit to AzureDoom for figuring out how to fix Vanilla's spinning bug
@@ -13,7 +14,7 @@ public class BetterWallClimberNavigation extends GroundPathNavigation {
     @Nullable
     private BlockPos pathToPosition;
 
-    public BetterWallClimberNavigation(Mob mob, Level level) {
+    public BetterWallClimberNavigation(@NotNull Mob mob, Level level) {
         super(mob, level);
     }
 

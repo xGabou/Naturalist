@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -31,7 +32,7 @@ public class LizardTailRenderer extends GeoEntityRenderer<LizardTail> {
     }
 
     @Override
-    public void render(LizardTail entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(LizardTail entity, float entityYaw, float partialTick, @NotNull PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.translate(0, -0.3, 0);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }

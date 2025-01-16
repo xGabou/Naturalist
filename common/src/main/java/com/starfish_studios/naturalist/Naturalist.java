@@ -4,6 +4,7 @@ import com.starfish_studios.naturalist.common.entity.*;
 import com.starfish_studios.naturalist.common.entity.core.projectile.ThrownDuckEgg;
 import com.starfish_studios.naturalist.platform.CommonPlatformHelper;
 import com.starfish_studios.naturalist.registry.*;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -62,7 +63,7 @@ public class Naturalist {
         DispenseItemBehavior dispenseItemBehavior = new DefaultDispenseItemBehavior() {
             private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
-            public @NotNull ItemStack execute(BlockSource source, ItemStack stack) {
+            public @NotNull ItemStack execute(@NotNull BlockSource source, ItemStack stack) {
                 DispensibleContainerItem dispensibleContainerItem = (DispensibleContainerItem)stack.getItem();
                 BlockPos blockPos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
                 Level level = source.getLevel();
@@ -80,7 +81,7 @@ public class Naturalist {
 
 
         DispenserBlock.registerBehavior(NaturalistRegistry.SNAIL_BUCKET.get(), new DefaultDispenseItemBehavior() {
-            public ItemStack execute(BlockSource source, ItemStack stack) {
+            public @NotNull ItemStack execute(@NotNull BlockSource source, ItemStack stack) {
                 Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
                 BlockPos blockPos = source.getPos().relative(direction);
                 ServerLevel serverLevel = source.getLevel();
@@ -94,7 +95,7 @@ public class Naturalist {
             }
         });
         DispenserBlock.registerBehavior(NaturalistRegistry.BUTTERFLY.get(), new DefaultDispenseItemBehavior() {
-            public ItemStack execute(BlockSource source, ItemStack stack) {
+            public @NotNull ItemStack execute(BlockSource source, ItemStack stack) {
                 Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
                 BlockPos blockPos = source.getPos().relative(direction);
                 ServerLevel serverLevel = source.getLevel();

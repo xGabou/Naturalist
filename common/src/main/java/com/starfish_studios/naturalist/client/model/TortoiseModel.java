@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -16,12 +17,14 @@ import software.bernie.geckolib.model.data.EntityModelData;
 public class TortoiseModel extends GeoModel<Tortoise> {
 
     @Override
-    public ResourceLocation getModelResource(Tortoise tortoise) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getModelResource(Tortoise tortoise) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/tortoise.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Tortoise tortoise) {
+    @SuppressWarnings("removal")
+    public ResourceLocation getTextureResource(@NotNull Tortoise tortoise) {
         return switch (tortoise.getVariant()) {
             case 1 -> new ResourceLocation(Naturalist.MOD_ID, "textures/entity/tortoise/green.png");
             case 2 -> new ResourceLocation(Naturalist.MOD_ID, "textures/entity/tortoise/black.png");
@@ -35,7 +38,7 @@ public class TortoiseModel extends GeoModel<Tortoise> {
     }
 
     @Override
-    public void setCustomAnimations(Tortoise entity, long instanceId, AnimationState<Tortoise> animationState) {
+    public void setCustomAnimations(@NotNull Tortoise entity, long instanceId, AnimationState<Tortoise> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

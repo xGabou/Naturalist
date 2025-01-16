@@ -15,9 +15,10 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.TurtleEggBlock;
+import org.jetbrains.annotations.NotNull;
 
 public class LayEggGoal<T extends Animal & EggLayingAnimal> extends MoveToBlockGoal {
-    private final T animal;
+    private final @NotNull T animal;
     public LayEggGoal(T animal, double speedModifier) {
         super(animal, speedModifier, 16);
         this.animal = animal;

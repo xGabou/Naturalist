@@ -29,7 +29,7 @@ public class MMPathFinder extends PathFinder {
     }
 
     static class PatchedPath extends Path {
-        public PatchedPath(Path original) {
+        public PatchedPath(@NotNull Path original) {
             super(copyPathPoints(original), original.getTarget(), original.canReach());
         }
 
@@ -42,7 +42,7 @@ public class MMPathFinder extends PathFinder {
             return new Vec3(d0, d1, d2);
         }
 
-        private static List<Node> copyPathPoints(Path original) {
+        private static @NotNull List<Node> copyPathPoints(Path original) {
             List<Node> points = new ArrayList<>();
             for (int i = 0; i < original.getNodeCount(); i++) {
                 points.add(original.getNode(i));

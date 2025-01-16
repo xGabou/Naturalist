@@ -23,6 +23,7 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -110,7 +111,7 @@ public class Catfish extends AbstractFish implements NaturalistGeoEntity {
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
+    public @NotNull ItemStack getBucketItemStack() {
         return new ItemStack(NaturalistRegistry.CATFISH_BUCKET.get());
     }
 
@@ -123,7 +124,7 @@ public class Catfish extends AbstractFish implements NaturalistGeoEntity {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.geoCache;
     }
-    protected <E extends Catfish> PlayState predicate(final AnimationState<E> event) {
+    protected <E extends Catfish> @NotNull PlayState predicate(final AnimationState<E> event) {
         if (!this.isInWater()) {
             event.getController().setAnimation(FLOP);
         } else {
@@ -133,7 +134,7 @@ public class Catfish extends AbstractFish implements NaturalistGeoEntity {
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
     }
 }

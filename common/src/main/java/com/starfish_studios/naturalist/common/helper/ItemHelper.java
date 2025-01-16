@@ -5,11 +5,12 @@ import net.minecraft.world.entity.item.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemHelper {
 
     //TODO: write a proper giveItemToPlayer function that only spawns an ItemEntity if the player has no room for the item
-    public static void spawnItemOnEntity(LivingEntity entity, ItemStack stack) {
+    public static void spawnItemOnEntity(@NotNull LivingEntity entity, ItemStack stack) {
         Level level = entity.level();
         ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 0.5, entity.getZ(), stack);
         itemEntity.setPickUpDelay(0);

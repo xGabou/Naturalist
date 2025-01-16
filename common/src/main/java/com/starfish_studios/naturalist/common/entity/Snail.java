@@ -1,8 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
-import com.starfish_studios.naturalist.common.entity.core.ClimbingAnimal;
-import com.starfish_studios.naturalist.common.entity.core.EggLayingAnimal;
-import com.starfish_studios.naturalist.common.entity.core.HidingAnimal;
+import com.starfish_studios.naturalist.common.entity.core.*;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.EggLayingBreedGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.LayEggGoal;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
@@ -38,7 +36,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -64,7 +61,7 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
     protected static final RawAnimation CLIMB = RawAnimation.begin().thenLoop("animation.sf_nba.snail.climb");
     protected static final RawAnimation HIDE = RawAnimation.begin().thenPlay("animation.sf_nba.snail.hide_start").thenLoop("animation.sf_nba.snail.hide_idle");
 
-    public Snail(EntityType<? extends Animal> type, Level level) {
+    public Snail(@NotNull EntityType<? extends NaturalistAnimal> type, Level level) {
         super(type, level);
     }
 
@@ -246,7 +243,7 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
         return DyeColor.byId(this.entityData.get(DATA_COLOR));
     }
 
-    public void setColor(DyeColor color) {
+    public void setColor(@NotNull DyeColor color) {
         this.entityData.set(DATA_COLOR, color.getId());
     }
 
@@ -318,7 +315,7 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
     }
 
 
-    static <T extends LivingEntity & Bucketable> Optional<InteractionResult> bucketMobPickup(Player player, InteractionHand hand, T entity) {
+    static <T extends LivingEntity & Bucketable> Optional<InteractionResult> bucketMobPickup(@NotNull Player player, @NotNull InteractionHand hand, T entity) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.getItem() == Items.BUCKET && entity.isAlive()) {
             entity.playSound(entity.getPickupSound(), 1.0F, 1.0F);
@@ -384,7 +381,7 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
         return this.geoCache;
     }
 
-    private <E extends Snail> PlayState predicate(final AnimationState<E> event) {
+    private <E extends Snail> PlayState predicate(final @NotNull AnimationState<E> event) {
         if (this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6) {
             event.getController().setAnimation(CRAWL);
         } else if (this.isClimbing()){
@@ -402,7 +399,7 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
         return PlayState.CONTINUE;
     }
 
-    private void soundListener(SoundKeyframeEvent<Snail> event) {
+    private void soundListener(@NotNull SoundKeyframeEvent<Snail> event) {
         Snail snail = event.getAnimatable();
         if (snail.level().isClientSide) {
             if (event.getKeyframeData().getSound().equals("forward")) {
@@ -415,7 +412,7 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate).setSoundKeyframeHandler(this::soundListener));
         controllers.add(new AnimationController<>(this, "hideController", 0, this::hidePredicate));
     }

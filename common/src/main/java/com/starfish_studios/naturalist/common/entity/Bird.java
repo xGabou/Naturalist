@@ -36,8 +36,8 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -57,14 +57,13 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     public float oFlap;
     private float flapping = 1.0F;
     private float nextFlap = 1.0F;
-    private boolean isWet;
 
 
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.bird.idle");
     protected static final RawAnimation FLY = RawAnimation.begin().thenLoop("animation.sf_nba.bird.fly");
     protected static final RawAnimation SIT = RawAnimation.begin().thenLoop("animation.sf_nba.bird.sit");
 
-    public Bird(EntityType<? extends ShoulderRidingEntity> entityType, Level level) {
+    public Bird(@NotNull EntityType<? extends ShoulderRidingEntity> entityType, @NotNull Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 10, false);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
@@ -84,17 +83,17 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
         // this.goalSelector.addGoal(7, new BirdPeckAtGroundGoal(this));
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.FLYING_SPEED, 0.8F).add(Attributes.MOVEMENT_SPEED, 0.2D);
     }
 
-    public static boolean checkBirdSpawnRules(EntityType<Bird> entityType, LevelAccessor state, MobSpawnType type, BlockPos pos, RandomSource random) {
+    public static boolean checkBirdSpawnRules(EntityType<Bird> entityType, @NotNull LevelAccessor state, MobSpawnType type, @NotNull BlockPos pos, RandomSource random) {
         return state.getBlockState(pos.below()).is(BlockTags.PARROTS_SPAWNABLE_ON) && isBrightEnoughToSpawn(state, pos);
     }
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel p_146743_, AgeableMob p_146744_) {
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel serverLevel, @NotNull AgeableMob ageableMob) {
         return null;
     }
 
@@ -103,20 +102,20 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
+    protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions size) {
         return size.height * 0.6f;
     }
 
     @Override
-    public boolean canMate(Animal pOtherAnimal) {
+    public boolean canMate(@NotNull Animal otherAnimal) {
         return false;
     }
 
     @Override
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        ItemStack stack = pPlayer.getItemInHand(pHand);
+    public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
         if (!this.isTame() && TAME_FOOD.test(stack)) {
-            if (!pPlayer.getAbilities().instabuild) {
+            if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
 
@@ -126,7 +125,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
 
             if (!this.level().isClientSide) {
                 if (this.random.nextInt(10) == 0) {
-                    this.tame(pPlayer);
+                    this.tame(player);
                     this.level().broadcastEntityEvent(this, (byte)7);
                 } else {
                     this.level().broadcastEntityEvent(this, (byte)6);
@@ -134,9 +133,9 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
             }
 
             return InteractionResult.sidedSuccess(this.level().isClientSide);
-        } else if (this.isTame() && this.isOwnedBy(pPlayer)) {
+        } else if (this.isTame() && this.isOwnedBy(player)) {
             if (TAME_FOOD.test(stack) && this.getHealth() < this.getMaxHealth()) {
-                if (!pPlayer.getAbilities().instabuild) {
+                if (!player.getAbilities().instabuild) {
                     stack.shrink(1);
                 }
                 this.heal(1.0F);
@@ -152,11 +151,11 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
             }
 
         }
-        return super.mobInteract(pPlayer, pHand);
+        return super.mobInteract(player, hand);
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
+    public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
         if (this.isInvulnerableTo(pSource)) {
             return false;
         } else {
@@ -170,7 +169,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
 
 
     @Override
-    public boolean isFood(ItemStack pStack) {
+    public boolean isFood(@NotNull ItemStack pStack) {
         return false;
     }
 
@@ -193,7 +192,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     @Override
-    protected PathNavigation createNavigation(Level pLevel) {
+    protected @NotNull PathNavigation createNavigation(@NotNull Level pLevel) {
         FlyingPathNavigation navigation = new FlyingPathNavigation(this, pLevel);
         navigation.setCanOpenDoors(false);
         navigation.setCanFloat(true);
@@ -237,12 +236,12 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     @Override
-    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, @NotNull DamageSource pSource) {
         return false;
     }
 
     @Override
-    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+    protected void checkFallDamage(double pY, boolean pOnGround, @NotNull BlockState pState, @NotNull BlockPos pPos) {
     }
 
     @Override
@@ -251,7 +250,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     @Override
-    protected void doPush(Entity pEntity) {
+    protected void doPush(@NotNull Entity pEntity) {
         if (!(pEntity instanceof Player)) {
             super.doPush(pEntity);
         }
@@ -275,7 +274,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
 
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return NaturalistSoundEvents.BIRD_HURT.get();
     }
 
@@ -328,7 +327,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
         return this.geoCache;
     }
 
-    protected <E extends Bird> PlayState predicate(final AnimationState<E> event) {
+    protected <E extends Bird> @NotNull PlayState predicate(final @NotNull AnimationState<E> event) {
         if (this.isInSittingPose()) {
             event.getController().setAnimation(SIT);
             return PlayState.CONTINUE;
@@ -346,14 +345,14 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     static class BirdWanderGoal extends WaterAvoidingRandomFlyingGoal {
-        private final Bird bird;
+        private final @NotNull Bird bird;
 
-        public BirdWanderGoal(Bird mob, double speedModifier) {
+        public BirdWanderGoal(@NotNull Bird mob, double speedModifier) {
             super(mob, speedModifier);
             this.bird = mob;
         }
@@ -404,9 +403,9 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     static class BirdFlockGoal extends FollowAdultGoal {
-        private final Bird bird;
+        private final @NotNull Bird bird;
 
-        public BirdFlockGoal(Bird pMob, double pSpeedModifier, float pStopDistance, float pAreaSize) {
+        public BirdFlockGoal(@NotNull Bird pMob, double pSpeedModifier, float pStopDistance, float pAreaSize) {
             super(pMob, pSpeedModifier, pStopDistance, pAreaSize);
             this.bird = pMob;
         }
@@ -455,9 +454,9 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     static class BirdTemptGoal extends TemptGoal {
         @Nullable
         private Player selectedPlayer;
-        private final Bird bird;
+        private final @NotNull Bird bird;
 
-        public BirdTemptGoal(Bird bird, double speedModifier, Ingredient temptItems, boolean canScare) {
+        public BirdTemptGoal(@NotNull Bird bird, double speedModifier, @NotNull Ingredient temptItems, boolean canScare) {
             super(bird, speedModifier, temptItems, canScare);
             this.bird = bird;
         }
@@ -474,7 +473,7 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
 
         @Override
         protected boolean canScare() {
-            return this.selectedPlayer != null && this.selectedPlayer.equals(this.player) ? false : super.canScare();
+            return (this.selectedPlayer == null || !this.selectedPlayer.equals(this.player)) && super.canScare();
         }
 
         @Override
@@ -484,9 +483,9 @@ public class Bird extends ShoulderRidingEntity implements FlyingAnimal, Naturali
     }
 
     static class BirdAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
-        private final Bird bird;
+        private final @NotNull Bird bird;
 
-        public BirdAvoidEntityGoal(Bird bird, Class<T> toAvoid, float maxDistance, double walkSpeed, double sprintSpeed) {
+        public BirdAvoidEntityGoal(@NotNull Bird bird, @NotNull Class<T> toAvoid, float maxDistance, double walkSpeed, double sprintSpeed) {
             super(bird, toAvoid, maxDistance, walkSpeed, sprintSpeed, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test);
             this.bird = bird;
         }

@@ -31,6 +31,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CattailBlock extends DoublePlantBlock implements SimpleWaterloggedBlock, BonemealableBlock {
@@ -69,7 +70,7 @@ public class CattailBlock extends DoublePlantBlock implements SimpleWaterloggedB
         return blockState != null ? copyWaterloggedFrom(context.getLevel(), context.getClickedPos()) : null;
     }
 
-    private BlockState copyWaterloggedFrom(Level level, BlockPos clickedPos) {
+    private @NotNull BlockState copyWaterloggedFrom(Level level, BlockPos clickedPos) {
         return this.defaultBlockState().setValue(WATERLOGGED, level.getFluidState(clickedPos).getType() == Fluids.WATER);
     }
 
@@ -82,7 +83,7 @@ public class CattailBlock extends DoublePlantBlock implements SimpleWaterloggedB
 
     }
 
-    public FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(BlockState state) {
         return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
@@ -96,7 +97,7 @@ public class CattailBlock extends DoublePlantBlock implements SimpleWaterloggedB
         }
     }
 
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }

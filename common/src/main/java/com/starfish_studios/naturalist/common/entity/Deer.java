@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.AlertOthersPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
@@ -37,7 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class Deer extends Animal implements NaturalistGeoEntity {
+public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private int panicTicks = 0;
     private int eatAnimationTick;
@@ -48,7 +49,7 @@ public class Deer extends Animal implements NaturalistGeoEntity {
     protected static final RawAnimation RUN = RawAnimation.begin().thenLoop("animation.sf_nba.deer.run");
     protected static final RawAnimation EAT = RawAnimation.begin().thenLoop("animation.sf_nba.deer.eat");
 
-    public Deer(EntityType<? extends Animal> entityType, Level level) {
+    public Deer(EntityType<? extends NaturalistAnimal> entityType, @NotNull Level level) {
         super(entityType, level);
         this.setMaxUpStep(2.0F);
     }
@@ -66,7 +67,7 @@ public class Deer extends Animal implements NaturalistGeoEntity {
         return NaturalistEntityTypes.DEER.get().create(level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, 0.2F);
     }
 
@@ -186,7 +187,7 @@ public class Deer extends Animal implements NaturalistGeoEntity {
         return this.geoCache;
     }
 
-    protected <E extends Deer> PlayState predicate(final AnimationState<E> event) {
+    protected <E extends Deer> PlayState predicate(final @NotNull AnimationState<E> event) {
         if (this.isEating()) {
             event.getController().setAnimation(EAT);
             event.getController().setAnimationSpeed(1.0D);
@@ -206,7 +207,7 @@ public class Deer extends Animal implements NaturalistGeoEntity {
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         // data.setResetSpeedInTicks(10);
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
     }

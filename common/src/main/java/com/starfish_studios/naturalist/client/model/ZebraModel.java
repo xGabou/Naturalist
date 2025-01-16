@@ -7,11 +7,12 @@ import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(value= EnvType.CLIENT)
 public class ZebraModel extends HorseModel<Zebra> {
-    private final ModelPart leftChest;
-    private final ModelPart rightChest;
+    private final @NotNull ModelPart leftChest;
+    private final @NotNull ModelPart rightChest;
 
     public ZebraModel(ModelPart root) {
         super(root);

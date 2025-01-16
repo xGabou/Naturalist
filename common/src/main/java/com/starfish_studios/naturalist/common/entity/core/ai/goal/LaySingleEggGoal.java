@@ -10,6 +10,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.TurtleEggBlock;
+import org.jetbrains.annotations.NotNull;
 
 public class LaySingleEggGoal<T extends Animal & EggLayingAnimal> extends MoveToBlockGoal {
     private final T animal;
@@ -60,7 +61,7 @@ public class LaySingleEggGoal<T extends Animal & EggLayingAnimal> extends MoveTo
     }
 
     @Override
-    protected boolean isValidTarget(LevelReader level, BlockPos pos) {
+    protected boolean isValidTarget(LevelReader level, @NotNull BlockPos pos) {
         return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(this.animal.getEggLayableBlockTag());
     }
 }

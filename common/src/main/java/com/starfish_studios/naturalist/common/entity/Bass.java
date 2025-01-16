@@ -11,6 +11,7 @@ import net.minecraft.world.entity.animal.AbstractSchoolingFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -37,7 +38,7 @@ public class Bass extends AbstractSchoolingFish implements NaturalistGeoEntity {
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
+    public @NotNull ItemStack getBucketItemStack() {
         return new ItemStack(NaturalistRegistry.BASS_BUCKET.get());
     }
 
@@ -52,12 +53,12 @@ public class Bass extends AbstractSchoolingFish implements NaturalistGeoEntity {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
         return SoundEvents.SALMON_HURT;
     }
 
     @Override
-    protected SoundEvent getFlopSound() {
+    protected @NotNull SoundEvent getFlopSound() {
         return NaturalistSoundEvents.BASS_FLOP.get();
     }
 
@@ -72,7 +73,7 @@ public class Bass extends AbstractSchoolingFish implements NaturalistGeoEntity {
         return this.geoCache;
     }
 
-    protected <E extends Bass> PlayState predicate(final AnimationState<E> event) {
+    protected <E extends Bass> @NotNull PlayState predicate(final AnimationState<E> event) {
         if (!this.isInWater()) {
             event.getController().setAnimation(FLOP);
         } else {
@@ -82,7 +83,7 @@ public class Bass extends AbstractSchoolingFish implements NaturalistGeoEntity {
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
 

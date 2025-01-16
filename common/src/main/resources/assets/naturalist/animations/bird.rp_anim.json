@@ -161,6 +161,22 @@
 					"scale": 1.4
 				}
 			}
+		},
+		"animation.sf_nba.bird.idle": {
+			"loop": true,
+			"bones": {
+				"left_wing": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 1]
+				},
+				"right_wing": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 1]
+				},
+				"tail": {
+					"rotation": ["Math.cos((query.anim_time - 0.2) * 180) * -2", 0, 0]
+				}
+			}
 		}
 	}
 }

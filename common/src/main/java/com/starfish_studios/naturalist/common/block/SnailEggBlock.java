@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class SnailEggBlock extends Block {
     public static float HITBOX_WIDTH = 0.4F;
@@ -36,7 +37,7 @@ public class SnailEggBlock extends Block {
         level.scheduleTick(pos, this, getSnailEggHatchDelay(level.getRandom()));
     }
 
-    private static int getSnailEggHatchDelay(RandomSource random) {
+    private static int getSnailEggHatchDelay(@NotNull RandomSource random) {
         int minHatchTickDelay = 600;
         int maxHatchTickDelay = 2400;
         return random.nextInt(minHatchTickDelay, maxHatchTickDelay);
@@ -63,11 +64,11 @@ public class SnailEggBlock extends Block {
         this.spawnBabySnails(level, pos, random);
     }
 
-    private void destroyBlock(Level level, BlockPos pos) {
+    private void destroyBlock(Level level, @NotNull BlockPos pos) {
         level.destroyBlock(pos, false);
     }
 
-    private void spawnBabySnails(ServerLevel level, BlockPos pos, RandomSource random) {
+    private void spawnBabySnails(ServerLevel level, @NotNull BlockPos pos, RandomSource random) {
         int i = random.nextInt(2, 6);
 
         for(int j = 1; j <= i; ++j) {
@@ -85,7 +86,7 @@ public class SnailEggBlock extends Block {
 
     }
 
-    private double getRandomSnailPositionOffset(RandomSource random) {
+    private double getRandomSnailPositionOffset(@NotNull RandomSource random) {
         double d = HITBOX_WIDTH / 2.0F;
         return Mth.clamp(random.nextDouble(), d, 1.0 - d);
     }

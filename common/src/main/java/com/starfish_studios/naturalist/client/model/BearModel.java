@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -16,12 +17,14 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class BearModel extends GeoModel<Bear> {
     @Override
-    public ResourceLocation getModelResource(Bear bear) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getModelResource(Bear bear) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/bear.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Bear bear) {
+    @SuppressWarnings("removal")
+    public ResourceLocation getTextureResource(@NotNull Bear bear) {
         // BEHAVIOR TEXTURES
 
         if (bear.isAngry()) {

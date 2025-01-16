@@ -6,6 +6,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,12 +17,14 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class HippoModel extends GeoModel<Hippo> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Hippo hippo) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/hippo.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Hippo hippo) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getTextureResource(Hippo hippo) {
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/hippo.png");
     }
 
@@ -30,7 +34,7 @@ public class HippoModel extends GeoModel<Hippo> {
     }
 
     @Override
-    public void setCustomAnimations(Hippo entity, long instanceId, AnimationState<Hippo> animationState) {
+    public void setCustomAnimations(Hippo entity, long instanceId, @Nullable AnimationState<Hippo> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

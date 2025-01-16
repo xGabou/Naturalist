@@ -1,6 +1,7 @@
 package com.starfish_studios.naturalist.common.entity;
 
 import com.starfish_studios.naturalist.common.entity.core.ClimbingAnimal;
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.SleepingAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.SearchForItemsGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.SleepGoal;
@@ -44,6 +45,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.Path;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -75,7 +77,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
     protected static final RawAnimation TONGUE = RawAnimation.begin().thenPlay("animation.sf_nba.snake.tongue");
     protected static final RawAnimation RATTLE = RawAnimation.begin().thenLoop("animation.sf_nba.snake.rattle");
 
-    public Snake(EntityType<? extends Animal> entityType, Level level) {
+    public Snake(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setCanPickUpLoot(true);
     }
@@ -121,7 +123,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
     }
 
     @Override
-    protected void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance pDifficulty) {
+    protected void populateDefaultEquipmentSlots(@NotNull RandomSource random, DifficultyInstance pDifficulty) {
         if (random.nextFloat() < 0.2F) {
             float chance = random.nextFloat();
             ItemStack stack;
@@ -242,7 +244,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
     }
 
     @Override
-    protected void pickUpItem(ItemEntity pItemEntity) {
+    protected void pickUpItem(@NotNull ItemEntity pItemEntity) {
         ItemStack stack = pItemEntity.getItem();
         if (this.getMainHandItem().isEmpty() && FOOD_ITEMS.test(stack)) {
             this.onItemPickup(pItemEntity);
@@ -414,7 +416,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
         return this.geoCache;
     }
 
-    private <E extends Snake> PlayState predicate(final AnimationState<E> event) {
+    private <E extends Snake> @NotNull PlayState predicate(final AnimationState<E> event) {
         if (this.isSleeping()) {
             event.getController().setAnimation(SLEEP);
             return PlayState.CONTINUE;
@@ -440,7 +442,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
         return PlayState.CONTINUE;
     }
 
-    private <E extends Snake> PlayState tonguePredicate(final AnimationState<E> event) {
+    private <E extends Snake> @NotNull PlayState tonguePredicate(final AnimationState<E> event) {
         if (this.random.nextInt(1000) < this.ambientSoundTime && !this.isSleeping() && event.getController().getAnimationState().equals(AnimationController.State.STOPPED)) {
             event.getController().forceAnimationReset();
         
@@ -449,7 +451,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
         return PlayState.CONTINUE;
     }
 
-    private <E extends Snake> PlayState rattlePredicate(final AnimationState<E> event) {
+    private <E extends Snake> @NotNull PlayState rattlePredicate(final AnimationState<E> event) {
         if (this.canRattle() && !this.isSleeping()) {
             event.getController().setAnimation(RATTLE);
             return PlayState.CONTINUE;
@@ -459,7 +461,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
         return PlayState.STOP;
     }
 
-    private void soundListener(SoundKeyframeEvent<Snake> event) {
+    private void soundListener(@NotNull SoundKeyframeEvent<Snake> event) {
         Snake snake = event.getAnimatable();
         if (snake.level().isClientSide) {
             if (event.getKeyframeData().getSound().equals("hiss")) {
@@ -487,7 +489,7 @@ public class Snake extends ClimbingAnimal implements SleepingAnimal, NeutralMob,
         private long lastCanUseCheck;
         private Path path;
 
-        public SnakeMeleeAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {
+        public SnakeMeleeAttackGoal(@NotNull PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {
             super(pMob, pSpeedModifier, pFollowingTargetEvenIfNotSeen);
         }
 

@@ -56,7 +56,7 @@ public class Dragonfly extends PathfinderMob implements NaturalistGeoEntity {
         return MobType.ARTHROPOD;
     }
 
-    public Dragonfly(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public Dragonfly(@NotNull EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
         this.setHoverTicks(30);
         this.setNoGravity(true);
@@ -163,7 +163,7 @@ public class Dragonfly extends PathfinderMob implements NaturalistGeoEntity {
     }
 
     @Override
-    protected Entity.MovementEmission getMovementEmission() {
+    protected Entity.@NotNull MovementEmission getMovementEmission() {
         return Entity.MovementEmission.EVENTS;
     }
 
@@ -192,7 +192,7 @@ public class Dragonfly extends PathfinderMob implements NaturalistGeoEntity {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+    protected @NotNull InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.is(Items.CHORUS_FRUIT)) {
             this.playSound(SoundEvents.GENERIC_EAT);
@@ -229,7 +229,7 @@ public class Dragonfly extends PathfinderMob implements NaturalistGeoEntity {
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 

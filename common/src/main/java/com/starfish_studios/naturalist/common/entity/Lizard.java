@@ -26,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -99,7 +100,7 @@ public class Lizard extends TamableAnimal implements NaturalistGeoEntity {
     }
 
     @Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(@NotNull Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (this.level().isClientSide) {
             boolean bl = this.isOwnedBy(player) || this.isTame() || TEMPT_INGREDIENT.test(stack) && !this.isTame();
@@ -290,9 +291,9 @@ public class Lizard extends TamableAnimal implements NaturalistGeoEntity {
     }
 
     static class LizardAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
-        private final Lizard lizard;
+        private final @NotNull Lizard lizard;
 
-        public LizardAvoidEntityGoal(Lizard lizard, Class<T> class_, float f, double d, double e) {
+        public LizardAvoidEntityGoal(@NotNull Lizard lizard, Class<T> class_, float f, double d, double e) {
             super(lizard, class_, f, d, e, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test);
             this.lizard = lizard;
         }

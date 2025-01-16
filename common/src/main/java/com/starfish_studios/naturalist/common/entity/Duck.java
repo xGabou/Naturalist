@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
@@ -39,7 +40,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class Duck extends Animal implements NaturalistGeoEntity {
+public class Duck extends NaturalistAnimal implements NaturalistGeoEntity {
     private static final Ingredient FOOD_ITEMS = Ingredient.of(NaturalistTags.ItemTags.DUCK_FOOD_ITEMS);
     public float flap;
     public float flapSpeed;
@@ -57,7 +58,7 @@ public class Duck extends Animal implements NaturalistGeoEntity {
     protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.sf_nba.duck.swim");
     protected static final RawAnimation FLAP = RawAnimation.begin().thenLoop("animation.sf_nba.duck.flap");
 
-    public Duck(EntityType<? extends Animal> entityType, Level level) {
+    public Duck(@NotNull EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.eggTime = this.random.nextInt(6000) + 6000;
     }
@@ -104,7 +105,7 @@ public class Duck extends Animal implements NaturalistGeoEntity {
         return NaturalistEntityTypes.DUCK.get().create(serverLevel);
     }
 
-    public static boolean checkDuckSpawnRules(EntityType<? extends Duck> pType, ServerLevelAccessor pLevel, MobSpawnType pReason, BlockPos pPos, RandomSource pRandom) {
+    public static boolean checkDuckSpawnRules(EntityType<? extends Duck> pType, @NotNull ServerLevelAccessor pLevel, MobSpawnType pReason, BlockPos pPos, RandomSource pRandom) {
         return pLevel.getBlockState(pPos.below()).is(NaturalistTags.BlockTags.DUCKS_SPAWNABLE_ON) || pLevel.getBlockState(pPos.below()).getFluidState().is(FluidTags.WATER);
     }
 

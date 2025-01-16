@@ -1,7 +1,10 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
@@ -22,10 +25,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Zoglin;
 import net.minecraft.world.entity.player.Player;
@@ -47,7 +52,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
+public class Boar extends NaturalistAnimal implements NeutralMob, NaturalistGeoEntity {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(NaturalistTags.ItemTags.BOAR_FOOD_ITEMS);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
@@ -60,8 +65,19 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     protected static final RawAnimation RUN = RawAnimation.begin().thenLoop("animation.sf_nba.boar.run");
     protected static final RawAnimation ATTACK = RawAnimation.begin().thenLoop("animation.sf_nba.boar.attack");
 
-    public Boar(EntityType<? extends Animal> entityType, Level level) {
+    public Boar(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
+    }
+
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
+    }
+
+    @Override
+    protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
+        return new MMPathNavigatorGround(this, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -161,7 +177,7 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     }
 
     @Override
-    public void thunderHit(ServerLevel level, @NotNull LightningBolt lightning) {
+    public void thunderHit(@NotNull ServerLevel level, @NotNull LightningBolt lightning) {
         if (level.getDifficulty() != Difficulty.PEACEFUL) {
             Zoglin zoglin = EntityType.ZOGLIN.create(level);
             assert zoglin != null;
@@ -209,7 +225,7 @@ public class Boar extends Animal implements NeutralMob, NaturalistGeoEntity {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.geoCache;
     }
-    protected <E extends Boar> PlayState predicate(final AnimationState<E> event) {
+    protected <E extends Boar> PlayState predicate(final @NotNull AnimationState<E> event) {
         if (this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6) {
             if (this.isSprinting()) {
                 event.getController().setAnimation(RUN);

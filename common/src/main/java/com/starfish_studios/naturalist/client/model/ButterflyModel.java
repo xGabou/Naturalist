@@ -5,17 +5,20 @@ import com.starfish_studios.naturalist.common.entity.Butterfly;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.model.GeoModel;
 
 @Environment(EnvType.CLIENT)
 public class ButterflyModel extends GeoModel<Butterfly> {
     @Override
-    public ResourceLocation getModelResource(Butterfly butterfly) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getModelResource(Butterfly butterfly) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/butterfly.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Butterfly butterfly) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getTextureResource(Butterfly butterfly) {
         if (butterfly.getVariant().getName().equals("cabbage_white")) {
             return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/butterfly/cabbage_white.png");
         } else if (butterfly.getVariant().getName().equals("monarch")) {

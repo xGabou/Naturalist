@@ -56,7 +56,7 @@ public class CaughtMobItem extends MobBucketItem {
         */
     }
 
-    private void spawn(ServerLevel serverLevel, ItemStack itemStack, BlockPos pos) {
+    private void spawn(ServerLevel serverLevel, ItemStack itemStack, @NotNull BlockPos pos) {
         Entity entity = this.type.spawn(serverLevel, itemStack, null, pos, MobSpawnType.BUCKET, true, false);
         if (entity instanceof Catchable catchable) {
             catchable.loadFromHandTag(itemStack.getOrCreateTag());
@@ -76,7 +76,7 @@ public class CaughtMobItem extends MobBucketItem {
 
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         BlockHitResult blockhitresult = getPlayerPOVHitResult(pLevel, pPlayer, ClipContext.Fluid.NONE);
         if (blockhitresult.getType() == HitResult.Type.MISS) {

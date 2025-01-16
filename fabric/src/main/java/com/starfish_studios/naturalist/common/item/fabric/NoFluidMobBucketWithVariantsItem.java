@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -19,7 +20,7 @@ public class NoFluidMobBucketWithVariantsItem extends NoFluidMobBucketItem {
     private final int color;
     private final EntityType<?> type;
 
-    public NoFluidMobBucketWithVariantsItem(Supplier<? extends EntityType<?>> entitySupplier, Fluid fluid, SoundEvent emptyingSound, int color, Properties settings) {
+    public NoFluidMobBucketWithVariantsItem(Supplier<? extends EntityType<?>> entitySupplier, Fluid fluid, @NotNull SoundEvent emptyingSound, int color, Properties settings) {
         super(entitySupplier.get(), fluid, emptyingSound, settings);
         this.color = color;
         this.type = entitySupplier.get();

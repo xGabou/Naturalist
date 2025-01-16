@@ -15,11 +15,13 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class VultureModel extends GeoModel<Vulture> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Vulture vulture) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/vulture.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Vulture vulture) {
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/vulture.png");
     }

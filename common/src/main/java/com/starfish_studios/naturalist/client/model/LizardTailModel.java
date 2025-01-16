@@ -17,11 +17,13 @@ public class LizardTailModel extends GeoModel<LizardTail> {
     };
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(LizardTail lizard) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/lizard_tail.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(LizardTail lizard) {
         return TEXTURE_LOCATIONS[lizard.getVariant()];
     }

@@ -2,11 +2,13 @@ package com.starfish_studios.naturalist.fabric;
 
 import com.google.common.base.Preconditions;
 import com.starfish_studios.naturalist.Naturalist;
+import com.starfish_studios.naturalist.NaturalistConfig;
 import com.starfish_studios.naturalist.common.entity.*;
 import com.starfish_studios.naturalist.core.registry.fabric.NaturalistConfigFabric;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
+import eu.midnightdust.lib.config.MidnightConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -28,13 +30,15 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class NaturalistFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        AutoConfig.register(NaturalistConfigFabric.class, GsonConfigSerializer::new);
+        MidnightConfig.init("naturalist", NaturalistConfig.class);
+
         Naturalist.init();
         addSpawns();
         addFeatures();
@@ -72,7 +76,7 @@ public class NaturalistFabric implements ModInitializer {
     }
 
 
-    private ResourceKey<PlacedFeature> getPlacedFeatureKey(String key) {
+    private @NotNull ResourceKey<PlacedFeature> getPlacedFeatureKey(String key) {
         return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Naturalist.MOD_ID, key));
     }
 

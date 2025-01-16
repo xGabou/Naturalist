@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +29,7 @@ public class SnailRenderer extends GeoEntityRenderer<Snail> {
     }
 
     @Override
-    public void render(Snail animatable, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(@NotNull Snail animatable, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         if (animatable.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         }
@@ -38,7 +39,7 @@ public class SnailRenderer extends GeoEntityRenderer<Snail> {
         super.render(animatable, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
-   public RenderType getRenderType(Snail animatable, float partialTicks, PoseStack stack, @Nullable MultiBufferSource renderTypeBuffer, @Nullable VertexConsumer vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
+   public RenderType getRenderType(Snail animatable, float partialTicks, PoseStack stack, @Nullable MultiBufferSource renderTypeBuffer, @Nullable VertexConsumer vertexBuilder, int packedLightIn, @NotNull ResourceLocation textureLocation) {
         return RenderType.entityCutoutNoCull(textureLocation);
     }
 }

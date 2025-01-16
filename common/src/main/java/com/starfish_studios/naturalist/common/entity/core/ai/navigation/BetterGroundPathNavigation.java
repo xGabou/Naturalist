@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class BetterGroundPathNavigation extends GroundPathNavigation {
     public BetterGroundPathNavigation(Mob mob, Level level) {
@@ -32,7 +33,7 @@ public class BetterGroundPathNavigation extends GroundPathNavigation {
         this.doStuckDetection(tempMobPos);
     }
 
-    private boolean shouldTargetNextNodeInDirection(Vec3 currentPos) {
+    private boolean shouldTargetNextNodeInDirection(@NotNull Vec3 currentPos) {
         if (this.path.getNextNodeIndex() + 1 >= this.path.getNodeCount()) {
             return false;
         }

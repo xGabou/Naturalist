@@ -89,14 +89,14 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, false, false, entity -> entity.getHealth() <= 6 && !entity.getMainHandItem().isEmpty() && !FOOD_ITEMS.test(this.getMainHandItem())));
     }
 
-    public static boolean checkVultureSpawnRules(EntityType<Vulture> entityType, LevelAccessor state, MobSpawnType type, BlockPos pos, RandomSource random) {
+    public static boolean checkVultureSpawnRules(EntityType<Vulture> entityType, LevelAccessor state, MobSpawnType type, @NotNull BlockPos pos, RandomSource random) {
         return state.getBlockState(pos.below()).is(NaturalistTags.BlockTags.VULTURES_SPAWNABLE_ON) && state.getRawBrightness(pos, 0) > 8;
     }
 
     @Override
     protected void dropAllDeathLoot(@NotNull DamageSource damageSource) {
         super.dropAllDeathLoot(damageSource);
-        
+
         if (!this.level().isClientSide()) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 ItemStack itemStack = this.getItemBySlot(slot);
@@ -124,7 +124,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
     }
 
     @Override
-    public boolean canBeAffected(MobEffectInstance effectInstance) {
+    public boolean canBeAffected(@NotNull MobEffectInstance effectInstance) {
         if (effectInstance.getEffect() == MobEffects.HUNGER) {
             return false;
         }
@@ -288,7 +288,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
 
 
     static class VulturePathNavigation extends FlyingPathNavigation {
-        public VulturePathNavigation(Mob mob, Level level) {
+        public VulturePathNavigation(@NotNull Mob mob, Level level) {
             super(mob, level);
         }
 
@@ -300,7 +300,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
 
     static class VultureAttackGoal extends MeleeAttackGoal {
 
-        public VultureAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+        public VultureAttackGoal(@NotNull PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
             super(mob, speedModifier, followingTargetEvenIfNotSeen);
         }
 

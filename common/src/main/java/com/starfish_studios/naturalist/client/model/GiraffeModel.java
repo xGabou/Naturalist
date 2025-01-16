@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,12 +16,14 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class GiraffeModel extends GeoModel<Giraffe> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Giraffe giraffe) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/giraffe.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Giraffe giraffe) {
+    @SuppressWarnings("removal")
+    public @NotNull ResourceLocation getTextureResource(Giraffe giraffe) {
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/giraffe.png");
     }
 
@@ -30,7 +33,7 @@ public class GiraffeModel extends GeoModel<Giraffe> {
     }
 
     @Override
-    public void setCustomAnimations(Giraffe entity, long instanceId, AnimationState<Giraffe> animationState) {
+    public void setCustomAnimations(@NotNull Giraffe entity, long instanceId, AnimationState<Giraffe> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

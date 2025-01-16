@@ -10,11 +10,13 @@ import software.bernie.geckolib.model.GeoModel;
 @Environment(EnvType.CLIENT)
 public class BassModel extends GeoModel<Bass> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Bass bass) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/bass.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Bass bass) {
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/bass.png");
     }

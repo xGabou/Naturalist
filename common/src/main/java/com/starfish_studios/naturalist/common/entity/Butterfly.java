@@ -1,6 +1,7 @@
 package com.starfish_studios.naturalist.common.entity;
 
 import com.mojang.logging.LogUtils;
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.FlyingWanderGoal;
 import com.starfish_studios.naturalist.common.entity.core.Catchable;
@@ -59,7 +60,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnimal, Catchable {
+public class Butterfly extends NaturalistAnimal implements NaturalistGeoEntity, FlyingAnimal, Catchable {
     // region VARIABLES
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -77,7 +78,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
         return MobType.ARTHROPOD;
     }
 
-    public Butterfly(EntityType<? extends Animal> entityType, Level level) {
+    public Butterfly(@NotNull EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
@@ -105,7 +106,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
     @Override
     protected PathNavigation createNavigation(Level pLevel) {
         FlyingPathNavigation navigation = new FlyingPathNavigation(this, pLevel) {
-            public boolean isStableDestination(BlockPos pPos) {
+            public boolean isStableDestination(@NotNull BlockPos pPos) {
                 return !pLevel.getBlockState(pPos.below()).isAir();
             }
         };
@@ -146,7 +147,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
         return Butterfly.Variant.BY_ID[this.entityData.get(DATA_VARIANT)];
     }
 
-    public void setVariant(Butterfly.Variant variant) {
+    public void setVariant(Butterfly.@NotNull Variant variant) {
         this.entityData.set(DATA_VARIANT, variant.getId());
     }
 
@@ -179,7 +180,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
         ++this.numCropsGrownSincePollination;
     }
 
-    public void saveToHandTag(ItemStack stack) {
+    public void saveToHandTag(@NotNull ItemStack stack) {
         Catchable.saveDefaultDataToHandTag(this, stack);
         CompoundTag compoundTag = stack.getOrCreateTag();
         compoundTag.putInt("Variant", this.getVariant().getId());
@@ -187,7 +188,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
 
     }
 
-    public void loadFromHandTag(CompoundTag tag) {
+    public void loadFromHandTag(@NotNull CompoundTag tag) {
         Catchable.loadDefaultDataFromHandTag(this, tag);
         int i = tag.getInt("Variant");
         if (i >= 0 && i < Butterfly.Variant.BY_ID.length) {
@@ -244,7 +245,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
         }
     }
 
-    public static boolean checkButterflySpawnRules(EntityType<? extends Butterfly> pType, ServerLevelAccessor pLevel, MobSpawnType pReason, BlockPos pPos, RandomSource pRandom) {
+    public static boolean checkButterflySpawnRules(EntityType<? extends Butterfly> pType, ServerLevelAccessor pLevel, MobSpawnType pReason, @NotNull BlockPos pPos, RandomSource pRandom) {
         return pLevel.getBlockState(pPos.below()).is(NaturalistTags.BlockTags.BUTTERFLIES_SPAWNABLE_ON);
     }
 
@@ -253,7 +254,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
     // region MISC
 
     @Override
-    public boolean isFood(ItemStack pStack) {
+    public boolean isFood(@NotNull ItemStack pStack) {
         return pStack.is(ItemTags.FLOWERS);
     }
 
@@ -298,7 +299,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
         }
     }
 
-    private void spawnFluidParticle(Level level, double x1, double x2, double z1, double z2, double y, ParticleOptions particleOptions) {
+    private void spawnFluidParticle(@NotNull Level level, double x1, double x2, double z1, double z2, double y, @NotNull ParticleOptions particleOptions) {
         level.addParticle(particleOptions, Mth.lerp(level.random.nextDouble(), x1, x2), y, Mth.lerp(level.random.nextDouble(), z1, z2), 0.0D, 0.0D, 0.0D);
     }
 
@@ -375,18 +376,18 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
             return this.name;
         }
 
-        public static Variant getTypeById(int id) {
+        public static @NotNull Variant getTypeById(int id) {
             for (Variant type : values()) {
                 if (type.id == id) return type;
             }
             return Variant.MONARCH;
         }
 
-        public static Butterfly.Variant getCommonSpawnVariant(RandomSource random) {
+        public static Butterfly.@NotNull Variant getCommonSpawnVariant(RandomSource random) {
             return getSpawnVariant(random, true);
         }
 
-        private static Butterfly.Variant getSpawnVariant(RandomSource random, boolean common) {
+        private static Butterfly.@NotNull Variant getSpawnVariant(RandomSource random, boolean common) {
             Butterfly.Variant[] variants = Arrays.stream(BY_ID).filter((variant) -> {
                 return variant.common == common;
             }).toArray(Variant[]::new);
@@ -413,7 +414,7 @@ public class Butterfly extends Animal implements NaturalistGeoEntity, FlyingAnim
         protected int ticksWaited;
         private final Butterfly butterfly;
 
-        public ButterflyPollinateGoal(Butterfly pMob, double pSpeedModifier, int pSearchRange, int pVerticalSearchRange) {
+        public ButterflyPollinateGoal(@NotNull Butterfly pMob, double pSpeedModifier, int pSearchRange, int pVerticalSearchRange) {
             super(pMob, pSpeedModifier, pSearchRange, pVerticalSearchRange);
             this.butterfly = pMob;
         }

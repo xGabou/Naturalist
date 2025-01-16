@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -17,6 +18,7 @@ import software.bernie.geckolib.model.data.EntityModelData;
 public class BirdModel extends GeoModel<Bird> {
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Bird bird) {
         if (bird.getType().equals(NaturalistEntityTypes.BLUEJAY.get())) {
             return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/bird/bluejay.png");
@@ -34,6 +36,7 @@ public class BirdModel extends GeoModel<Bird> {
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Bird bird) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/bird.geo.json");
     }
@@ -44,7 +47,7 @@ public class BirdModel extends GeoModel<Bird> {
     }
 
     @Override
-    public void setCustomAnimations(Bird entity, long instanceId, AnimationState<Bird> animationState) {
+    public void setCustomAnimations(Bird entity, long instanceId, @Nullable AnimationState<Bird> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

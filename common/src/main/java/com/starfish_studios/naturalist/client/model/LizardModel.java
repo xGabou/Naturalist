@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -22,22 +23,24 @@ public class LizardModel extends GeoModel<Lizard> {
     };
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Lizard lizard) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/lizard.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Lizard lizard) {
+    @SuppressWarnings("removal")
+    public ResourceLocation getTextureResource(@NotNull Lizard lizard) {
         return TEXTURE_LOCATIONS[Math.min(lizard.getVariant(), TEXTURE_LOCATIONS.length - 1)];
     }
 
     @Override
-    public ResourceLocation getAnimationResource(Lizard lizard) {
+    public @NotNull ResourceLocation getAnimationResource(Lizard lizard) {
         return new ResourceLocation(Naturalist.MOD_ID, "animations/lizard.rp_anim.json");
     }
 
     @Override
-    public void setCustomAnimations(Lizard entity, long instanceId, AnimationState<Lizard> animationState) {
+    public void setCustomAnimations(@NotNull Lizard entity, long instanceId, AnimationState<Lizard> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

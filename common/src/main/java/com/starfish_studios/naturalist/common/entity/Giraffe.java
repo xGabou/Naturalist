@@ -1,6 +1,8 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
@@ -20,6 +22,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
@@ -44,7 +47,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class Giraffe extends Animal implements NaturalistGeoEntity {
+public class Giraffe extends NaturalistAnimal implements NaturalistGeoEntity {
 
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.giraffe.idle");
     protected static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.sf_nba.giraffe.walk");
@@ -53,13 +56,19 @@ public class Giraffe extends Animal implements NaturalistGeoEntity {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private static final EntityDataAccessor<Integer> TAME_TICKS = SynchedEntityData.defineId(Giraffe.class, EntityDataSerializers.INT);
 
-    public Giraffe(EntityType<? extends Animal> entityType, Level level) {
+    public Giraffe(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setMaxUpStep(1.0f);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 35.0D).add(Attributes.MOVEMENT_SPEED, 0.25F);
+    }
+
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
     }
 
     @Override
@@ -149,7 +158,7 @@ public class Giraffe extends Animal implements NaturalistGeoEntity {
         }
     }
 
-    protected void doPlayerRide(Player player) {
+    protected void doPlayerRide(@NotNull Player player) {
         if (!this.level().isClientSide) {
             player.setYRot(this.getYRot());
             player.setXRot(this.getXRot());
@@ -184,7 +193,7 @@ public class Giraffe extends Animal implements NaturalistGeoEntity {
         return InteractionResult.sidedSuccess(this.level().isClientSide);
     }
 
-    protected boolean handleEating(Player player, ItemStack stack) {
+    protected boolean handleEating(Player player, @NotNull ItemStack stack) {
         boolean shouldEat = false;
         float foodHealAmount = 0.0f;
         int ageUpAmount = 0;
@@ -349,7 +358,7 @@ public class Giraffe extends Animal implements NaturalistGeoEntity {
     }
 
     @Override
-    public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
+    public Vec3 getDismountLocationForPassenger(@NotNull LivingEntity passenger) {
         Vec3 vec3 = AbstractHorse.getCollisionHorizontalEscapeVector(this.getBbWidth(), passenger.getBbWidth(), this.getYRot() + (passenger.getMainArm() == HumanoidArm.RIGHT ? 90.0f : -90.0f));
         Vec3 vec32 = this.getDismountLocationInDirection(vec3, passenger);
         if (vec32 != null) {

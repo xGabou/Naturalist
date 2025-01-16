@@ -35,7 +35,7 @@ public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
     public static final int MIN_GOOP = 1;
     public static final int MAX_GOOP = 3;
     public static final BooleanProperty WATERLOGGED;
-    public static final ToIntFunction<BlockState> LIGHT_EMISSION;
+    public static final @NotNull ToIntFunction<BlockState> LIGHT_EMISSION;
     public static IntegerProperty GOOP;
 
     public GlowGoopBlock(Properties properties) {
@@ -67,7 +67,7 @@ public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState blockState = context.getLevel().getBlockState(context.getClickedPos());
         if (blockState.is(this)) {
             return blockState.setValue(GOOP, Math.min(MAX_GOOP, blockState.getValue(GOOP) + 1));
@@ -79,12 +79,12 @@ public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public @NotNull FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(@NotNull BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+    public boolean canBeReplaced(BlockState state, @NotNull BlockPlaceContext context) {
         ItemStack stack = context.getItemInHand();
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -110,7 +110,7 @@ public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
 
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         builder.add(GOOP, WATERLOGGED);
     }
 

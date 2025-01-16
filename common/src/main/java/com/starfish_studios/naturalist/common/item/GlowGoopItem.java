@@ -10,12 +10,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class GlowGoopItem extends ItemNameBlockItem {
 
-    public GlowGoopItem(Block block, Properties properties) {
+    public GlowGoopItem(Block block, @NotNull Properties properties) {
         super(block, properties);
     }
 

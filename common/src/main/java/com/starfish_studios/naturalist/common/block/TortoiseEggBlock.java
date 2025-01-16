@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TurtleEggBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class TortoiseEggBlock extends TurtleEggBlock {
     public TortoiseEggBlock(Properties properties) {
@@ -53,12 +54,12 @@ public class TortoiseEggBlock extends TurtleEggBlock {
         }
     }
 
-    private boolean shouldUpdateHatchLevel(Level level) {
+    private boolean shouldUpdateHatchLevel(@NotNull Level level) {
         return level.random.nextInt(500) == 0;
     }
 
     @Override
-    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+    public void stepOn(Level level, BlockPos pos, BlockState state, @NotNull Entity entity) {
         if (!entity.isSteppingCarefully()) {
             this.destroyEgg(level, state, pos, entity, 100);
         }
@@ -73,7 +74,7 @@ public class TortoiseEggBlock extends TurtleEggBlock {
         super.fallOn(level, state, pos, entity, fallDistance);
     }
 
-    private void destroyEgg(Level level, BlockState state, BlockPos pos, Entity entity, int chance) {
+    private void destroyEgg(@NotNull Level level, BlockState state, BlockPos pos, Entity entity, int chance) {
         if (!this.canDestroyEgg(level, entity)) {
             return;
         }
@@ -82,7 +83,7 @@ public class TortoiseEggBlock extends TurtleEggBlock {
         }
     }
 
-    private boolean canDestroyEgg(Level level, Entity entity) {
+    private boolean canDestroyEgg(@NotNull Level level, Entity entity) {
         if (!(entity instanceof Tortoise) && !(entity.getType().is(NaturalistTags.EntityTypes.SAFE_EGG_WALKERS))) {
             if (!(entity instanceof LivingEntity)) {
                 return false;

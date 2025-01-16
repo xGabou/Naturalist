@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,17 +16,19 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class ElephantModel extends GeoModel<Elephant> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Elephant elephant) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/elephant.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Elephant elephant) {
         return new ResourceLocation(Naturalist.MOD_ID, /*elephant.isDirty() ? "textures/entity/elephant_dirt.png" :*/ "textures/entity/elephant.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(Elephant elephant) {
+    public @NotNull ResourceLocation getAnimationResource(Elephant elephant) {
         return new ResourceLocation(Naturalist.MOD_ID, "animations/elephant.rp_anim.json");
     }
 

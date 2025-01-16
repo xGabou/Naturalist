@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import software.bernie.geckolib.cache.object.GeoBone;
@@ -45,8 +46,8 @@ public class HippoRenderer extends GeoEntityRenderer<Hippo> {
     }
 
     @Override
-    public void renderRecursively(PoseStack stack, Hippo entity, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight,
-        int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderRecursively(PoseStack stack, Hippo entity, @NotNull GeoBone bone, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight,
+                                  int packedOverlay, float red, float green, float blue, float alpha) {
         if (bone.getName().equals("botjaw") && animatable.getMainHandItem().getItem() instanceof BlockItem blockItem) {
             stack.pushPose();
             stack.mulPose(new Quaternionf());

@@ -21,12 +21,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Zebra extends AbstractChestedHorse {
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT, Items.SUGAR, Blocks.HAY_BLOCK.asItem(), Items.APPLE, Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
 
-    public Zebra(EntityType<? extends AbstractChestedHorse> entityType, Level level) {
+    public Zebra(@NotNull EntityType<? extends AbstractChestedHorse> entityType, @NotNull Level level) {
         super(entityType, level);
     }
 
@@ -37,7 +38,7 @@ public class Zebra extends AbstractChestedHorse {
         this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomJumpStrength(randomSource));
     }
 
-    protected float generateRandomMaxHealth(RandomSource randomSource) {
+    protected float generateRandomMaxHealth(@NotNull RandomSource randomSource) {
         return 15.0f + randomSource.nextInt(8) + randomSource.nextInt(9);
     }
 
@@ -45,7 +46,7 @@ public class Zebra extends AbstractChestedHorse {
         return 0.4f + randomSource.nextDouble() * 0.1;
     }
 
-    protected double generateRandomSpeed(RandomSource randomSource) {
+    protected double generateRandomSpeed(@NotNull RandomSource randomSource) {
         return (0.5f + randomSource.nextDouble() * 0.3 + randomSource.nextDouble() * 0.3 + randomSource.nextDouble() * 0.3) * 0.25;
     }
 

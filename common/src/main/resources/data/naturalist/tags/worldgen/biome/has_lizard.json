@@ -5,12 +5,21 @@
     "minecraft:desert",
     "#minecraft:is_jungle",
     "#minecraft:is_forest",
+    "#minecraft:is_savanna",
     {
       "id": "#forge:is_swamp",
       "required": false
     },
     {
       "id": "#forge:is_desert",
+      "required": false
+    },
+    {
+      "id": "#forge:is_forest",
+      "required": false
+    },
+    {
+      "id": "#forge:is_savanna",
       "required": false
     },
     {
@@ -26,11 +35,11 @@
       "required": false
     },
     {
-      "id": "#forge:is_forest",
+      "id": "#c:forest",
       "required": false
     },
     {
-      "id": "#c:forest",
+      "id": "#c:savanna",
       "required": false
     }
   ]

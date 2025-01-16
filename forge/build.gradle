@@ -33,6 +33,9 @@ configurations {
 
 repositories {
     maven {
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
@@ -52,6 +55,9 @@ dependencies {
     forge "net.minecraftforge:forge:$rootProject.forge_version"
 
     modImplementation("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_forge_version}-forge")
+    modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
 //    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 

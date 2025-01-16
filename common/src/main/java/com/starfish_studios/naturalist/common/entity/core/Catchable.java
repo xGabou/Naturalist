@@ -20,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public interface Catchable {
     boolean fromHand();
@@ -36,7 +37,7 @@ public interface Catchable {
 
     /** @deprecated */
     @Deprecated
-    static void saveDefaultDataToHandTag(Mob mob, ItemStack hand) {
+    static void saveDefaultDataToHandTag(@NotNull Mob mob, @NotNull ItemStack hand) {
         CompoundTag compoundTag = hand.getOrCreateTag();
         if (mob.hasCustomName()) {
             hand.setHoverName(mob.getCustomName());
@@ -68,7 +69,7 @@ public interface Catchable {
     /** @deprecated */
 
     @Deprecated
-    static void loadDefaultDataFromHandTag(Mob mob, CompoundTag tag) {
+    static void loadDefaultDataFromHandTag(@NotNull Mob mob, CompoundTag tag) {
         if (tag.contains("NoAI")) {
             mob.setNoAi(tag.getBoolean("NoAI"));
         }
@@ -95,7 +96,7 @@ public interface Catchable {
 
     }
 
-    static <T extends LivingEntity & Catchable> Optional<InteractionResult> catchAnimal(Player player, InteractionHand hand, T entity, boolean needsNet) {
+    static <T extends LivingEntity & Catchable> @NotNull Optional<InteractionResult> catchAnimal(Player player, @NotNull InteractionHand hand, T entity, boolean needsNet) {
         ItemStack itemStack = player.getItemInHand(hand);
         if ((needsNet ? itemStack.getItem().equals(NaturalistRegistry.BUG_NET.get()) : itemStack.isEmpty()) && entity.isAlive()) {
             ItemStack caughtItemStack = entity.getCaughtItemStack();

@@ -9,11 +9,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class SnakeRenderer extends GeoEntityRenderer<Snake> {
-    public SnakeRenderer(EntityRendererProvider.Context renderManager) {
+    public SnakeRenderer(EntityRendererProvider.@NotNull Context renderManager) {
         super(renderManager, new SnakeModel());
         this.shadowRadius = 0.4F;
         this.addRenderLayer(new SleepLayer<>(this, new ResourceLocation(Naturalist.MOD_ID, "geo/entity/snake.geo.json"), new ResourceLocation(Naturalist.MOD_ID, "textures/entity/snake/snake_sleep.png")));

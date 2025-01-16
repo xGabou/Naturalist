@@ -1,12 +1,12 @@
 package com.starfish_studios.naturalist.forge;
 
 import com.starfish_studios.naturalist.Naturalist;
+import com.starfish_studios.naturalist.NaturalistConfig;
 import com.starfish_studios.naturalist.common.entity.*;
 import com.starfish_studios.naturalist.platform.forge.CommonPlatformHelperImpl;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
-import com.starfish_studios.naturalist.registry.forge.NaturalistBiomeModifiers;
-import com.starfish_studios.naturalist.registry.forge.NaturalistConfigForge;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -20,20 +20,20 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
+
+import static com.starfish_studios.naturalist.registry.forge.NaturalistBiomeModifiers.BIOME_MODIFIER_SERIALIZERS;
 
 @Mod(Naturalist.MOD_ID)
 public class NaturalistForge {
@@ -41,11 +41,9 @@ public class NaturalistForge {
     public NaturalistForge() {
         Naturalist.init();
 
+        MidnightConfig.init("naturalist", NaturalistConfig.class);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueue);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, NaturalistConfigForge.COMMON_CONFIG, "naturalist.toml");
-        NaturalistConfigForge.loadConfig(NaturalistConfigForge.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("naturalist.toml").toString());
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -55,7 +53,7 @@ public class NaturalistForge {
         CommonPlatformHelperImpl.ENTITY_TYPES.register(bus);
         CommonPlatformHelperImpl.POTIONS.register(bus);
         CommonPlatformHelperImpl.CREATIVE_MODE_TABS.register(bus);
-        NaturalistBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(bus);
+        BIOME_MODIFIER_SERIALIZERS.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::register);
@@ -103,7 +101,7 @@ public class NaturalistForge {
         NaturalistRegistry.addAllToCreativeTab();
     }
 
-    private void createAttributes(EntityAttributeCreationEvent event) {
+    private void createAttributes(@NotNull EntityAttributeCreationEvent event) {
         event.put(NaturalistEntityTypes.SNAIL.get(), Snail.createAttributes().build());
         event.put(NaturalistEntityTypes.BEAR.get(), Bear.createAttributes().build());
         event.put(NaturalistEntityTypes.BUTTERFLY.get(), Butterfly.createAttributes().build());

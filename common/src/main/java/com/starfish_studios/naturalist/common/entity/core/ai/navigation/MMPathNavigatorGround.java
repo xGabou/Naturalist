@@ -8,12 +8,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.*;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 // Credit to Mowzies Mobs
 public class MMPathNavigatorGround extends GroundPathNavigation {
-    public MMPathNavigatorGround(Mob entity, Level world) {
+    public MMPathNavigatorGround(@NotNull Mob entity, Level world) {
         super(entity, world);
     }
 
@@ -52,7 +53,7 @@ public class MMPathNavigatorGround extends GroundPathNavigation {
                 Math.abs(this.mob.getY() - pathPos.y) < 1.0D;
     }
 
-    private boolean atElevationChange(Path path) {
+    private boolean atElevationChange(@NotNull Path path) {
         final int curr = path.getNextNodeIndex();
         final int end = Math.min(path.getNodeCount(), curr + Mth.ceil(this.mob.getBbWidth() * 0.5F) + 1);
         final int currY = path.getNode(curr).y;
@@ -64,7 +65,7 @@ public class MMPathNavigatorGround extends GroundPathNavigation {
         return false;
     }
 
-    private boolean tryShortcut(Path path, Vec3 entityPos, int pathLength, Vec3 base, Vec3 max) {
+    private boolean tryShortcut(Path path, @NotNull Vec3 entityPos, int pathLength, Vec3 base, Vec3 max) {
         for (int i = pathLength; --i > path.getNextNodeIndex(); ) {
             final Vec3 vec = path.getEntityPosAtNode(this.mob, i).subtract(entityPos);
             if (this.sweep(vec, base, max)) {
@@ -78,7 +79,7 @@ public class MMPathNavigatorGround extends GroundPathNavigation {
     static final float EPSILON = 1.0E-8F;
 
     // Based off of https://github.com/andyhall/voxel-aabb-sweep/blob/d3ef85b19c10e4c9d2395c186f9661b052c50dc7/index.js
-    private boolean sweep(Vec3 vec, Vec3 base, Vec3 max) {
+    private boolean sweep(@NotNull Vec3 vec, Vec3 base, Vec3 max) {
         float t = 0.0F;
         float max_t = (float) vec.length();
         if (max_t < EPSILON) return true;

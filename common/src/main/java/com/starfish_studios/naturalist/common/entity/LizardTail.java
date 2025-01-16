@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -82,13 +83,13 @@ public class LizardTail extends Mob implements NaturalistGeoEntity {
         return this.geoCache;
     }
 
-    private <E extends LizardTail> PlayState predicate(final AnimationState<E> event) {
+    private <E extends LizardTail> @NotNull PlayState predicate(final @NotNull AnimationState<E> event) {
         event.getController().setAnimation(FLOP);
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
+    public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 

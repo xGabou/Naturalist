@@ -16,11 +16,13 @@ public class DragonflyModel extends GeoModel<Dragonfly> {
     };
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Dragonfly dragonfly) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/dragonfly.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Dragonfly dragonfly) {
         return TEXTURE_LOCATIONS[dragonfly.getVariant()];
     }

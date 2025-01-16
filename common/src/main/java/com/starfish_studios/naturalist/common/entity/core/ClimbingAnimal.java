@@ -8,11 +8,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class ClimbingAnimal extends Animal {
+public abstract class ClimbingAnimal extends NaturalistAnimal {
     private static final EntityDataAccessor<Byte> CLIMB_FLAG = SynchedEntityData.defineId(ClimbingAnimal.class, EntityDataSerializers.BYTE);
 
-    protected ClimbingAnimal(EntityType<? extends Animal> entityType, Level level) {
+    protected ClimbingAnimal(@NotNull EntityType<? extends Animal> entityType, @NotNull Level level) {
         super(entityType, level);
     }
 
@@ -23,7 +24,7 @@ public abstract class ClimbingAnimal extends Animal {
     }
 
     @Override
-    protected PathNavigation createNavigation(Level pLevel) {
+    protected @NotNull PathNavigation createNavigation(Level pLevel) {
         return new BetterWallClimberNavigation(this, pLevel);
     }
 

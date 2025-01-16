@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class ThrownDuckEgg extends ThrowableItemProjectile {
     public ThrownDuckEgg(EntityType<ThrownDuckEgg> thrownDuckEggEntityType, Level level) {
@@ -22,7 +23,7 @@ public class ThrownDuckEgg extends ThrowableItemProjectile {
         super(NaturalistEntityTypes.DUCK_EGG.get(), livingEntity, level);
     }
 
-    public ThrownDuckEgg(Level level, double d, double e, double f) {
+    public ThrownDuckEgg(@NotNull Level level, double d, double e, double f) {
         super(NaturalistEntityTypes.DUCK_EGG.get(), d, e, f, level);
     }
 

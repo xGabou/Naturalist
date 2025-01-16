@@ -34,8 +34,13 @@
 					"pivot": [0, 26, -21.5]
 				},
 				{
-					"name": "head_rot",
+					"name": "head_rot2",
 					"parent": "attack",
+					"pivot": [0, 26, -21.5]
+				},
+				{
+					"name": "head_rot",
+					"parent": "head_rot2",
 					"pivot": [0, 26, -21.5]
 				},
 				{

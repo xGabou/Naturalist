@@ -5,19 +5,17 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 
 public class SmartBodyHelper extends BodyRotationControl {
-    private static final float MAX_ROTATE = 75;
-
     private static final int HISTORY_SIZE = 10;
-
-    private final Mob entity;
-
-    private int rotateTime;
-
-    private float targetYawHead;
+    private static final double MOVE_THRESHOLD = 2.5e-7;
+    private static final float BODY_LAG_MOVING = 0.3F;
+    private static final float HEAD_LAG = 0.2F;
+    private static final float BODY_LAG_STILL = 0.05F;
+    private static final float BODY_MAX = 45F;
+    private static final float HEAD_MAX = 22.5F;
 
     private final double[] histPosX = new double[HISTORY_SIZE];
-
     private final double[] histPosZ = new double[HISTORY_SIZE];
+    private final Mob entity;
 
     public SmartBodyHelper(Mob entity) {
         super(entity);
@@ -26,56 +24,47 @@ public class SmartBodyHelper extends BodyRotationControl {
 
     @Override
     public void clientTick() {
-        for (int i = histPosX.length - 1; i > 0; i--) {
+        for (int i = HISTORY_SIZE - 1; i > 0; i--) {
             histPosX[i] = histPosX[i - 1];
             histPosZ[i] = histPosZ[i - 1];
         }
         histPosX[0] = entity.getX();
         histPosZ[0] = entity.getZ();
-        double dx = delta(histPosX);
-        double dz = delta(histPosZ);
+
+        double dx = avgDelta(histPosX);
+        double dz = avgDelta(histPosZ);
         double distSq = dx * dx + dz * dz;
-        if (distSq > 2.5e-7) {
-            double moveAngle = (float) Mth.atan2(dz, dx) * (180 / (float) Math.PI) - 90;
-            entity.yBodyRot += (float) (Mth.wrapDegrees(moveAngle - entity.yBodyRot) * 0.6F);
-            this.targetYawHead = this.entity.yHeadRot;
-            this.rotateTime = 0;
-            super.clientTick();
-        } else if (entity.getPassengers().isEmpty() || !(entity.getPassengers().get(0) instanceof Mob)) {
-            float limit = MAX_ROTATE;
-            if (Math.abs(entity.yHeadRot - targetYawHead) > 15) {
-                rotateTime = 0;
-                targetYawHead = entity.yHeadRot;
-            } else {
-                rotateTime++;
-                final int speed = 10;
-                if (rotateTime > speed) {
-                    limit = Math.max(1 - (rotateTime - speed) / (float) speed, 0) * MAX_ROTATE;
-                }
-            }
-            entity.yBodyRot = approach(entity.yHeadRot, entity.yBodyRot, limit);
+
+        if (entity.getTarget() != null) {
+            entity.yBodyRot = entity.yBodyRotO;
+            entity.yHeadRot = entity.yBodyRot;
+        } else if (distSq > MOVE_THRESHOLD) {
+            float moveAngle = (float) Math.toDegrees(Math.atan2(dz, dx)) - 90.0F;
+            entity.yBodyRot = approachAngle(entity.yBodyRot, moveAngle, BODY_LAG_MOVING, BODY_MAX);
+            entity.yHeadRot = approachAngle(entity.yHeadRot, entity.yBodyRot, HEAD_LAG, HEAD_MAX);
+        } else {
+            entity.yBodyRot = approachAngle(entity.yBodyRot, entity.yHeadRot, BODY_LAG_STILL, BODY_MAX);
         }
     }
 
-    private double delta(double[] arr) {
+
+    private double avgDelta(double[] arr) {
         return mean(arr, 0) - mean(arr, HISTORY_SIZE / 2);
     }
 
     private double mean(double[] arr, int start) {
-        double mean = 0;
-        for (int i = 0; i < HISTORY_SIZE / 2; i++) {
-            mean += arr[i + start];
+        double s = 0;
+        int half = HISTORY_SIZE / 2;
+        for (int i = 0; i < half; i++) {
+            s += arr[start + i];
         }
-        return mean / arr.length;
+        return s / half;
     }
 
-    public static float approach(float target, float current, float limit) {
-        float delta = Mth.wrapDegrees(current - target);
-        if (delta < -limit) {
-            delta = -limit;
-        } else if (delta >= limit) {
-            delta = limit;
-        }
-        return target + delta * 0.55F;
+    private static float approachAngle(float current, float target, float factor, float maxDelta) {
+        float d = Mth.wrapDegrees(target - current);
+        if (d < -maxDelta) d = -maxDelta;
+        else if (d > maxDelta) d = maxDelta;
+        return current + d * factor;
     }
 }

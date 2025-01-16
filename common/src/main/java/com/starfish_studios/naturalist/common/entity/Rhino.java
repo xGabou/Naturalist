@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyHurtByTargetGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.BetterGroundPathNavigation;
@@ -36,6 +37,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -50,7 +52,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.EnumSet;
 import java.util.List;
 
-public class Rhino extends Animal implements NaturalistGeoEntity {
+public class Rhino extends NaturalistAnimal implements NaturalistGeoEntity {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private static final EntityDataAccessor<Integer> CHARGE_COOLDOWN_TICKS = SynchedEntityData.defineId(Rhino.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> HAS_TARGET = SynchedEntityData.defineId(Rhino.class, EntityDataSerializers.BOOLEAN);
@@ -60,16 +62,16 @@ public class Rhino extends Animal implements NaturalistGeoEntity {
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.rhino.idle");
     protected static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.sf_nba.rhino.walk");
     protected static final RawAnimation RUN = RawAnimation.begin().thenLoop("animation.sf_nba.rhino.run");
-    protected static final RawAnimation ATTACK = RawAnimation.begin().thenLoop("animation.sf_nba.rhino.attack");
-    protected static final RawAnimation FOOT = RawAnimation.begin().thenLoop("animation.sf_nba.rhino.foot");
+    protected static final RawAnimation ATTACK = RawAnimation.begin().thenPlay("animation.sf_nba.rhino.attack");
+    protected static final RawAnimation FOOT = RawAnimation.begin().thenPlay("animation.sf_nba.rhino.foot");
     protected static final RawAnimation STUNNED = RawAnimation.begin().thenLoop("animation.sf_nba.rhino.stunned");
 
-    public Rhino(EntityType<? extends Animal> entityType, Level level) {
+    public Rhino(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setMaxUpStep(1.0f);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 40.0D).add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.ATTACK_DAMAGE, 6.0D).add(Attributes.KNOCKBACK_RESISTANCE, 0.6D).add(Attributes.FOLLOW_RANGE, 12.0D);
     }
 
@@ -279,15 +281,26 @@ public class Rhino extends Animal implements NaturalistGeoEntity {
     }
 
     private <E extends Rhino> PlayState attackPredicate(final AnimationState<E> event) {
+//        if (this.swinging && event.getController().getAnimationState().equals(AnimationController.State.STOPPED)) {
+//            event.getController().forceAnimationReset();
+//
+//            event.getController().setAnimation(ATTACK);
+//            event.getController().setAnimationSpeed(0.8F);
+//            this.swinging = false;
+//        }
+//        return PlayState.CONTINUE;
+
         if (this.swinging && event.getController().getAnimationState().equals(AnimationController.State.STOPPED)) {
+            event.setAnimation(ATTACK);
+            event.getController().setAnimationSpeed(1.3F);
             event.getController().forceAnimationReset();
-        
-            event.getController().setAnimation(ATTACK);
-            event.getController().setAnimationSpeed(0.8F);
-            this.swinging = false;
         }
+        this.swinging = false;
+
         return PlayState.CONTINUE;
     }
+
+
 
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
@@ -349,7 +362,7 @@ public class Rhino extends Animal implements NaturalistGeoEntity {
     static class RhinoChargeGoal extends Goal {
         protected final Rhino mob;
         private final double speedModifier;
-        private Path path;
+        private @Nullable Path path;
         private Vec3 chargeDirection;
 
         public RhinoChargeGoal(Rhino pathfinderMob, double speedModifier) {
@@ -391,6 +404,8 @@ public class Rhino extends Animal implements NaturalistGeoEntity {
         public void stop() {
             this.mob.resetChargeCooldownTicks();
             this.mob.getNavigation().stop();
+
+            this.mob.swinging = false;
         }
 
         @Override
@@ -480,6 +495,12 @@ public class Rhino extends Animal implements NaturalistGeoEntity {
                 return false;
             }
             return super.canUse();
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.mob.swinging = false;
         }
     }
 }

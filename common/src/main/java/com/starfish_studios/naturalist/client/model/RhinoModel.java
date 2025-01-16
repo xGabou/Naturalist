@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -15,11 +16,13 @@ import software.bernie.geckolib.model.data.EntityModelData;
 @Environment(EnvType.CLIENT)
 public class RhinoModel extends GeoModel<Rhino> {
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Rhino rhino) {
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/rhino.geo.json");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Rhino rhino) {
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/rhino.png");
     }
@@ -30,7 +33,7 @@ public class RhinoModel extends GeoModel<Rhino> {
     }
 
     @Override
-    public void setCustomAnimations(Rhino entity, long instanceId, AnimationState<Rhino> animationState) {
+    public void setCustomAnimations(@NotNull Rhino entity, long instanceId, AnimationState<Rhino> animationState) {
         super.setCustomAnimations(entity, instanceId, animationState);
 
         if (animationState == null) return;

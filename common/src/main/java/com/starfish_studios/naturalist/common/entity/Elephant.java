@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyHurtByTargetGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.DistancedFollowParentGoal;
@@ -46,7 +47,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
-public class Elephant extends Animal implements NeutralMob, NaturalistGeoEntity {
+public class Elephant extends NaturalistAnimal implements NeutralMob, NaturalistGeoEntity {
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.elephant.idle");
     protected static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.sf_nba.elephant.walk");
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -58,12 +59,12 @@ public class Elephant extends Animal implements NeutralMob, NaturalistGeoEntity 
     @org.jetbrains.annotations.Nullable
     private UUID persistentAngerTarget;
 
-    public Elephant(EntityType<? extends Animal> entityType, Level level) {
+    public Elephant(EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setMaxUpStep(1.0F);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 80.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
@@ -255,7 +256,7 @@ public class Elephant extends Animal implements NeutralMob, NaturalistGeoEntity 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.geoCache;
     }
-    private <E extends Elephant> PlayState predicate(final AnimationState<E> event) {
+    private <E extends Elephant> @NotNull PlayState predicate(final AnimationState<E> event) {
         if (this.isBaby()) {
             event.setControllerSpeed(1.3f + event.getLimbSwingAmount());
         } else {
@@ -271,7 +272,7 @@ public class Elephant extends Animal implements NeutralMob, NaturalistGeoEntity 
         return PlayState.CONTINUE;
     }
 
-    private <E extends Elephant> PlayState swingPredicate(final AnimationState<E> event) {
+    private <E extends Elephant> PlayState swingPredicate(final @NotNull AnimationState<E> event) {
         if (this.swinging && event.getController().getAnimationState().equals(AnimationController.State.STOPPED)) {
             event.getController().forceAnimationReset();
         

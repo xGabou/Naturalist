@@ -1,5 +1,6 @@
 package com.starfish_studios.naturalist.common.entity;
 
+import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.SleepingAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyHurtByTargetGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Path;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -47,7 +49,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Lion extends Animal implements NaturalistGeoEntity, SleepingAnimal {
+public class Lion extends NaturalistAnimal implements NaturalistGeoEntity, SleepingAnimal {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private static final EntityDataAccessor<Boolean> SLEEPING = SynchedEntityData.defineId(Lion.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> HAS_MANE = SynchedEntityData.defineId(Lion.class, EntityDataSerializers.BOOLEAN);
@@ -61,7 +63,7 @@ public class Lion extends Animal implements NaturalistGeoEntity, SleepingAnimal 
     protected static final RawAnimation SLEEP = RawAnimation.begin().thenLoop("animation.sf_nba.lion.sleep");
     protected static final RawAnimation SLEEP2 = RawAnimation.begin().thenLoop("animation.sf_nba.lion.sleep2");
 
-    public Lion(EntityType<? extends Animal> entityType, Level level) {
+    public Lion(@NotNull EntityType<? extends NaturalistAnimal> entityType, Level level) {
         super(entityType, level);
         this.setMaxUpStep(1.0f);
     }
@@ -474,7 +476,7 @@ public class Lion extends Animal implements NaturalistGeoEntity, SleepingAnimal 
             this.checkAndPerformAttack(target, d);
         }
 
-        protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
+        protected void checkAndPerformAttack(@NotNull LivingEntity enemy, double distToEnemySqr) {
             double d = this.getAttackReachSqr(enemy);
             if (distToEnemySqr <= d && this.ticksUntilNextAttack <= 0) {
                 this.resetAttackCooldown();
@@ -487,7 +489,7 @@ public class Lion extends Animal implements NaturalistGeoEntity, SleepingAnimal 
             this.ticksUntilNextAttack = this.adjustedTickDelay(20);
         }
 
-        protected double getAttackReachSqr(LivingEntity attackTarget) {
+        protected double getAttackReachSqr(@NotNull LivingEntity attackTarget) {
             return this.mob.getBbWidth() * 1.3f * (this.mob.getBbWidth() * 1.3f) + attackTarget.getBbWidth();
         }
     }
