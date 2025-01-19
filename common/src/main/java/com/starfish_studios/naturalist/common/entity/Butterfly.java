@@ -5,6 +5,7 @@ import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.FlyingWanderGoal;
 import com.starfish_studios.naturalist.common.entity.core.Catchable;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
@@ -29,6 +30,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -76,6 +78,11 @@ public class Butterfly extends NaturalistAnimal implements NaturalistGeoEntity, 
     @NotNull
     public MobType getMobType() {
         return MobType.ARTHROPOD;
+    }
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
     }
 
     public Butterfly(@NotNull EntityType<? extends NaturalistAnimal> entityType, Level level) {

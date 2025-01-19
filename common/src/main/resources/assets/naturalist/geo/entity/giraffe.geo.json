@@ -16,8 +16,13 @@
 					"pivot": [0, -2, 0]
 				},
 				{
-					"name": "body",
+					"name": "bodyRot",
 					"parent": "root",
+					"pivot": [0, 33, 0]
+				},
+				{
+					"name": "body",
+					"parent": "bodyRot",
 					"pivot": [0, 31, -10.5],
 					"cubes": [
 						{"origin": [-7.5, 31, -15], "size": [15, 20, 28], "uv": [1, 0]}
@@ -30,6 +35,14 @@
 					"rotation": [22.5, 0, 0],
 					"cubes": [
 						{"origin": [-4.5, 37.85212, -14.07548], "size": [9, 17, 20], "uv": [1, 49]}
+					]
+				},
+				{
+					"name": "saddle",
+					"parent": "neck",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-4.5, 37.85212, -14.07548], "size": [9, 17, 20], "inflate": 0.5, "uv": [69, 91]}
 					]
 				},
 				{

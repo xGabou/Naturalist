@@ -1,6 +1,7 @@
 package com.starfish_studios.naturalist.common.entity;
 
 import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
+import com.starfish_studios.naturalist.common.entity.core.ai.goal.LookAtLivingEntityGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
@@ -17,6 +18,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
@@ -25,6 +27,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
@@ -32,6 +35,7 @@ import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
@@ -79,7 +83,7 @@ public class Giraffe extends NaturalistAnimal implements NaturalistGeoEntity {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4));
+        this.goalSelector.addGoal(1, new GiraffePanicGoal(this, 1.4));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, FOOD_ITEMS, false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.0));
@@ -408,5 +412,34 @@ public class Giraffe extends NaturalistAnimal implements NaturalistGeoEntity {
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 4, this::predicate));
+    }
+
+    public static class GiraffePanicGoal extends PanicGoal {
+        private static final int SEARCH_DISTANCE = 15;
+        private static final int VERTICAL_CHECK_DISTANCE = 4;
+
+        public GiraffePanicGoal(PathfinderMob mob, double speedModifier) {
+            super(mob, speedModifier);
+        }
+
+        @Override
+        protected boolean findRandomPosition() {
+            Vec3 vec3 = DefaultRandomPos.getPos(this.mob, SEARCH_DISTANCE, VERTICAL_CHECK_DISTANCE);
+            if (vec3 == null) {
+                return false;
+            } else {
+                this.posX = vec3.x;
+                this.posY = vec3.y;
+                this.posZ = vec3.z;
+                return true;
+            }
+        }
+
+        @Nullable
+        @Override
+        protected BlockPos lookForWater(BlockGetter level, Entity entity, int range) {
+            BlockPos blockPos = entity.blockPosition();
+            return !level.getBlockState(blockPos).getCollisionShape(level, blockPos).isEmpty() ? null : BlockPos.findClosestMatch(entity.blockPosition(), range + 5, 2, (blockPosx) -> level.getFluidState(blockPosx).is(FluidTags.WATER)).orElse(null);
+        }
     }
 }

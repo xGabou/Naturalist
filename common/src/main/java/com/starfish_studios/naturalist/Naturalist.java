@@ -39,8 +39,6 @@ import org.apache.logging.log4j.Logger;
 
 public class Naturalist {
     public static final String MOD_ID = "naturalist";
-    public static final CreativeModeTab TAB = CommonPlatformHelper.registerCreativeModeTab(new ResourceLocation(MOD_ID, "tab"), () -> new ItemStack(NaturalistRegistry.BUG_NET.get()));
-    public static final ResourceKey<CreativeModeTab> TAB_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MOD_ID, "tab"));
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static void init() {

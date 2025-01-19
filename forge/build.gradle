@@ -58,9 +58,6 @@ dependencies {
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_forge_version}-forge")
     modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-//    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }

@@ -277,7 +277,7 @@
   "naturalist.midnightconfig.blacklistConfig": "§7§oTo §c§l§nREMOVE§7§o mobs from spawning in certain biomes, add biomes to §9§o'naturalist:tags/worldgen/biome/blacklist/<animal>_blacklist.json'",
 
   "naturalist.midnightconfig.alligatorRemoved": "§7Remove Alligator",
-  "naturalist.midnightconfig.alligatorRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Alligators will not spawn, and existing Alligators will be removed.",
+  "naturalist.midnightconfig.alligatorRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Alligators will not spawn, and existing Alligators will be removed.",
   "naturalist.midnightconfig.alligatorSpawnWeight": "§9Alligator Spawn Weight",
   "naturalist.midnightconfig.alligatorSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Alligators spawning in the world.",
   "naturalist.midnightconfig.alligatorSpawnMinGroupSize": "§7§oAlligator Minimum Group Size",
@@ -286,7 +286,7 @@
   "naturalist.midnightconfig.alligatorSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Alligators that can spawn in a group.",
 
   "naturalist.midnightconfig.bassRemoved": "§7Remove Bass",
-  "naturalist.midnightconfig.bassRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Bass will not spawn, and existing Bass will be removed.",
+  "naturalist.midnightconfig.bassRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Bass will not spawn, and existing Bass will be removed.",
   "naturalist.midnightconfig.bassSpawnWeight": "§9Bass Spawn Weight",
   "naturalist.midnightconfig.bassSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Bass spawning in the world.",
   "naturalist.midnightconfig.bassSpawnMinGroupSize": "§7§oBass Minimum Group Size",
@@ -295,7 +295,7 @@
   "naturalist.midnightconfig.bassSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Bass that can spawn in a group.",
 
   "naturalist.midnightconfig.bearRemoved": "§7Remove Bear",
-  "naturalist.midnightconfig.bearRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Bears will not spawn, and existing Bears will be removed.",
+  "naturalist.midnightconfig.bearRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Bears will not spawn, and existing Bears will be removed.",
   "naturalist.midnightconfig.bearSpawnWeight": "§9Bear Spawn Weight",
   "naturalist.midnightconfig.bearSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Bears spawning in the world.",
   "naturalist.midnightconfig.bearSpawnMinGroupSize": "§7§oBear Minimum Group Size",
@@ -304,14 +304,14 @@
   "naturalist.midnightconfig.bearSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Bears that can spawn in a group.",
 
   "naturalist.midnightconfig.bluejayRemoved": "§7Remove Bluejay",
-    "naturalist.midnightconfig.bluejayRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Bluejays will not spawn, and existing Bluejays will be removed.",
+    "naturalist.midnightconfig.bluejayRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Bluejays will not spawn, and existing Bluejays will be removed.",
     "naturalist.midnightconfig.bluejaySpawnWeight": "§9Bluejay Spawn Weight",
     "naturalist.midnightconfig.bluejaySpawnWeight.tooltip": "§8§o[?]§7§o The chance of Bluejays spawning in the world.",
     "naturalist.midnightconfig.bluejaySpawnMinGroupSize": "§7§oBluejay Minimum Group Size",
     "naturalist.midnightconfig.bluejaySpawnMinGroupSize.tooltip": "§8§o[?]§7§o The minimum number of Bluejays that can spawn in a group.",
 
   "naturalist.midnightconfig.birdRemoved": "§7Remove Bird",
-  "naturalist.midnightconfig.birdRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Birds will not spawn, and existing Birds will be removed.",
+  "naturalist.midnightconfig.birdRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Birds will not spawn, and existing Birds will be removed.",
   "naturalist.midnightconfig.birdSpawnWeight": "§9Bird Spawn Weight",
   "naturalist.midnightconfig.birdSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Birds spawning in the world.",
   "naturalist.midnightconfig.birdSpawnMinGroupSize": "§7§oBird Minimum Group Size",
@@ -320,7 +320,7 @@
   "naturalist.midnightconfig.birdSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Birds that can spawn in a group.",
 
   "naturalist.midnightconfig.boarRemoved": "§7Remove Boar",
-  "naturalist.midnightconfig.boarRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Boars will not spawn, and existing Boars will be removed.",
+  "naturalist.midnightconfig.boarRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Boars will not spawn, and existing Boars will be removed.",
   "naturalist.midnightconfig.boarSpawnWeight": "§9Boar Spawn Weight",
   "naturalist.midnightconfig.boarSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Boars spawning in the world.",
   "naturalist.midnightconfig.boarSpawnMinGroupSize": "§7§oBoar Minimum Group Size",
@@ -329,7 +329,7 @@
   "naturalist.midnightconfig.boarSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Boars that can spawn in a group.",
 
   "naturalist.midnightconfig.butterflyRemoved": "§7Remove Butterfly",
-  "naturalist.midnightconfig.butterflyRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Butterflies will not spawn, and existing Butterflies will be removed.",
+  "naturalist.midnightconfig.butterflyRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Butterflies will not spawn, and existing Butterflies will be removed.",
   "naturalist.midnightconfig.butterflySpawnWeight": "§9Butterfly Spawn Weight",
   "naturalist.midnightconfig.butterflySpawnWeight.tooltip": "§8§o[?]§7§o The chance of Butterflies spawning in the world.",
   "naturalist.midnightconfig.butterflySpawnMinGroupSize": "§7§oButterfly Minimum Group Size",
@@ -338,7 +338,7 @@
     "naturalist.midnightconfig.butterflySpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Butterflies that can spawn in a group.",
 
   "naturalist.midnightconfig.canaryRemoved": "§7Remove Canary",
-    "naturalist.midnightconfig.canaryRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Canaries will not spawn, and existing Canaries will be removed.",
+    "naturalist.midnightconfig.canaryRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Canaries will not spawn, and existing Canaries will be removed.",
     "naturalist.midnightconfig.canarySpawnWeight": "§9Canary Spawn Weight",
     "naturalist.midnightconfig.canarySpawnWeight.tooltip": "§8§o[?]§7§o The chance of Canaries spawning in the world.",
     "naturalist.midnightconfig.canarySpawnMinGroupSize": "§7§oCanary Minimum Group Size",
@@ -347,7 +347,7 @@
     "naturalist.midnightconfig.canarySpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Canaries that can spawn in a group.",
 
     "naturalist.midnightconfig.cardinalRemoved": "§7Remove Cardinal",
-    "naturalist.midnightconfig.cardinalRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Cardinals will not spawn, and existing Cardinals will be removed.",
+    "naturalist.midnightconfig.cardinalRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Cardinals will not spawn, and existing Cardinals will be removed.",
     "naturalist.midnightconfig.cardinalSpawnWeight": "§9Cardinal Spawn Weight",
     "naturalist.midnightconfig.cardinalSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Cardinals spawning in the world.",
     "naturalist.midnightconfig.cardinalSpawnMinGroupSize": "§7§oCardinal Minimum Group Size",
@@ -356,7 +356,7 @@
     "naturalist.midnightconfig.cardinalSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Cardinals that can spawn in a group.",
   
   "naturalist.midnightconfig.catfishRemoved": "§7Remove Catfish",
-  "naturalist.midnightconfig.catfishRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Catfish will not spawn, and existing Catfish will be removed.",
+  "naturalist.midnightconfig.catfishRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Catfish will not spawn, and existing Catfish will be removed.",
   "naturalist.midnightconfig.catfishSpawnWeight": "§9Catfish Spawn Weight",
   "naturalist.midnightconfig.catfishSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Catfish spawning in the world.",
   "naturalist.midnightconfig.catfishSpawnMinGroupSize": "§7§oCatfish Minimum Group Size",
@@ -365,7 +365,7 @@
   "naturalist.midnightconfig.catfishSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Catfish that can spawn in a group.",
 
     "naturalist.midnightconfig.coralSnakeRemoved": "§7Remove Coral Snake",
-    "naturalist.midnightconfig.coralSnakeRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Coral Snakes will not spawn, and existing Coral Snakes will be removed.",
+    "naturalist.midnightconfig.coralSnakeRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Coral Snakes will not spawn, and existing Coral Snakes will be removed.",
     "naturalist.midnightconfig.coralSnakeSpawnWeight": "§9Coral Snake Spawn Weight",
     "naturalist.midnightconfig.coralSnakeSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Coral Snakes spawning in the world.",
     "naturalist.midnightconfig.coralSnakeSpawnMinGroupSize": "§7§oCoral Snake Minimum Group Size",
@@ -373,7 +373,7 @@
     "naturalist.midnightconfig.coralSnakeSpawnMaxGroupSize": "§7§oCoral Snake Maximum Group Size",
 
     "naturalist.midnightconfig.deerRemoved": "§7Remove Deer",
-    "naturalist.midnightconfig.deerRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Deer will not spawn, and existing Deer will be removed.",
+    "naturalist.midnightconfig.deerRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Deer will not spawn, and existing Deer will be removed.",
   "naturalist.midnightconfig.deerSpawnWeight": "§9Deer Spawn Weight",
   "naturalist.midnightconfig.deerSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Deer spawning in the world.",
   "naturalist.midnightconfig.deerSpawnMinGroupSize": "§7§oDeer Minimum Group Size",
@@ -382,7 +382,7 @@
   "naturalist.midnightconfig.deerSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Deer that can spawn in a group.",
 
     "naturalist.midnightconfig.dragonflyRemoved": "§7Remove Dragonfly",
-    "naturalist.midnightconfig.dragonflyRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Dragonflies will not spawn, and existing Dragonflies will be removed.",
+    "naturalist.midnightconfig.dragonflyRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Dragonflies will not spawn, and existing Dragonflies will be removed.",
   "naturalist.midnightconfig.dragonflySpawnWeight": "§9Dragonfly Spawn Weight",
   "naturalist.midnightconfig.dragonflySpawnWeight.tooltip": "§8§o[?]§7§o The chance of Dragonflies spawning in the world.",
   "naturalist.midnightconfig.dragonflySpawnMinGroupSize": "§7§oDragonfly Minimum Group Size",
@@ -391,7 +391,7 @@
   "naturalist.midnightconfig.dragonflySpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Dragonflies that can spawn in a group.",
 
   "naturalist.midnightconfig.duckRemoved": "§7Remove Duck",
-  "naturalist.midnightconfig.duckRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Ducks will not spawn, and existing Ducks will be removed.",
+  "naturalist.midnightconfig.duckRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Ducks will not spawn, and existing Ducks will be removed.",
   "naturalist.midnightconfig.duckSpawnWeight": "§9Duck Spawn Weight",
   "naturalist.midnightconfig.duckSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Ducks spawning in the world.",
   "naturalist.midnightconfig.duckSpawnMinGroupSize": "§7§oDuck Minimum Group Size",
@@ -400,7 +400,7 @@
   "naturalist.midnightconfig.duckSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Ducks that can spawn in a group.",
 
     "naturalist.midnightconfig.elephantRemoved": "§7Remove Elephant",
-    "naturalist.midnightconfig.elephantRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Elephants will not spawn, and existing Elephants will be removed.",
+    "naturalist.midnightconfig.elephantRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Elephants will not spawn, and existing Elephants will be removed.",
   "naturalist.midnightconfig.elephantSpawnWeight": "§9Elephant Spawn Weight",
   "naturalist.midnightconfig.elephantSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Elephants spawning in the world.",
   "naturalist.midnightconfig.elephantSpawnMinGroupSize": "§7§oElephant Minimum Group Size",
@@ -409,7 +409,7 @@
   "naturalist.midnightconfig.elephantSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Elephants that can spawn in a group.",
 
     "naturalist.midnightconfig.finchRemoved": "§7Remove Finch",
-    "naturalist.midnightconfig.finchRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Finches will not spawn, and existing Finches will be removed.",
+    "naturalist.midnightconfig.finchRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Finches will not spawn, and existing Finches will be removed.",
     "naturalist.midnightconfig.finchSpawnWeight": "§9Finch Spawn Weight",
     "naturalist.midnightconfig.finchSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Finches spawning in the world.",
     "naturalist.midnightconfig.finchSpawnMinGroupSize": "§7§oFinch Minimum Group Size",
@@ -418,7 +418,7 @@
     "naturalist.midnightconfig.finchSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Finches that can spawn in a group.",
 
   "naturalist.midnightconfig.fireflyRemoved": "§7Remove Firefly",
-  "naturalist.midnightconfig.fireflyRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Fireflies will not spawn, and existing Fireflies will be removed.",
+  "naturalist.midnightconfig.fireflyRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Fireflies will not spawn, and existing Fireflies will be removed.",
   "naturalist.midnightconfig.fireflySpawnWeight": "§9Firefly Spawn Weight",
   "naturalist.midnightconfig.fireflySpawnWeight.tooltip": "§8§o[?]§7§o The chance of Fireflies spawning in the world.",
   "naturalist.midnightconfig.fireflySpawnMinGroupSize": "§7§oFirefly Minimum Group Size",
@@ -443,7 +443,7 @@
     "naturalist.midnightconfig.forestRabbitSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Forest Rabbits that can spawn in a group.",
 
   "naturalist.midnightconfig.giraffeRemoved": "§7Remove Giraffe",
-  "naturalist.midnightconfig.giraffeRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Giraffes will not spawn, and existing Giraffes will be removed.",
+  "naturalist.midnightconfig.giraffeRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Giraffes will not spawn, and existing Giraffes will be removed.",
   "naturalist.midnightconfig.giraffeSpawnWeight": "§9Giraffe Spawn Weight",
   "naturalist.midnightconfig.giraffeSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Giraffes spawning in the world.",
   "naturalist.midnightconfig.giraffeSpawnMinGroupSize": "§7§oGiraffe Minimum Group Size",
@@ -452,7 +452,7 @@
   "naturalist.midnightconfig.giraffeSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Giraffes that can spawn in a group.",
 
   "naturalist.midnightconfig.hippoRemoved": "§7Remove Hippo",
-    "naturalist.midnightconfig.hippoRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Hippos will not spawn, and existing Hippos will be removed.",
+    "naturalist.midnightconfig.hippoRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Hippos will not spawn, and existing Hippos will be removed.",
   "naturalist.midnightconfig.hippoSpawnWeight": "§9Hippo Spawn Weight",
   "naturalist.midnightconfig.hippoSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Hippos spawning in the world.",
   "naturalist.midnightconfig.hippoSpawnMinGroupSize": "§7§oHippo Minimum Group Size",
@@ -461,7 +461,7 @@
   "naturalist.midnightconfig.hippoSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Hippos that can spawn in a group.",
 
     "naturalist.midnightconfig.lionRemoved": "§7Remove Lion",
-    "naturalist.midnightconfig.lionRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Lions will not spawn, and existing Lions will be removed.",
+    "naturalist.midnightconfig.lionRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Lions will not spawn, and existing Lions will be removed.",
   "naturalist.midnightconfig.lionSpawnWeight": "§9Lion Spawn Weight",
   "naturalist.midnightconfig.lionSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Lions spawning in the world.",
   "naturalist.midnightconfig.lionSpawnMinGroupSize": "§7§oLion Minimum Group Size",
@@ -470,7 +470,7 @@
   "naturalist.midnightconfig.lionSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Lions that can spawn in a group.",
 
   "naturalist.midnightconfig.lizardRemoved": "§7Remove Lizard",
-  "naturalist.midnightconfig.lizardRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Lizards will not spawn, and existing Lizards will be removed.",
+  "naturalist.midnightconfig.lizardRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Lizards will not spawn, and existing Lizards will be removed.",
   "naturalist.midnightconfig.lizardSpawnWeight": "§9Lizard Spawn Weight",
   "naturalist.midnightconfig.lizardSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Lizards spawning in the world.",
   "naturalist.midnightconfig.lizardSpawnMinGroupSize": "§7§oLizard Minimum Group Size",
@@ -479,7 +479,7 @@
   "naturalist.midnightconfig.lizardSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Lizards that can spawn in a group.",
 
   "naturalist.midnightconfig.rattlesnakeRemoved": "§7Remove Rattlesnake",
-    "naturalist.midnightconfig.rattlesnakeRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Rattlesnakes will not spawn, and existing Rattlesnakes will be removed.",
+    "naturalist.midnightconfig.rattlesnakeRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Rattlesnakes will not spawn, and existing Rattlesnakes will be removed.",
     "naturalist.midnightconfig.rattlesnakeSpawnWeight": "§9Rattlesnake Spawn Weight",
     "naturalist.midnightconfig.rattlesnakeSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Rattlesnakes spawning in the world.",
     "naturalist.midnightconfig.rattlesnakeSpawnMinGroupSize": "§7§oRattlesnake Minimum Group Size",
@@ -488,7 +488,7 @@
     "naturalist.midnightconfig.rattlesnakeSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Rattlesnakes that can spawn in a group.",
 
   "naturalist.midnightconfig.rhinoRemoved": "§7Remove Rhino",
-    "naturalist.midnightconfig.rhinoRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Rhinos will not spawn, and existing Rhinos will be removed.",
+    "naturalist.midnightconfig.rhinoRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Rhinos will not spawn, and existing Rhinos will be removed.",
   "naturalist.midnightconfig.rhinoSpawnWeight": "§9Rhino Spawn Weight",
   "naturalist.midnightconfig.rhinoSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Rhinos spawning in the world.",
   "naturalist.midnightconfig.rhinoSpawnMinGroupSize": "§7§oRhino Minimum Group Size",
@@ -497,7 +497,7 @@
   "naturalist.midnightconfig.rhinoSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Rhinos that can spawn in a group.",
 
   "naturalist.midnightconfig.robinRemoved": "§7Remove Robin",
-    "naturalist.midnightconfig.robinRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Robins will not spawn, and existing Robins will be removed.",
+    "naturalist.midnightconfig.robinRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Robins will not spawn, and existing Robins will be removed.",
     "naturalist.midnightconfig.robinSpawnWeight": "§9Robin Spawn Weight",
     "naturalist.midnightconfig.robinSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Robins spawning in the world.",
     "naturalist.midnightconfig.robinSpawnMinGroupSize": "§7§oRobin Minimum Group Size",
@@ -506,7 +506,7 @@
     "naturalist.midnightconfig.robinSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Robins that can spawn in a group.",
 
   "naturalist.midnightconfig.snailRemoved": "§7Remove Snail",
-    "naturalist.midnightconfig.snailRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Snails will not spawn, and existing Snails will be removed.",
+    "naturalist.midnightconfig.snailRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Snails will not spawn, and existing Snails will be removed.",
   "naturalist.midnightconfig.snailSpawnWeight": "§9Snail Spawn Weight",
   "naturalist.midnightconfig.snailSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Snails spawning in the world.",
   "naturalist.midnightconfig.snailSpawnMinGroupSize": "§7§oSnail Minimum Group Size",
@@ -515,7 +515,7 @@
   "naturalist.midnightconfig.snailSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Snails that can spawn in a group.",
 
   "naturalist.midnightconfig.snakeRemoved": "§7Remove Snake",
-    "naturalist.midnightconfig.snakeRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Snakes will not spawn, and existing Snakes will be removed.",
+    "naturalist.midnightconfig.snakeRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Snakes will not spawn, and existing Snakes will be removed.",
   "naturalist.midnightconfig.snakeSpawnWeight": "§9Snake Spawn Weight",
   "naturalist.midnightconfig.snakeSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Snakes spawning in the world.",
   "naturalist.midnightconfig.snakeSpawnMinGroupSize": "§7§oSnake Minimum Group Size",
@@ -524,7 +524,7 @@
   "naturalist.midnightconfig.snakeSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Snakes that can spawn in a group.",
 
   "naturalist.midnightconfig.sparrowRemoved": "§7Remove Sparrow",
-    "naturalist.midnightconfig.sparrowRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Sparrows will not spawn, and existing Sparrows will be removed.",
+    "naturalist.midnightconfig.sparrowRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Sparrows will not spawn, and existing Sparrows will be removed.",
     "naturalist.midnightconfig.sparrowSpawnWeight": "§9Sparrow Spawn Weight",
     "naturalist.midnightconfig.sparrowSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Sparrows spawning in the world.",
     "naturalist.midnightconfig.sparrowSpawnMinGroupSize": "§7§oSparrow Minimum Group Size",
@@ -533,7 +533,7 @@
     "naturalist.midnightconfig.sparrowSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Sparrows that can spawn in a group.",
 
   "naturalist.midnightconfig.tortoiseRemoved": "§7Remove Tortoise",
-    "naturalist.midnightconfig.tortoiseRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Tortoises will not spawn, and existing Tortoises will be removed.",
+    "naturalist.midnightconfig.tortoiseRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Tortoises will not spawn, and existing Tortoises will be removed.",
   "naturalist.midnightconfig.tortoiseSpawnWeight": "§9Tortoise Spawn Weight",
   "naturalist.midnightconfig.tortoiseSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Tortoises spawning in the world.",
   "naturalist.midnightconfig.tortoiseSpawnMinGroupSize": "§7§oTortoise Minimum Group Size",
@@ -542,7 +542,7 @@
   "naturalist.midnightconfig.tortoiseSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Tortoises that can spawn in a group.",
 
   "naturalist.midnightconfig.vultureRemoved": "§7Remove Vulture",
-    "naturalist.midnightconfig.vultureRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Vultures will not spawn, and existing Vultures will be removed.",
+    "naturalist.midnightconfig.vultureRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Vultures will not spawn, and existing Vultures will be removed.",
   "naturalist.midnightconfig.vultureSpawnWeight": "§9Vulture Spawn Weight",
   "naturalist.midnightconfig.vultureSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Vultures spawning in the world.",
   "naturalist.midnightconfig.vultureSpawnMinGroupSize": "§7§oVulture Minimum Group Size",
@@ -551,7 +551,7 @@
   "naturalist.midnightconfig.vultureSpawnMaxGroupSize.tooltip": "§8§o[?]§7§o The maximum number of Vultures that can spawn in a group.",
 
   "naturalist.midnightconfig.zebraRemoved": "§7Remove Zebra",
-    "naturalist.midnightconfig.zebraRemoved.tooltip": "§8§o[?]§7§o If set to 'No', Zebras will not spawn, and existing Zebras will be removed.",
+    "naturalist.midnightconfig.zebraRemoved.tooltip": "§8§o[?]§7§o If set to 'Yes', Zebras will not spawn, and existing Zebras will be removed.",
   "naturalist.midnightconfig.zebraSpawnWeight": "§9Zebra Spawn Weight",
   "naturalist.midnightconfig.zebraSpawnWeight.tooltip": "§8§o[?]§7§o The chance of Zebras spawning in the world.",
   "naturalist.midnightconfig.zebraSpawnMinGroupSize": "§7§oZebra Minimum Group Size",

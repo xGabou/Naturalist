@@ -6,6 +6,7 @@ import com.starfish_studios.naturalist.common.entity.*;
 import com.starfish_studios.naturalist.platform.forge.CommonPlatformHelperImpl;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
+import com.starfish_studios.naturalist.registry.forge.NaturalistCreativeModeTabForge;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.animal.AbstractFish;
@@ -52,13 +53,14 @@ public class NaturalistForge {
         CommonPlatformHelperImpl.SOUND_EVENTS.register(bus);
         CommonPlatformHelperImpl.ENTITY_TYPES.register(bus);
         CommonPlatformHelperImpl.POTIONS.register(bus);
-        CommonPlatformHelperImpl.CREATIVE_MODE_TABS.register(bus);
+//        CommonPlatformHelperImpl.CREATIVE_MODE_TABS.register(bus);
+        NaturalistCreativeModeTabForge.CREATIVE_MODE_TABS.register(bus);
         BIOME_MODIFIER_SERIALIZERS.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::register);
         bus.addListener(this::createAttributes);
-        bus.addListener(CommonPlatformHelperImpl::buildContents);
+//        bus.addListener(CommonPlatformHelperImpl::buildContents);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

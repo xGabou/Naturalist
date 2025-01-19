@@ -16,8 +16,13 @@
 					"pivot": [0, 0, -1]
 				},
 				{
-					"name": "body",
+					"name": "body_rot",
 					"parent": "root",
+					"pivot": [0, 16, -0.75]
+				},
+				{
+					"name": "body",
+					"parent": "body_rot",
 					"pivot": [0, 16, -0.75],
 					"cubes": [
 						{"origin": [-8, 8, -12], "size": [16, 17, 10], "uv": [0, 31]},
