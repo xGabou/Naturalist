@@ -12,6 +12,10 @@
       "required": false
     },
     {
+      "id": "#forge:is_desert",
+      "required": false
+    },
+    {
       "id": "#c:desert",
       "required": false
     },

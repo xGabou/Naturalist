@@ -12,6 +12,10 @@
     {
       "id": "#c:swamp",
       "required": false
+    },
+    {
+      "id": "#atmospheric:is_rainforest",
+      "required": false
     }
   ]
 }

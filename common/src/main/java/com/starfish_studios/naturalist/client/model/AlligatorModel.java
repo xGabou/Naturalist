@@ -25,7 +25,7 @@ public class AlligatorModel extends GeoModel<Alligator> {
     @Override
     @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Alligator alligator) {
-        return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/alligator.png");
+        return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/alligator/alligator.png");
     }
 
     @Override

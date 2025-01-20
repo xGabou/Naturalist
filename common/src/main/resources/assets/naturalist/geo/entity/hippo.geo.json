@@ -33,14 +33,17 @@
 					]
 				},
 				{
-					"name": "headRot",
+					"name": "bone",
 					"parent": "body",
 					"pivot": [0, 18, -10]
 				},
 				{
 					"name": "head",
-					"parent": "headRot",
-					"pivot": [0, 18, -10]
+					"parent": "bone",
+					"pivot": [0, 18, -10],
+					"locators": {
+						"lead": [0, 20, -9]
+					}
 				},
 				{
 					"name": "topJaw",

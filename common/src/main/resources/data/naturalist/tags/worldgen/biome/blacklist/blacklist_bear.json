@@ -1,5 +1,13 @@
 {
     "replace": false,
     "values": [
+        {
+            "id": "#c:hot",
+            "required": false
+          },
+        {
+            "id": "#atmospheric:is_rainforest",
+            "required": false
+          }
     ]
 }

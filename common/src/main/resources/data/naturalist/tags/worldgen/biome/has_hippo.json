@@ -13,6 +13,10 @@
     {
       "id": "#c:jungle",
       "required": false
+    },
+    {
+      "id": "#atmospheric:is_rainforest",
+      "required": false
     }
   ]
 }

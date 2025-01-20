@@ -71,6 +71,11 @@ public class Giraffe extends NaturalistAnimal implements NaturalistGeoEntity {
 
 
     @Override
+    public int getMaxHeadYRot() {
+        return 45;
+    }
+
+    @Override
     protected @NotNull BodyRotationControl createBodyControl() {
         return new SmartBodyHelper(this);
     }
