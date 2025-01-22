@@ -5,6 +5,7 @@ import com.starfish_studios.naturalist.common.item.fabric.*;
 import com.starfish_studios.naturalist.mixin.fabric.PotionBrewingInvoker;
 import com.starfish_studios.naturalist.mixin.fabric.SpawnPlacementsInvoker;
 import com.starfish_studios.naturalist.registry.NaturalistMenus;
+import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -12,7 +13,9 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -31,6 +34,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
+import static com.starfish_studios.naturalist.Naturalist.MOD_ID;
+
 public class CommonPlatformHelperImpl {
 
     public static <T extends Block> Supplier<T> registerBlock(@NotNull String name, Supplier<T> block) {
@@ -45,13 +50,6 @@ public class CommonPlatformHelperImpl {
 
     public static <T extends Item> Supplier<T> registerItem(String name, @NotNull Supplier<T> item) {
         T registry = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Naturalist.MOD_ID, name), item.get());
-        /*
-        if (shouldPutInCreativeTab) {
-            ItemGroupEvents.modifyEntriesEvent(Naturalist.TAB_KEY).register(content -> {
-                content.accept(item.get());
-            });
-        }
-         */
         return () -> registry;
     }
 
@@ -102,17 +100,6 @@ public class CommonPlatformHelperImpl {
         player.openMenu(provider);
     }
 
-    public static @NotNull CreativeModeTab registerCreativeModeTab(ResourceLocation name, @NotNull Supplier<ItemStack> icon) {
-        return Registry.register(
-                BuiltInRegistries.CREATIVE_MODE_TAB,
-                name,
-                FabricItemGroup.builder()
-                        .icon(icon)
-                        .title(Component.translatable("itemGroup.naturalist.tab"))
-                        .build()
-        );
-    }
-
     public static <T extends Potion> Supplier<T> registerPotion(String name, Supplier<T> potion) {
         T registry = Registry.register(BuiltInRegistries.POTION, new ResourceLocation(Naturalist.MOD_ID, name), potion.get());
         return () -> registry;
@@ -128,10 +115,5 @@ public class CommonPlatformHelperImpl {
 
     public static void registerCompostable(float chance, ItemLike item) {
         CompostingChanceRegistry.INSTANCE.add(item, chance);
-    }
-    public static void acceptItemToCreativeTab(ItemStack itemStack) {
-        ItemGroupEvents.modifyEntriesEvent(Naturalist.TAB_KEY).register(content -> {
-            content.accept(itemStack);
-        });
     }
 }

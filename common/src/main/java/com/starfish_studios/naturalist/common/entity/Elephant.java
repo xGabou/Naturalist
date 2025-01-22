@@ -5,6 +5,7 @@ import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyHurtByTarg
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.DistancedFollowParentGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import net.minecraft.nbt.CompoundTag;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
@@ -64,6 +66,17 @@ public class Elephant extends NaturalistAnimal implements NeutralMob, Naturalist
         this.setMaxUpStep(1.0F);
     }
 
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
+    }
+
+    @Override
+    protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
+        return new MMPathNavigatorGround(this, level);
+    }
+
     public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 80.0D)
@@ -95,11 +108,6 @@ public class Elephant extends NaturalistAnimal implements NeutralMob, Naturalist
         return NaturalistEntityTypes.ELEPHANT.get().create(serverLevel);
     }
 
-
-    @Override
-    protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
-        return new MMPathNavigatorGround(this, level);
-    }
 
     @Override
     public void customServerAiStep() {

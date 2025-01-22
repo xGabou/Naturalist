@@ -33,6 +33,10 @@ public class NaturalistEntityTypes {
     public static final Supplier<EntityType<Lizard>> LIZARD = CommonPlatformHelper.registerEntityType("lizard", Lizard::new, MobCategory.CREATURE, 0.8F, 0.5F, 10);
     public static final Supplier<EntityType<LizardTail>> LIZARD_TAIL = CommonPlatformHelper.registerEntityType("lizard_tail", LizardTail::new, MobCategory.CREATURE, 0.7f, 0.5f, 10);
 //    public static final Supplier<EntityType<Ostrich>> OSTRICH = CommonPlatformHelper.registerEntityType("ostrich", Ostrich::new, MobCategory.CREATURE, 1.4F, 2.1F, 10);
+
+    // Moose
+    public static final Supplier<EntityType<Moose>> MOOSE = CommonPlatformHelper.registerEntityType("moose", Moose::new, MobCategory.CREATURE, 1.7F, 2.0F, 10);
+
     public static final Supplier<EntityType<Snake>> RATTLESNAKE = CommonPlatformHelper.registerEntityType("rattlesnake", Snake::new, MobCategory.CREATURE, 0.6F, 0.7F, 8);
     public static final Supplier<EntityType<Rhino>> RHINO = CommonPlatformHelper.registerEntityType("rhino", Rhino::new, MobCategory.CREATURE, 2.5F, 3.0F, 10);
     public static final Supplier<EntityType<Bird>> ROBIN = CommonPlatformHelper.registerEntityType("robin", Bird::new, MobCategory.CREATURE, 0.5F, 0.6F, 8);

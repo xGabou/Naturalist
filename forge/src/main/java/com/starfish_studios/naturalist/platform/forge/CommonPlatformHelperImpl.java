@@ -3,10 +3,6 @@ package com.starfish_studios.naturalist.platform.forge;
 import com.starfish_studios.naturalist.item.forge.*;
 import com.starfish_studios.naturalist.registry.NaturalistMenus;
 import com.starfish_studios.naturalist.util.forge.NaturalistBrewingRecipe;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.MenuProvider;
@@ -24,16 +20,11 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 import static com.starfish_studios.naturalist.Naturalist.MOD_ID;
@@ -46,7 +37,6 @@ public class CommonPlatformHelperImpl {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
     public static <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);
@@ -105,17 +95,6 @@ public class CommonPlatformHelperImpl {
         NetworkHooks.openScreen(player, provider);
     }
 
-    static ResourceKey<CreativeModeTab> tabResourceKey;
-    public static @NotNull CreativeModeTab registerCreativeModeTab(ResourceLocation name, Supplier<ItemStack> icon) {
-        CreativeModeTab tab = CreativeModeTab.builder()
-                .title(Component.translatable("itemGroup.naturalist.tab"))
-                .icon(icon)
-                .build();
-        RegistryObject<CreativeModeTab> creativeModeTabRegistryObject = CREATIVE_MODE_TABS.register(MOD_ID, () -> tab);
-        tabResourceKey = creativeModeTabRegistryObject.getKey();
-        return tab;
-    }
-
     public static <T extends Potion> Supplier<T> registerPotion(String name, Supplier<T> potion) {
         return POTIONS.register(name, potion);
     }
@@ -130,22 +109,5 @@ public class CommonPlatformHelperImpl {
 
     public static void registerCompostable(float chance, ItemLike item) {
         ComposterBlock.COMPOSTABLES.put(item.asItem(), chance);
-    }
-
-    static List<ItemStack> itemStacks = new ArrayList<>();
-
-    public static void acceptItemToCreativeTab(ItemStack itemStack) {
-        itemStacks.add(itemStack);
-    }
-
-    @SubscribeEvent
-    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
-        // Add to ingredients tab
-        if (event.getTabKey() == tabResourceKey) {
-            for (ItemStack itemStack : itemStacks) {
-                event.accept(itemStack);
-            }
-            // itemStacks.clear();
-        }
     }
 }

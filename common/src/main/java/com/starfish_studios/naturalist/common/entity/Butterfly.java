@@ -428,7 +428,7 @@ public class Butterfly extends NaturalistAnimal implements NaturalistGeoEntity, 
 
         @Override
         protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
-            return pLevel.getBlockState(pPos).is(BlockTags.FLOWERS) || pLevel.getBlockState(pPos).is(NaturalistRegistry.CATTAIL.get());
+            return pLevel.getBlockState(pPos).is(BlockTags.FLOWERS);
         }
 
         @Override

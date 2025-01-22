@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public class ClientPlatformHelperImpl {
     public static void setRenderLayer(@NotNull Supplier<Block> block, RenderType type) {
         BlockRenderLayerMap.INSTANCE.putBlock(block.get(), type);
-        BlockRenderLayerMap.INSTANCE.putBlock(NaturalistRegistry.CATTAIL.get(), RenderType.cutout());
+//        BlockRenderLayerMap.INSTANCE.putBlock(NaturalistRegistry.CATTAIL.get(), RenderType.cutout());
     }
 
     public static <T extends Entity> void registerEntityRenderers(@NotNull Supplier<EntityType<T>> type, EntityRendererProvider<T> renderProvider) {

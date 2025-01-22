@@ -4,7 +4,9 @@ import com.google.common.base.Preconditions;
 import com.starfish_studios.naturalist.Naturalist;
 import com.starfish_studios.naturalist.NaturalistConfig;
 import com.starfish_studios.naturalist.common.entity.*;
+import com.starfish_studios.naturalist.core.platform.fabric.CommonPlatformHelperImpl;
 import com.starfish_studios.naturalist.core.registry.fabric.NaturalistConfigFabric;
+import com.starfish_studios.naturalist.core.registry.fabric.NaturalistCreativeModeFabric;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
@@ -37,9 +39,10 @@ import java.util.List;
 public class NaturalistFabric implements ModInitializer {
     @Override
     public void onInitialize() {
+        Naturalist.init();
+
         MidnightConfig.init("naturalist", NaturalistConfig.class);
 
-        Naturalist.init();
         addSpawns();
         addFeatures();
         registerEntityAttributes();
@@ -48,7 +51,7 @@ public class NaturalistFabric implements ModInitializer {
         Naturalist.registerSpawnPlacements();
         Naturalist.registerDispenserBehaviors();
 
-        NaturalistRegistry.addAllToCreativeTab();
+        NaturalistCreativeModeFabric.init();
     }
 
 

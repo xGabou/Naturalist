@@ -53,7 +53,6 @@ public class NaturalistForge {
         CommonPlatformHelperImpl.SOUND_EVENTS.register(bus);
         CommonPlatformHelperImpl.ENTITY_TYPES.register(bus);
         CommonPlatformHelperImpl.POTIONS.register(bus);
-//        CommonPlatformHelperImpl.CREATIVE_MODE_TABS.register(bus);
         NaturalistCreativeModeTabForge.CREATIVE_MODE_TABS.register(bus);
         BIOME_MODIFIER_SERIALIZERS.register(bus);
 
@@ -100,7 +99,6 @@ public class NaturalistForge {
 
     private void register(final FMLLoadCompleteEvent event) {
         NaturalistRegistry.addAllToCreativeTab();
-        NaturalistRegistry.addAllToCreativeTab();
     }
 
     private void createAttributes(@NotNull EntityAttributeCreationEvent event) {
@@ -138,6 +136,7 @@ public class NaturalistForge {
         event.put(NaturalistEntityTypes.BASS.get(), AbstractFish.createAttributes().build());
         event.put(NaturalistEntityTypes.LIZARD.get(), Lizard.createAttributes().build());
         event.put(NaturalistEntityTypes.LIZARD_TAIL.get(), LizardTail.createAttributes().build());
+        event.put(NaturalistEntityTypes.MOOSE.get(), Moose.createAttributes().build());
         event.put(NaturalistEntityTypes.TORTOISE.get(), Tortoise.createAttributes().build());
         event.put(NaturalistEntityTypes.DUCK.get(), Duck.createAttributes().build());
         // event.put(NaturalistEntityTypes.HYENA.get(), Hyena.createAttributes().build());

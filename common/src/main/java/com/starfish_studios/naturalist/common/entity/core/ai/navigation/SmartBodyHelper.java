@@ -36,17 +36,25 @@ public class SmartBodyHelper extends BodyRotationControl {
         double distSq = dx * dx + dz * dz;
 
         if (entity.getTarget() != null) {
-            entity.yBodyRot = entity.yBodyRotO;
-            entity.yHeadRot = entity.yBodyRot;
+            double tx = entity.getTarget().getX() - entity.getX();
+            double tz = entity.getTarget().getZ() - entity.getZ();
+            float targetAngle = (float)(Mth.atan2(tz, tx) * (180F / Math.PI)) - 90F;
+
+            entity.yBodyRot = approachAngle(entity.yBodyRot, targetAngle, BODY_LAG_MOVING, BODY_MAX);
+            entity.yHeadRot = approachAngle(entity.yHeadRot, targetAngle, HEAD_LAG, HEAD_MAX);
+            clampHeadBodyDifference();
+
         } else if (distSq > MOVE_THRESHOLD) {
-            float moveAngle = (float) Math.toDegrees(Math.atan2(dz, dx)) - 90.0F;
+            float moveAngle = (float)(Math.toDegrees(Math.atan2(dz, dx)) - 90.0F);
             entity.yBodyRot = approachAngle(entity.yBodyRot, moveAngle, BODY_LAG_MOVING, BODY_MAX);
             entity.yHeadRot = approachAngle(entity.yHeadRot, entity.yBodyRot, HEAD_LAG, HEAD_MAX);
+            clampHeadBodyDifference();
+
         } else {
             entity.yBodyRot = approachAngle(entity.yBodyRot, entity.yHeadRot, BODY_LAG_STILL, BODY_MAX);
+            clampHeadBodyDifference();
         }
     }
-
 
     private double avgDelta(double[] arr) {
         return mean(arr, 0) - mean(arr, HISTORY_SIZE / 2);
@@ -63,8 +71,17 @@ public class SmartBodyHelper extends BodyRotationControl {
 
     private static float approachAngle(float current, float target, float factor, float maxDelta) {
         float d = Mth.wrapDegrees(target - current);
-        if (d < -maxDelta) d = -maxDelta;
-        else if (d > maxDelta) d = maxDelta;
+        if (d < -maxDelta) {
+            d = -maxDelta;
+        } else if (d > maxDelta) {
+            d = maxDelta;
+        }
         return current + d * factor;
+    }
+
+    private void clampHeadBodyDifference() {
+        float diff = Mth.wrapDegrees(entity.yHeadRot - entity.yBodyRot);
+        float clamped = Mth.clamp(diff, -HEAD_MAX, HEAD_MAX);
+        entity.yHeadRot = entity.yBodyRot + clamped;
     }
 }

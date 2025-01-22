@@ -6,6 +6,7 @@ import com.starfish_studios.naturalist.common.entity.core.ai.goal.BabyPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.DistancedFollowParentGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.SmoothFloatGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import net.minecraft.core.BlockPos;
@@ -25,6 +26,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -70,6 +72,12 @@ public class Hippo extends NaturalistAnimal implements NaturalistGeoEntity {
         super(entityType, level);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.setMaxUpStep(1.0f);
+    }
+
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
     }
 
     @Override

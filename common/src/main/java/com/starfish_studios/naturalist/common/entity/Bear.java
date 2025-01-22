@@ -5,6 +5,7 @@ import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import com.starfish_studios.naturalist.common.entity.core.SleepingAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.*;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
@@ -31,6 +32,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
@@ -97,6 +99,12 @@ public class Bear extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
         super(entityType, level);
         this.setMaxUpStep(1.0F);
         this.setCanPickUpLoot(true);
+    }
+
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
     }
 
     @Override
@@ -425,7 +433,7 @@ public class Bear extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
         this.setSheared(true);
         int amount = 1 + this.random.nextInt(2);
         for (int j = 0; j < amount; ++j) {
-            ItemEntity itemEntity = this.spawnAtLocation(NaturalistRegistry.BEAR_FUR.get(), 1);
+            ItemEntity itemEntity = this.spawnAtLocation(NaturalistRegistry.FUR.get(), 1);
             if (itemEntity == null) continue;
             itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1f, this.random.nextFloat() * 0.05f, (this.random.nextFloat() - this.random.nextFloat()) * 0.1f));
         }
@@ -529,11 +537,12 @@ public class Bear extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
 
     protected <E extends Bear> PlayState attackPredicate(final AnimationState<E> event) {
         if (this.swinging && event.getController().getAnimationState().equals(AnimationController.State.STOPPED)) {
+            event.setAnimation(ATTACK);
+            event.getController().setAnimationSpeed(1.3F);
             event.getController().forceAnimationReset();
-        
-            event.getController().setAnimation(ATTACK);
-            this.swinging = false;
         }
+        this.swinging = false;
+
         return PlayState.CONTINUE;
     }
 

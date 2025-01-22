@@ -3,6 +3,8 @@ package com.starfish_studios.naturalist.common.entity;
 import com.starfish_studios.naturalist.common.entity.core.*;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.EggLayingBreedGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.LayEggGoal;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
@@ -22,9 +24,11 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
@@ -69,6 +73,17 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D).add(Attributes.MOVEMENT_SPEED, 0.1F);
+    }
+
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
+    }
+
+    @Override
+    protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
+        return new MMPathNavigatorGround(this, level);
     }
 
     @Override
@@ -393,10 +408,13 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
     }
 
     private <E extends Snail> PlayState hidePredicate(final AnimationState<E> event) {
-        if (this.canHide()) {
+        if( this.canHide()) {
             event.getController().setAnimation(HIDE);
+            return PlayState.CONTINUE;
         }
-        return PlayState.CONTINUE;
+        event.getController().forceAnimationReset();
+
+        return PlayState.STOP;
     }
 
     private void soundListener(@NotNull SoundKeyframeEvent<Snail> event) {
@@ -408,13 +426,16 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
             if (event.getKeyframeData().getSound().equals("back")) {
                 snail.level().playLocalSound(snail.getX(), snail.getY(), snail.getZ(), NaturalistSoundEvents.SNAIL_BACK.get(), snail.getSoundSource(), 0.5F, 1.0F, false);
             }
+            if (event.getKeyframeData().getSound().equals("hide")) {
+                snail.level().playLocalSound(snail.getX(), snail.getY(), snail.getZ(), NaturalistSoundEvents.TORTOISE_HIDE.get(), snail.getSoundSource(), 0.2F, 1.7F, false);
+            }
         }
     }
 
     @Override
     public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate).setSoundKeyframeHandler(this::soundListener));
-        controllers.add(new AnimationController<>(this, "hideController", 0, this::hidePredicate));
+        controllers.add(new AnimationController<>(this, "hideController", 0, this::hidePredicate).setSoundKeyframeHandler(this::soundListener));
     }
 
 

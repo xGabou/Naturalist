@@ -1,6 +1,8 @@
 package com.starfish_studios.naturalist.common.entity;
 
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.FlyingWanderGoal;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
+import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
 import com.starfish_studios.naturalist.registry.NaturalistTags;
 import net.minecraft.core.BlockPos;
@@ -18,6 +20,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -70,6 +73,12 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
         this.setPathfindingMalus(BlockPathTypes.FENCE, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_OTHER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.DAMAGE_OTHER, 0.0F);
+    }
+
+
+    @Override
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return new SmartBodyHelper(this);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -293,7 +302,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
         }
 
         @Override
-        public boolean isStableDestination(BlockPos pos) {
+        public boolean isStableDestination(@NotNull BlockPos pos) {
             return super.isStableDestination(pos) && this.mob.level().getBlockState(pos).is(NaturalistTags.BlockTags.VULTURE_PERCH_BLOCKS);
         }
     }

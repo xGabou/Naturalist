@@ -34,7 +34,6 @@ public class LookAtLivingEntityGoal extends Goal {
         this.onlyHorizontal = onlyHorizontal;
         this.setFlags(EnumSet.of(Flag.LOOK));
 
-        // Targeting conditions for any nearby living entity
         this.lookAtContext = TargetingConditions.forNonCombat()
                 .range(lookDistance)
                 .selector(entity -> entity instanceof LivingEntity && entity != mob);
@@ -46,7 +45,6 @@ public class LookAtLivingEntityGoal extends Goal {
             return false;
         }
 
-        // Find the nearest LivingEntity
         this.lookAt = this.mob.level().getNearestEntity(
                 this.mob.level().getEntitiesOfClass(LivingEntity.class, this.mob.getBoundingBox().inflate(this.lookDistance), entity -> true),
                 this.lookAtContext,

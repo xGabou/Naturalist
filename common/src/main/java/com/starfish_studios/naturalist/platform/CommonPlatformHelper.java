@@ -90,11 +90,6 @@ public class CommonPlatformHelper {
     }
 
     @ExpectPlatform
-    public static CreativeModeTab registerCreativeModeTab(ResourceLocation name, Supplier<ItemStack> icon) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static <T extends Potion> Supplier<T> registerPotion(String name, Supplier<T> potion) {
         throw new AssertionError();
     }
@@ -111,11 +106,6 @@ public class CommonPlatformHelper {
 
     @ExpectPlatform
     public static void registerCompostable(float chance, ItemLike item) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static void acceptItemToCreativeTab(ItemStack itemStack) {
         throw new AssertionError();
     }
 }

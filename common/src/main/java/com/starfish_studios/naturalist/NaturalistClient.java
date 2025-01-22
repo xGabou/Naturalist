@@ -17,8 +17,8 @@ public class NaturalistClient {
         ClientPlatformHelper.setRenderLayer(NaturalistRegistry.CRIMSON_FROGLASS_PANE, RenderType.translucent());
         ClientPlatformHelper.setRenderLayer(NaturalistRegistry.SNAIL_EGGS, RenderType.cutout());
 
-        ClientPlatformHelper.setRenderLayer(NaturalistRegistry.CATTAIL, RenderType.cutout());
-        ClientPlatformHelper.setRenderLayer(NaturalistRegistry.DUCKWEED_BLOCK, RenderType.cutout());
+//        ClientPlatformHelper.setRenderLayer(NaturalistRegistry.CATTAIL, RenderType.cutout());
+//        ClientPlatformHelper.setRenderLayer(NaturalistRegistry.DUCKWEED_BLOCK, RenderType.cutout());
 
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.SNAIL, SnailRenderer::new);
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.BEAR, BearRenderer::new);
@@ -53,6 +53,7 @@ public class NaturalistClient {
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.BASS, BassRenderer::new);
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.LIZARD, LizardRenderer::new);
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.LIZARD_TAIL, LizardTailRenderer::new);
+        ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.MOOSE, MooseRenderer::new);
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.TORTOISE, TortoiseRenderer::new);
         ClientPlatformHelper.registerEntityRenderers(NaturalistEntityTypes.DUCK, DuckRenderer::new);
     }

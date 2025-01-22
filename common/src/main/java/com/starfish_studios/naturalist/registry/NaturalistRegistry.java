@@ -18,8 +18,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.starfish_studios.naturalist.platform.CommonPlatformHelper.registerItem;
@@ -27,18 +30,49 @@ import static com.starfish_studios.naturalist.platform.CommonPlatformHelper.regi
 
 public class NaturalistRegistry {
 
+    public static List<ItemStack> collectAllItemStacks() {
+        List<ItemStack> stacks = new ArrayList<>();
+        try {
+            Field[] fields = NaturalistRegistry.class.getDeclaredFields();
+            for (Field field : fields) {
+                // We only want static fields of type Supplier<?>
+                if (!Modifier.isStatic(field.getModifiers())) continue;
+                if (!Supplier.class.isAssignableFrom(field.getType())) continue;
+
+                @SuppressWarnings("unchecked")
+                Supplier<?> supplier = (Supplier<?>) field.get(null);
+                Object value = supplier.get();
+
+                // If it's a Block, convert it to an ItemStack via the block's Item
+                if (value instanceof Block block) {
+                    stacks.add(new ItemStack(block));
+                }
+                // If it's an Item, just wrap the Item in an ItemStack
+                else if (value instanceof Item item) {
+                    stacks.add(new ItemStack(item));
+                }
+            }
+        } catch (IllegalAccessException ignored) {
+            // Should not happen for public fields
+        }
+        return stacks;
+    }
+
+    public static final Supplier<Item> BUSHMEAT = registerItem("bushmeat", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).meat().build())));
+    public static final Supplier<Item> COOKED_BUSHMEAT = registerItem("cooked_bushmeat", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).meat().build())));
+    public static final Supplier<Item> FUR = registerItem("fur", () -> new Item(new Item.Properties()));
+
     //region BLOCKS & ITEMS
     public static final Supplier<Block> ALLIGATOR_EGG = registerBlock("alligator_egg", () -> new AlligatorEggBlock(BlockBehaviour.Properties.copy(Blocks.TURTLE_EGG)));
     public static final Supplier<Item> DUCK_EGG = registerItem("duck_egg", () -> new DuckEggItem(new Item.Properties()));
     public static final Supplier<Block> TORTOISE_EGG = registerBlock("tortoise_egg", () -> new TortoiseEggBlock(BlockBehaviour.Properties.copy(Blocks.TURTLE_EGG)));
     public static final Supplier<Item> COOKED_EGG = registerItem("cooked_egg", () -> new Item(new Item.Properties().food(Foods.BREAD)));
     public static final Supplier<Block> SNAIL_EGGS = registerBlock("snail_eggs", () -> new SnailEggBlock(BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)));
-    public static final Supplier<Block> CATTAIL = registerBlock("cattail", () -> new CattailBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.SMALL_DRIPLEAF).offsetType(BlockBehaviour.OffsetType.XZ)));
-    public static final Supplier<Item> CATTAIL_FLUFF = registerItem("cattail_fluff", () -> new Item(new Item.Properties()));
+//    public static final Supplier<Block> CATTAIL = registerBlock("cattail", () -> new CattailBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.SMALL_DRIPLEAF).offsetType(BlockBehaviour.OffsetType.XZ)));
+//    public static final Supplier<Item> CATTAIL_FLUFF = registerItem("cattail_fluff", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> ANTLER = registerItem("antler", () -> new Item(new Item.Properties()));
     public static final Supplier<Block> GLOW_GOOP_BLOCK = registerBlockOnly("glow_goop", () -> new GlowGoopBlock(BlockBehaviour.Properties.of().strength(0.5F).replaceable().noOcclusion().noCollission().lightLevel(GlowGoopBlock.LIGHT_EMISSION).sound(SoundType.HONEY_BLOCK)));
     public static final Supplier<Item> GLOW_GOOP = CommonPlatformHelper.registerItem("glow_goop", () -> new GlowGoopItem(GLOW_GOOP_BLOCK.get(), new Item.Properties()));
-    public static final Supplier<Item> BEAR_FUR = registerItem("bear_fur", () -> new Item(new Item.Properties()));
     public static final Supplier<Block> TEDDY_BEAR = registerBlock("teddy_bear", () -> new TeddyBearBlock(BlockBehaviour.Properties.of().strength(0.8f).sound(SoundType.WOOL).noOcclusion()));
     public static final Supplier<Item> DUCK = registerItem("duck", () -> new Item(new Item.Properties().food(Foods.CHICKEN)));
     public static final Supplier<Item> COOKED_DUCK = registerItem("cooked_duck", () -> new Item(new Item.Properties().food(Foods.COOKED_CHICKEN)));
@@ -59,8 +93,8 @@ public class NaturalistRegistry {
     public static final Supplier<Item> BUTTERFLY = CommonPlatformHelper.registerCaughtMobItem("butterfly", NaturalistEntityTypes.BUTTERFLY, () -> Fluids.EMPTY, NaturalistSoundEvents.BIRD_FLY, Butterfly.Variant.values().length);
     public static final Supplier<Item> SNAIL_SHELL = registerItem("snail_shell", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> SNAIL_BUCKET = CommonPlatformHelper.registerNoFluidMobBucketItem("snail_bucket", NaturalistEntityTypes.SNAIL, () -> Fluids.EMPTY, NaturalistSoundEvents.BUCKET_EMPTY_SNAIL, Snail.Color.values().length);
-    public static final Supplier<Block> DUCKWEED_BLOCK = registerBlockOnly("duckweed", () -> new WaterlilyBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.SMALL_DRIPLEAF).replaceable().ignitedByLava().pushReaction(PushReaction.DESTROY)));
-    public static final Supplier<Item> DUCKWEED = CommonPlatformHelper.registerItem("duckweed", () -> new PlaceOnWaterBlockItem(DUCKWEED_BLOCK.get(), new Item.Properties()));
+//    public static final Supplier<Block> DUCKWEED_BLOCK = registerBlockOnly("duckweed", () -> new WaterlilyBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.SMALL_DRIPLEAF).replaceable().ignitedByLava().pushReaction(PushReaction.DESTROY)));
+//    public static final Supplier<Item> DUCKWEED = CommonPlatformHelper.registerItem("duckweed", () -> new PlaceOnWaterBlockItem(DUCKWEED_BLOCK.get(), new Item.Properties()));
     // endregion
 
 
@@ -137,26 +171,22 @@ public class NaturalistRegistry {
     }
 
     public static void addAllToCreativeTab() {
-        try {
-            Field[] fields = NaturalistRegistry.class.getDeclaredFields();
-            for (Field field : fields) {
-                ParameterizedType type = (ParameterizedType) field.getGenericType();
-                Type rawType = type.getRawType();
-                Type[] typeArguments = type.getActualTypeArguments();
+        Field[] fields = NaturalistRegistry.class.getDeclaredFields();
+        for (Field field : fields) {
+            ParameterizedType type = (ParameterizedType) field.getGenericType();
+            Type rawType = type.getRawType();
+            Type[] typeArguments = type.getActualTypeArguments();
 
-                if (rawType == Supplier.class) {
-                    if (typeArguments.length == 1) {
-                        Class<?> arg = (Class<?>) typeArguments[0];
-                        if (Block.class.isAssignableFrom(arg)) {
-                            Supplier<?> supplier = (Supplier<?>) field.get(null);
-                            CommonPlatformHelper.acceptItemToCreativeTab(new ItemStack((Block) supplier.get()));
-                        } else if (Item.class.isAssignableFrom(arg) || SpawnEggItem.class.isAssignableFrom(arg)) {
-                            Supplier<?> supplier = (Supplier<?>) field.get(null);
-                            CommonPlatformHelper.acceptItemToCreativeTab(new ItemStack((Item) supplier.get()));
-                        }
+            if (rawType == Supplier.class) {
+                if (typeArguments.length == 1) {
+                    Class<?> arg = (Class<?>) typeArguments[0];
+                    if (Block.class.isAssignableFrom(arg)) {
+                        NaturalistRegistry.addAllToCreativeTab();
+                    } else if (Item.class.isAssignableFrom(arg) || SpawnEggItem.class.isAssignableFrom(arg)) {
+                        NaturalistRegistry.addAllToCreativeTab();
                     }
                 }
             }
-        } catch (IllegalAccessException ignored) {}
+        }
     }
 }
