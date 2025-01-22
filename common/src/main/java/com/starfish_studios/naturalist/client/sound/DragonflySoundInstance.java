@@ -1,7 +1,7 @@
 package com.starfish_studios.naturalist.client.sound;
 
 import com.starfish_studios.naturalist.common.entity.Dragonfly;
-import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
+import com.starfish_studios.naturalist.core.registry.NaturalistSoundEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;

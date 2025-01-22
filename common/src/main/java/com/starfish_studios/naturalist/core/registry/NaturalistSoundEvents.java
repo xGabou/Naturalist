@@ -1,7 +1,7 @@
-package com.starfish_studios.naturalist.registry;
+package com.starfish_studios.naturalist.core.registry;
 
 import com.starfish_studios.naturalist.Naturalist;
-import com.starfish_studios.naturalist.platform.CommonPlatformHelper;
+import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 

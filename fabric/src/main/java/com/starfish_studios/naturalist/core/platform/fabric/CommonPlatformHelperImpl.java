@@ -4,18 +4,12 @@ import com.starfish_studios.naturalist.Naturalist;
 import com.starfish_studios.naturalist.common.item.fabric.*;
 import com.starfish_studios.naturalist.mixin.fabric.PotionBrewingInvoker;
 import com.starfish_studios.naturalist.mixin.fabric.SpawnPlacementsInvoker;
-import com.starfish_studios.naturalist.registry.NaturalistMenus;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import com.starfish_studios.naturalist.core.registry.NaturalistMenus;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -33,8 +27,6 @@ import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
-
-import static com.starfish_studios.naturalist.Naturalist.MOD_ID;
 
 public class CommonPlatformHelperImpl {
 

@@ -1,7 +1,7 @@
 package com.starfish_studios.naturalist.item.forge;
 
 import com.starfish_studios.naturalist.common.entity.Snail;
-import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
+import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

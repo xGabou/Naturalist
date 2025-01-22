@@ -1,6 +1,5 @@
 package com.starfish_studios.naturalist.core.platform.fabric;
 
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.RenderType;

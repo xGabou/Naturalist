@@ -1,7 +1,7 @@
-package com.starfish_studios.naturalist.registry.forge;
+package com.starfish_studios.naturalist.core.registry.forge;
 
 import com.starfish_studios.naturalist.Naturalist;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

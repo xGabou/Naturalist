@@ -3,10 +3,10 @@ package com.starfish_studios.naturalist.forge;
 import com.starfish_studios.naturalist.Naturalist;
 import com.starfish_studios.naturalist.NaturalistConfig;
 import com.starfish_studios.naturalist.common.entity.*;
-import com.starfish_studios.naturalist.platform.forge.CommonPlatformHelperImpl;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
-import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
-import com.starfish_studios.naturalist.registry.forge.NaturalistCreativeModeTabForge;
+import com.starfish_studios.naturalist.core.platform.forge.CommonPlatformHelperImpl;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
+import com.starfish_studios.naturalist.core.registry.forge.NaturalistCreativeModeTabForge;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.animal.AbstractFish;
@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import static com.starfish_studios.naturalist.registry.forge.NaturalistBiomeModifiers.BIOME_MODIFIER_SERIALIZERS;
+import static com.starfish_studios.naturalist.core.registry.forge.NaturalistBiomeModifiers.BIOME_MODIFIER_SERIALIZERS;
 
 @Mod(Naturalist.MOD_ID)
 public class NaturalistForge {

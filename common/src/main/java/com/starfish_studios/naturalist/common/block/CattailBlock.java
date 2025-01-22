@@ -5,7 +5,7 @@
 
 package com.starfish_studios.naturalist.common.block;
 
-import com.starfish_studios.naturalist.registry.NaturalistTags;
+import com.starfish_studios.naturalist.core.registry.NaturalistTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

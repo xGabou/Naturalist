@@ -1,9 +1,9 @@
 package com.starfish_studios.naturalist;
 
 import com.starfish_studios.naturalist.client.renderer.*;
-import com.starfish_studios.naturalist.platform.ClientPlatformHelper;
-import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.platform.ClientPlatformHelper;
+import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
 import net.minecraft.client.renderer.RenderType;
 
 public class NaturalistClient {

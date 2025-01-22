@@ -1,4 +1,4 @@
-package com.starfish_studios.naturalist.registry;
+package com.starfish_studios.naturalist.core.registry;
 
 import com.starfish_studios.naturalist.Naturalist;
 import net.minecraft.core.Registry;

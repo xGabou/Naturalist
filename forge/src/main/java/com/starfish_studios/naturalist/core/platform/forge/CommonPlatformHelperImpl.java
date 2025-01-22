@@ -1,7 +1,7 @@
-package com.starfish_studios.naturalist.platform.forge;
+package com.starfish_studios.naturalist.core.platform.forge;
 
 import com.starfish_studios.naturalist.item.forge.*;
-import com.starfish_studios.naturalist.registry.NaturalistMenus;
+import com.starfish_studios.naturalist.core.registry.NaturalistMenus;
 import com.starfish_studios.naturalist.util.forge.NaturalistBrewingRecipe;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;

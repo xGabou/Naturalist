@@ -1,7 +1,7 @@
 package com.starfish_studios.naturalist.common.item;
 
 import com.starfish_studios.naturalist.common.entity.core.projectile.ThrownDuckEgg;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;

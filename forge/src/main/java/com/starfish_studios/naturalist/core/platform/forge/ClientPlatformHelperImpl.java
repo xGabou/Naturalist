@@ -1,4 +1,4 @@
-package com.starfish_studios.naturalist.platform.forge;
+package com.starfish_studios.naturalist.core.platform.forge;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;

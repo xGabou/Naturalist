@@ -2,7 +2,7 @@ package com.starfish_studios.naturalist.mixin;
 
 import com.starfish_studios.naturalist.NaturalistConfig;
 import com.starfish_studios.naturalist.common.entity.Firefly;
-import com.starfish_studios.naturalist.registry.NaturalistTags;
+import com.starfish_studios.naturalist.core.registry.NaturalistTags;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

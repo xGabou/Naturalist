@@ -1,7 +1,7 @@
 package com.starfish_studios.naturalist.common.item.fabric;
 
 import com.starfish_studios.naturalist.common.entity.Snail;
-import com.starfish_studios.naturalist.registry.NaturalistEntityTypes;
+import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

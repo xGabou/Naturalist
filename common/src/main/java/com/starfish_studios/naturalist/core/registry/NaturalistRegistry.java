@@ -1,11 +1,11 @@
-package com.starfish_studios.naturalist.registry;
+package com.starfish_studios.naturalist.core.registry;
 
 import com.starfish_studios.naturalist.common.block.*;
 import com.starfish_studios.naturalist.common.entity.Butterfly;
 import com.starfish_studios.naturalist.common.entity.Snail;
 import com.starfish_studios.naturalist.common.item.DuckEggItem;
 import com.starfish_studios.naturalist.common.item.GlowGoopItem;
-import com.starfish_studios.naturalist.platform.CommonPlatformHelper;
+import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.starfish_studios.naturalist.platform.CommonPlatformHelper.registerItem;
-import static com.starfish_studios.naturalist.platform.CommonPlatformHelper.registerMobBucketItem;
+import static com.starfish_studios.naturalist.core.platform.CommonPlatformHelper.registerItem;
+import static com.starfish_studios.naturalist.core.platform.CommonPlatformHelper.registerMobBucketItem;
 
 public class NaturalistRegistry {
 

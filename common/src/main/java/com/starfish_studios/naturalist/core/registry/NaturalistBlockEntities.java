@@ -1,4 +1,4 @@
-package com.starfish_studios.naturalist.registry;
+package com.starfish_studios.naturalist.core.registry;
 
 import com.starfish_studios.naturalist.common.block.*;
 import net.minecraft.world.level.block.*;

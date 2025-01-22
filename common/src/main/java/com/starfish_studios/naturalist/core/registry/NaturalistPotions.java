@@ -1,6 +1,6 @@
-package com.starfish_studios.naturalist.registry;
+package com.starfish_studios.naturalist.core.registry;
 
-import com.starfish_studios.naturalist.platform.CommonPlatformHelper;
+import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;

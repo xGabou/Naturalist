@@ -2,9 +2,9 @@ package com.starfish_studios.naturalist.common.entity;
 
 
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
-import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
-import com.starfish_studios.naturalist.registry.NaturalistTags;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.registry.NaturalistSoundEvents;
+import com.starfish_studios.naturalist.core.registry.NaturalistTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,7 +22,6 @@ import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;

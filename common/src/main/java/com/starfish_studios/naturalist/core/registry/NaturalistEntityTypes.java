@@ -1,8 +1,8 @@
-package com.starfish_studios.naturalist.registry;
+package com.starfish_studios.naturalist.core.registry;
 
 import com.starfish_studios.naturalist.common.entity.*;
 import com.starfish_studios.naturalist.common.entity.core.projectile.ThrownDuckEgg;
-import com.starfish_studios.naturalist.platform.CommonPlatformHelper;
+import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 

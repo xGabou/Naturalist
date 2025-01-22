@@ -8,7 +8,7 @@ package com.starfish_studios.naturalist.common.entity.core;
 import java.util.Optional;
 
 import com.starfish_studios.naturalist.common.helper.*;
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;

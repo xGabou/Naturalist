@@ -1,4 +1,4 @@
-package com.starfish_studios.naturalist.platform;
+package com.starfish_studios.naturalist.core.platform;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;

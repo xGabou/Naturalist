@@ -1,8 +1,8 @@
 package com.starfish_studios.naturalist.common.entity;
 
 
-import com.starfish_studios.naturalist.registry.NaturalistRegistry;
-import com.starfish_studios.naturalist.registry.NaturalistSoundEvents;
+import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
+import com.starfish_studios.naturalist.core.registry.NaturalistSoundEvents;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;

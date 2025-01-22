@@ -1,4 +1,4 @@
-package com.starfish_studios.naturalist.registry.forge;
+package com.starfish_studios.naturalist.core.registry.forge;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;

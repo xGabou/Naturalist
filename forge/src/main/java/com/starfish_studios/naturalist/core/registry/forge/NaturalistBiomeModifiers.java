@@ -1,4 +1,4 @@
-package com.starfish_studios.naturalist.registry.forge;
+package com.starfish_studios.naturalist.core.registry.forge;
 
 import com.mojang.serialization.Codec;
 import com.starfish_studios.naturalist.Naturalist;
