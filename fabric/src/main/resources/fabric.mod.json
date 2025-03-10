@@ -20,9 +20,6 @@
     ],
     "client": [
       "com.starfish_studios.naturalist.fabric.NaturalistFabricClient"
-    ],
-    "modmenu": [
-      "com.starfish_studios.naturalist.core.integration.fabric.ModMenuIntegration"
     ]
   },
   "mixins": [
