@@ -57,7 +57,7 @@ public class NaturalistForge {
         BIOME_MODIFIER_SERIALIZERS.register(bus);
 
         bus.addListener(this::setup);
-        bus.addListener(this::register);
+//        bus.addListener(this::register);
         bus.addListener(this::createAttributes);
 //        bus.addListener(CommonPlatformHelperImpl::buildContents);
 
@@ -97,9 +97,9 @@ public class NaturalistForge {
         });
     }
 
-    private void register(final FMLLoadCompleteEvent event) {
-        NaturalistRegistry.addAllToCreativeTab();
-    }
+//    private void register(final FMLLoadCompleteEvent event) {
+//        NaturalistRegistry.addAllToCreativeTab();
+//    }
 
     private void createAttributes(@NotNull EntityAttributeCreationEvent event) {
         event.put(NaturalistEntityTypes.SNAIL.get(), Snail.createAttributes().build());
