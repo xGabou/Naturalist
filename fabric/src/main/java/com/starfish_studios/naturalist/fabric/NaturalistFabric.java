@@ -166,12 +166,12 @@ public class NaturalistFabric implements ModInitializer {
         addMobSpawn(NaturalistTags.Biomes.HAS_LIZARD, MobCategory.CREATURE, NaturalistEntityTypes.LIZARD.get(), NaturalistConfig.lizardSpawnWeight, 1, 2);
         addMobSpawn(NaturalistTags.Biomes.HAS_TORTOISE, MobCategory.CREATURE, NaturalistEntityTypes.TORTOISE.get(), NaturalistConfig.tortoiseSpawnWeight, 1, 3);
         addMobSpawn(NaturalistTags.Biomes.HAS_DUCK, MobCategory.CREATURE, NaturalistEntityTypes.DUCK.get(), NaturalistConfig.duckSpawnWeight, 1, 3);
-        if (NaturalistConfig.spawnFarmAnimalsInSavannas) {
-            removeSpawn(BiomeTags.IS_SAVANNA, List.of(EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN, EntityType.COW));
-        }
-        if (NaturalistConfig.spawnFarmAnimalsInSwamps) {
-            removeSpawn(ConventionalBiomeTags.SWAMP, List.of(EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN, EntityType.COW));
-        }
+//        if (NaturalistConfig.spawnFarmAnimalsInSavannas) {
+//            removeSpawn(BiomeTags.IS_SAVANNA, List.of(EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN, EntityType.COW));
+//        }
+//        if (NaturalistConfig.spawnFarmAnimalsInSwamps) {
+//            removeSpawn(ConventionalBiomeTags.SWAMP, List.of(EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN, EntityType.COW));
+//        }
 //        if (NaturalistConfig.removeForestPigs) {
 //            removeSpawn(ConventionalBiomeTags.FOREST, List.of(EntityType.PIG));
 //        }

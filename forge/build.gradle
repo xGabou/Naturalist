@@ -78,6 +78,7 @@ shadowJar {
 }
 
 remapJar {
-    inputFile.set shadowJar.archiveFile
+    archiveFileName.set("${project.archives_name}-5.0pre1+forge-1.20.1.jar")
+    inputFile.set(shadowJar.archiveFile)
 }
 

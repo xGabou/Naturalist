@@ -43,6 +43,10 @@ public abstract class MobMixin extends LivingEntity {
             return;
         }
 
+        if (BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).getPath().equals("caterpillar")) {
+            return;
+        }
+
         String mobName = naturalist$toCamelCase(BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).getPath());
         String configFieldName = mobName + "Removed";
 
@@ -58,10 +62,7 @@ public abstract class MobMixin extends LivingEntity {
         }
     }
 
-    /**
-     * Converts a snake_case string to camelCase.
-     * Example: "coral_snake" -> "coralSnake"
-     */
+
     @Unique
     private String naturalist$toCamelCase(String input) {
         StringBuilder camelCase = new StringBuilder();

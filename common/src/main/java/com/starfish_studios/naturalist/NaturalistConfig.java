@@ -18,6 +18,7 @@ public class NaturalistConfig extends MidnightConfig {
     @Entry(category = "mobRemoval") public static boolean butterflyRemoved = false;
     @Entry(category = "mobRemoval") public static boolean canaryRemoved = false;
     @Entry(category = "mobRemoval") public static boolean cardinalRemoved = false;
+//    @Entry(category = "mobRemoval") public static boolean caterpillarRemoved = false;
     @Entry(category = "mobRemoval") public static boolean catfishRemoved = false;
     @Entry(category = "mobRemoval") public static boolean coralSnakeRemoved = false;
     @Entry(category = "mobRemoval") public static boolean deerRemoved = false;
