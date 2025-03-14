@@ -29,12 +29,6 @@ public class DeerRenderer extends GeoEntityRenderer<Deer> {
 
     @Override
     public void render(Deer entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if (entity.isBaby()) {
-            poseStack.scale(0.6F, 0.6F, 0.6F);
-        }
-        else {
-            poseStack.scale(0.9F, 0.9F, 0.9F);
-        }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

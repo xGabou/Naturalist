@@ -2,9 +2,7 @@
   "values": [
     "minecraft:swamp",
     "minecraft:mangrove_swamp",
-    "minecraft:plains",
     "minecraft:river",
-    "minecraft:desert",
     {
       "id": "#forge:is_swamp",
       "required": false

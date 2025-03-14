@@ -78,7 +78,6 @@ public class MMPathNavigatorGround extends GroundPathNavigation {
 
     static final float EPSILON = 1.0E-8F;
 
-    // Based off of https://github.com/andyhall/voxel-aabb-sweep/blob/d3ef85b19c10e4c9d2395c186f9661b052c50dc7/index.js
     private boolean sweep(@NotNull Vec3 vec, Vec3 base, Vec3 max) {
         float t = 0.0F;
         float max_t = (float) vec.length();
@@ -105,7 +104,6 @@ public class MMPathNavigatorGround extends GroundPathNavigation {
         }
         final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         do {
-            // stepForward
             int axis = (tNext[0] < tNext[1]) ?
                     ((tNext[0] < tNext[2]) ? 0 : 2) :
                     ((tNext[1] < tNext[2]) ? 1 : 2);
@@ -117,7 +115,6 @@ public class MMPathNavigatorGround extends GroundPathNavigation {
                 tr[i] += dt * normed[i];
                 tri[i] = trailEdgeToInt(tr[i], step[i]);
             }
-            // checkCollision
             int stepx = step[0];
             int x0 = (axis == 0) ? ldi[0] : tri[0];
             int x1 = ldi[0] + stepx;

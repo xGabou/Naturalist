@@ -35,7 +35,6 @@ public class NaturalistRegistry {
         try {
             Field[] fields = NaturalistRegistry.class.getDeclaredFields();
             for (Field field : fields) {
-                // We only want static fields of type Supplier<?>
                 if (!Modifier.isStatic(field.getModifiers())) continue;
                 if (!Supplier.class.isAssignableFrom(field.getType())) continue;
 
@@ -43,17 +42,14 @@ public class NaturalistRegistry {
                 Supplier<?> supplier = (Supplier<?>) field.get(null);
                 Object value = supplier.get();
 
-                // If it's a Block, convert it to an ItemStack via the block's Item
                 if (value instanceof Block block) {
                     stacks.add(new ItemStack(block));
                 }
-                // If it's an Item, just wrap the Item in an ItemStack
                 else if (value instanceof Item item) {
                     stacks.add(new ItemStack(item));
                 }
             }
         } catch (IllegalAccessException ignored) {
-            // Should not happen for public fields
         }
         return stacks;
     }

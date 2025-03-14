@@ -4,8 +4,8 @@ import eu.midnightdust.lib.config.MidnightConfig;
 
 public class NaturalistConfig extends MidnightConfig {
 
-    @Entry(category = "server") public static boolean spawnFarmAnimalsInSwamps = false;
-    @Entry(category = "server") public static boolean spawnFarmAnimalsInSavannas = false;
+//    @Entry(category = "server") public static boolean spawnFarmAnimalsInSwamps = false;
+//    @Entry(category = "server") public static boolean spawnFarmAnimalsInSavannas = false;
 
     @Comment(category = "mobRemoval") public static Comment mobRemoval;
     @Comment(category = "mobRemoval") public static Comment spacer;

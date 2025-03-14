@@ -7,19 +7,25 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 public class SmartBodyHelper extends BodyRotationControl {
     private static final int HISTORY_SIZE = 10;
     private static final double MOVE_THRESHOLD = 2.5e-7;
-    private static final float BODY_LAG_MOVING = 0.3F;
-    private static final float HEAD_LAG = 0.2F;
-    private static final float BODY_LAG_STILL = 0.05F;
-    private static final float BODY_MAX = 45F;
-    private static final float HEAD_MAX = 22.5F;
+
+    public float bodyLagMoving;
+    public float headLag;
+    public float bodyLagStill;
+    public float bodyMax;
+    public float headMax;
 
     private final double[] histPosX = new double[HISTORY_SIZE];
     private final double[] histPosZ = new double[HISTORY_SIZE];
-    private final Mob entity;
+    protected final Mob entity;
 
     public SmartBodyHelper(Mob entity) {
         super(entity);
         this.entity = entity;
+        this.bodyLagMoving = 0.3F;
+        this.headLag = 0.2F;
+        this.bodyLagStill = 0.05F;
+        this.bodyMax = 45F;
+        this.headMax = 22.5F;
     }
 
     @Override
@@ -39,19 +45,16 @@ public class SmartBodyHelper extends BodyRotationControl {
             double tx = entity.getTarget().getX() - entity.getX();
             double tz = entity.getTarget().getZ() - entity.getZ();
             float targetAngle = (float)(Mth.atan2(tz, tx) * (180F / Math.PI)) - 90F;
-
-            entity.yBodyRot = approachAngle(entity.yBodyRot, targetAngle, BODY_LAG_MOVING, BODY_MAX);
-            entity.yHeadRot = approachAngle(entity.yHeadRot, targetAngle, HEAD_LAG, HEAD_MAX);
+            entity.yBodyRot = approachAngle(entity.yBodyRot, targetAngle, bodyLagMoving, bodyMax);
+            entity.yHeadRot = approachAngle(entity.yHeadRot, targetAngle, headLag, headMax);
             clampHeadBodyDifference();
-
         } else if (distSq > MOVE_THRESHOLD) {
             float moveAngle = (float)(Math.toDegrees(Math.atan2(dz, dx)) - 90.0F);
-            entity.yBodyRot = approachAngle(entity.yBodyRot, moveAngle, BODY_LAG_MOVING, BODY_MAX);
-            entity.yHeadRot = approachAngle(entity.yHeadRot, entity.yBodyRot, HEAD_LAG, HEAD_MAX);
+            entity.yBodyRot = approachAngle(entity.yBodyRot, moveAngle, bodyLagMoving, bodyMax);
+            entity.yHeadRot = approachAngle(entity.yHeadRot, entity.yBodyRot, headLag, headMax);
             clampHeadBodyDifference();
-
         } else {
-            entity.yBodyRot = approachAngle(entity.yBodyRot, entity.yHeadRot, BODY_LAG_STILL, BODY_MAX);
+            entity.yBodyRot = approachAngle(entity.yBodyRot, entity.yHeadRot, bodyLagStill, bodyMax);
             clampHeadBodyDifference();
         }
     }
@@ -69,7 +72,7 @@ public class SmartBodyHelper extends BodyRotationControl {
         return s / half;
     }
 
-    private static float approachAngle(float current, float target, float factor, float maxDelta) {
+    private float approachAngle(float current, float target, float factor, float maxDelta) {
         float d = Mth.wrapDegrees(target - current);
         if (d < -maxDelta) {
             d = -maxDelta;
@@ -81,7 +84,7 @@ public class SmartBodyHelper extends BodyRotationControl {
 
     private void clampHeadBodyDifference() {
         float diff = Mth.wrapDegrees(entity.yHeadRot - entity.yBodyRot);
-        float clamped = Mth.clamp(diff, -HEAD_MAX, HEAD_MAX);
+        float clamped = Mth.clamp(diff, -headMax, headMax);
         entity.yHeadRot = entity.yBodyRot + clamped;
     }
 }

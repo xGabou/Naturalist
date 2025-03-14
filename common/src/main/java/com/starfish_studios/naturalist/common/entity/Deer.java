@@ -2,7 +2,7 @@ package com.starfish_studios.naturalist.common.entity;
 
 import com.starfish_studios.naturalist.common.entity.core.NaturalistAnimal;
 import com.starfish_studios.naturalist.common.entity.core.NaturalistGeoEntity;
-import com.starfish_studios.naturalist.common.entity.core.ai.goal.AlertOthersPanicGoal;
+import com.starfish_studios.naturalist.common.entity.core.ai.goal.BigPanicGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
 import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
@@ -48,6 +48,7 @@ public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.sf_nba.deer.idle");
     protected static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.sf_nba.deer.walk");
     protected static final RawAnimation RUN = RawAnimation.begin().thenLoop("animation.sf_nba.deer.run");
+    protected static final RawAnimation BABY_RUN = RawAnimation.begin().thenLoop("animation.sf_nba.deer.baby_run");
     protected static final RawAnimation EAT = RawAnimation.begin().thenLoop("animation.sf_nba.deer.eat");
 
     public Deer(EntityType<? extends NaturalistAnimal> entityType, @NotNull Level level) {
@@ -57,9 +58,14 @@ public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
 
 
     @Override
-    protected @NotNull BodyRotationControl createBodyControl() {
-        return new SmartBodyHelper(this);
+    protected BodyRotationControl createBodyControl() {
+        SmartBodyHelper helper = new SmartBodyHelper(this);
+        helper.bodyLagMoving = 0.7F;
+        helper.bodyLagStill = 0.2F;
+        return helper;
     }
+
+
 
     @Override
     protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
@@ -82,13 +88,13 @@ public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new AlertOthersPanicGoal(this, 2.0D));
+        this.goalSelector.addGoal(1, new BigPanicGoal(this, 1.6D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.APPLE), true));
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.5D, 2.0D, livingEntity -> EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity) && !livingEntity.isDiscrete()));
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Monster.class, 4.0F, 1.5D, 2.0D));
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Animal.class, 10.0F, 1.5D, 2.0D, livingEntity -> livingEntity.getType().is(NaturalistTags.EntityTypes.DEER_PREDATORS)));
-        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
+        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.5D));
         this.eatBlockGoal = new EatBlockGoal(this);
         this.goalSelector.addGoal(6, this.eatBlockGoal);
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
@@ -150,14 +156,13 @@ public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
 
     @Override
     public void customServerAiStep() {
-        this.eatAnimationTick = this.eatBlockGoal.getEatAnimationTick();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.5D);
         } else {
-            this.setSprinting(false);
+            super.customServerAiStep();
         }
-        super.customServerAiStep();
     }
+
 
     // PANICKING
 
@@ -195,27 +200,47 @@ public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
     }
 
     protected <E extends Deer> PlayState predicate(final @NotNull AnimationState<E> event) {
-        if (this.isEating()) {
-            event.getController().setAnimation(EAT);
-            event.getController().setAnimationSpeed(1.0D);
-        } else if (this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6) {
+        if (this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6) {
             if (this.isSprinting()) {
-                event.getController().setAnimation(RUN);
-                event.getController().setAnimationSpeed(2.3D);
+                if (this.isBaby()) {
+                    event.getController().setAnimation(BABY_RUN);
+                    event.getController().setAnimationSpeed(1.0D);
+                } else {
+                    event.getController().setAnimation(RUN);
+                    event.getController().setAnimationSpeed(2.3D);
+                }
             } else {
                 event.getController().setAnimation(WALK);
-                event.getController().setAnimationSpeed(1.0D);
+                if (this.isBaby()) {
+                    event.getController().setAnimationSpeed(1.2D);
+                } else {
+                    event.getController().setAnimationSpeed(1.0D);
+                }
             }
         } else {
             event.getController().setAnimation(IDLE);
-            event.getController().setAnimationSpeed(1.0D);
+            if (this.isBaby()) {
+                event.getController().setAnimationSpeed(1.5D);
+            } else {
+                event.getController().setAnimationSpeed(1.0D);
+            }
         }
         return PlayState.CONTINUE;
+    }
+
+    // eatPredicate
+    protected <E extends Deer> PlayState eatPredicate(final @NotNull AnimationState<E> event) {
+        if (this.isEating()) {
+            event.getController().setAnimation(EAT);
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     @Override
     public void registerControllers(final AnimatableManager.@NotNull ControllerRegistrar controllers) {
         // data.setResetSpeedInTicks(10);
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "eat_controller", 5, this::eatPredicate));
     }
 }

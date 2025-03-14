@@ -18,6 +18,9 @@ public class DeerModel extends GeoModel<Deer> {
     @Override
     @SuppressWarnings("removal")
     public ResourceLocation getModelResource(Deer deer) {
+        if (deer.isBaby()) {
+            return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/fawn.geo.json");
+        }
         return new ResourceLocation(Naturalist.MOD_ID, "geo/entity/deer.geo.json");
     }
 
@@ -25,7 +28,7 @@ public class DeerModel extends GeoModel<Deer> {
     @SuppressWarnings("removal")
     public ResourceLocation getTextureResource(Deer deer) {
         if (deer.isBaby()) {
-            return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/deer.png");
+            return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/fawn.png");
         }
 
         return new ResourceLocation(Naturalist.MOD_ID, "textures/entity/deer.png");
@@ -44,22 +47,6 @@ public class DeerModel extends GeoModel<Deer> {
 
         EntityModelData extraDataOfType = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
         CoreGeoBone head = this.getAnimationProcessor().getBone("head");
-        CoreGeoBone antlers = this.getAnimationProcessor().getBone("antlers");
-
-        if (entity.isBaby()) {
-            head.setScaleX(1.4F);
-            head.setScaleY(1.4F);
-            head.setScaleZ(1.4F);
-            head.setScaleX(1.6F);
-            head.setScaleY(1.6F);
-            head.setScaleZ(1.6F);
-        } else {
-            head.setScaleX(1.0F);
-            head.setScaleY(1.0F);
-            head.setScaleZ(1.0F);
-        }
-
-        antlers.setHidden(entity.isBaby());
 
         if (!entity.isEating()) {
             head.setRotX(extraDataOfType.headPitch() * Mth.DEG_TO_RAD);
