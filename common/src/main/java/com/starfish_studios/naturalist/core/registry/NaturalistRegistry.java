@@ -43,6 +43,9 @@ public class NaturalistRegistry {
                 Object value = supplier.get();
 
                 if (value instanceof Block block) {
+                    if (block == GLOW_GOOP_BLOCK.get() || block == CHRYSALIS_BLOCK.get()) {
+                        continue;
+                    }
                     stacks.add(new ItemStack(block));
                 }
                 else if (value instanceof Item item) {
@@ -53,6 +56,7 @@ public class NaturalistRegistry {
         }
         return stacks;
     }
+
 
     public static final Supplier<Item> BUSHMEAT = registerItem("bushmeat", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).meat().build())));
     public static final Supplier<Item> COOKED_BUSHMEAT = registerItem("cooked_bushmeat", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).meat().build())));

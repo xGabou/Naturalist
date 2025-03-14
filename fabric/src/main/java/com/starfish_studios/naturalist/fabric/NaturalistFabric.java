@@ -40,7 +40,6 @@ public class NaturalistFabric implements ModInitializer {
         MidnightConfig.init("naturalist", NaturalistConfig.class);
 
         addSpawns();
-        addFeatures();
         registerEntityAttributes();
         Naturalist.registerBrewingRecipes();
         Naturalist.registerCompostables();
@@ -49,36 +48,6 @@ public class NaturalistFabric implements ModInitializer {
 
         NaturalistCreativeModeFabric.init();
     }
-
-
-    public void addFeatures() {
-        BiomeModifications.addFeature(
-                (biomeSelector) -> biomeSelector.getBiomeKey().equals(Biomes.SWAMP),
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                getPlacedFeatureKey("patch_cattail")
-        );
-        BiomeModifications.addFeature(
-                (biomeSelector) -> biomeSelector.getBiomeKey().equals(Biomes.SWAMP),
-                GenerationStep.Decoration.RAW_GENERATION,
-                getPlacedFeatureKey("swamp_mud")
-        );
-        BiomeModifications.addFeature(
-                (biomeSelector) -> biomeSelector.getBiomeKey().equals(Biomes.SWAMP),
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                getPlacedFeatureKey("patch_duckweed")
-        );
-        BiomeModifications.addFeature(
-                (biomeSelector) -> biomeSelector.getBiomeKey().equals(Biomes.SAVANNA),
-                GenerationStep.Decoration.LAKES,
-                getPlacedFeatureKey("savanna_lake")
-        );
-    }
-
-
-    private @NotNull ResourceKey<PlacedFeature> getPlacedFeatureKey(String key) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Naturalist.MOD_ID, key));
-    }
-
 
     void registerEntityAttributes() {
         FabricDefaultAttributeRegistry.register(NaturalistEntityTypes.SNAIL.get(), Snail.createAttributes());
