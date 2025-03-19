@@ -38,14 +38,6 @@
 					]
 				},
 				{
-					"name": "saddle",
-					"parent": "neck",
-					"pivot": [0, 0, 0],
-					"cubes": [
-						{"origin": [-4.5, 37.85212, -14.07548], "size": [9, 17, 20], "inflate": 0.5, "uv": [69, 91]}
-					]
-				},
-				{
 					"name": "head",
 					"parent": "neck",
 					"pivot": [0, 51.85212, -10.82548],
