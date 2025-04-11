@@ -3,6 +3,7 @@ package com.starfish_studios.naturalist.core.registry;
 import com.starfish_studios.naturalist.common.block.*;
 import com.starfish_studios.naturalist.common.entity.Butterfly;
 import com.starfish_studios.naturalist.common.entity.Snail;
+import com.starfish_studios.naturalist.common.item.BugNetItem;
 import com.starfish_studios.naturalist.common.item.DuckEggItem;
 import com.starfish_studios.naturalist.common.item.GlowGoopItem;
 import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
@@ -86,7 +87,7 @@ public class NaturalistRegistry {
     public static final Supplier<Item> COOKED_CATFISH = registerItem("cooked_catfish", () -> new Item(new Item.Properties().food(Foods.COOKED_SALMON)));
     public static final Supplier<Item> BASS = registerItem("bass", () -> new Item(new Item.Properties().food(Foods.COD)));
     public static final Supplier<Item> COOKED_BASS = registerItem("cooked_bass", () -> new Item(new Item.Properties().food(Foods.COOKED_COD)));
-    public static final Supplier<Item> BUG_NET = registerItem("bug_net", () -> new Item(new Item.Properties().durability(64)));
+    public static final Supplier<Item> BUG_NET = registerItem("bug_net", () -> new BugNetItem(new Item.Properties().durability(64)));
     public static final Supplier<Block> CHRYSALIS_BLOCK = registerBlockOnly("chrysalis", () -> new ChrysalisBlock(BlockBehaviour.Properties.of().randomTicks().strength(0.2F, 3.0F).sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Item> CHRYSALIS = registerItem("chrysalis", () -> new BlockItem(CHRYSALIS_BLOCK.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> CATERPILLAR = CommonPlatformHelper.registerCaughtMobItem("caterpillar", NaturalistEntityTypes.CATERPILLAR, () -> Fluids.EMPTY, NaturalistSoundEvents.SNAIL_FORWARD);

@@ -53,6 +53,8 @@ public class NaturalistForge {
         CommonPlatformHelperImpl.SOUND_EVENTS.register(bus);
         CommonPlatformHelperImpl.ENTITY_TYPES.register(bus);
         CommonPlatformHelperImpl.POTIONS.register(bus);
+        CommonPlatformHelperImpl.RECIPE_TYPES.register(bus);
+        CommonPlatformHelperImpl.RECIPE_SERIALIZERS.register(bus);
         NaturalistCreativeModeTabForge.CREATIVE_MODE_TABS.register(bus);
         BIOME_MODIFIER_SERIALIZERS.register(bus);
 

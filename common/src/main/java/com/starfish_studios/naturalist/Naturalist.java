@@ -41,6 +41,7 @@ public class Naturalist {
         NaturalistSoundEvents.init();
         NaturalistEntityTypes.init();
         NaturalistPotions.init();
+        NaturalistRecipes.register();
     }
 
     public static void registerDispenserBehaviors() {

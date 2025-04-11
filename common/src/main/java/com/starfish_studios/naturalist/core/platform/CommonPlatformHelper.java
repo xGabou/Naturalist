@@ -11,6 +11,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
@@ -103,6 +105,11 @@ public class CommonPlatformHelper {
 
     @ExpectPlatform
     public static void registerCompostable(float chance, ItemLike item) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void registerRecipes(String name, Supplier<RecipeType<?>> type, Supplier<RecipeSerializer<?>> serializer) {
         throw new AssertionError();
     }
 }

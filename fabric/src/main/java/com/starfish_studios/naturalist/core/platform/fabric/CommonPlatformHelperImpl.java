@@ -19,6 +19,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
@@ -107,5 +109,10 @@ public class CommonPlatformHelperImpl {
 
     public static void registerCompostable(float chance, ItemLike item) {
         CompostingChanceRegistry.INSTANCE.add(item, chance);
+    }
+
+    public static void registerRecipes(String name, Supplier<RecipeType<?>> type, Supplier<RecipeSerializer<?>> serializer){
+        Registry.register(BuiltInRegistries.RECIPE_TYPE, new ResourceLocation("naturalist", name), type.get());
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation("naturalist", name), serializer.get());
     }
 }
