@@ -38,7 +38,6 @@ public class FlyingWanderGoal extends Goal {
         Vec3 vec32;
         vec32 = mob.getViewVector(0.0F);
 
-        boolean i = true;
         Vec3 vec33 = HoverRandomPos.getPos(mob, 8, 7, vec32.x, vec32.z, 1.5707964F, 3, 1);
         return vec33 != null ? vec33 : AirAndWaterRandomPos.getPos(mob, 8, 4, -2, vec32.x, vec32.z, 1.5707963705062866);
     }
