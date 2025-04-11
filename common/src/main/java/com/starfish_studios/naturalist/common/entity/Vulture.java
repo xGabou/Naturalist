@@ -25,6 +25,8 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -37,6 +39,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -90,7 +93,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new VultureAttackGoal(this, 1.2F, true));
         this.goalSelector.addGoal(2, new VultureSearchForFoodGoal(this, 1.2F, FOOD_ITEMS, 12, 24));
-        this.goalSelector.addGoal(3, new FlyingWanderGoal(this));
+        this.goalSelector.addGoal(3, new HighAltitudeFlyingWanderGoal(this));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Monster.class, 10, false, false, entity -> entity.getType().is(NaturalistTags.EntityTypes.VULTURE_HOSTILES) && !FOOD_ITEMS.test(this.getMainHandItem())));
@@ -397,4 +400,47 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
         }
     }
 
+    static class HighAltitudeFlyingWanderGoal extends FlyingWanderGoal {
+
+        private int preferredAltitude = -1;
+
+        //Min and Max is bound by heightmap and max build height
+        private static final int MIN_ALTITUDE_ABOVE_GROUND = 16;
+        private static final int MAX_ALTITUDE_ABOVE_GROUND = 40;
+        //Extra offset from max build height
+        private static final int ALTITUDE_MARGIN_FROM_BUILD_LIMIT = 32;
+
+        //A bit of randomness for the altitude, vulture will now change altitude once every 16-32 wander attempts
+        private int wanderAttemptsUntilAltitudeChange = 0;
+        private static final int ALTITUDE_CHANGE_INTERVAL_MIN = 16;
+        private static final int ALTITUDE_CHANGE_INTERVAL_RANGE = 16;
+
+        public HighAltitudeFlyingWanderGoal(Vulture mob) {
+            super(mob);
+        }
+
+        @Override
+        public Vec3 findPos() {
+            Vec3 lookVec = mob.getViewVector(0.0F);
+
+            if (preferredAltitude < 0 || wanderAttemptsUntilAltitudeChange <= 0) {
+                BlockPos mobPos = mob.blockPosition();
+                Level level = mob.level();
+
+                int groundY = level.getHeight(Heightmap.Types.WORLD_SURFACE, mobPos.getX(), mobPos.getZ());
+                int maxY = level.getMaxBuildHeight();
+                int minAltitude = groundY + MIN_ALTITUDE_ABOVE_GROUND;
+                int maxAltitude = Math.min(groundY + MAX_ALTITUDE_ABOVE_GROUND, maxY - ALTITUDE_MARGIN_FROM_BUILD_LIMIT);
+                preferredAltitude = Mth.nextInt(mob.getRandom(), minAltitude, maxAltitude);
+                wanderAttemptsUntilAltitudeChange = ALTITUDE_CHANGE_INTERVAL_MIN + mob.getRandom().nextInt(ALTITUDE_CHANGE_INTERVAL_RANGE);
+            } else {
+                wanderAttemptsUntilAltitudeChange--;
+            }
+
+            double offsetX = lookVec.x * 8 + mob.getRandom().nextInt(5) - 2;
+            double offsetZ = lookVec.z * 8 + mob.getRandom().nextInt(5) - 2;
+
+            return new Vec3(mob.getX() + offsetX, preferredAltitude, mob.getZ() + offsetZ);
+        }
+    }
 }

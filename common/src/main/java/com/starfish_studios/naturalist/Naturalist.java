@@ -27,7 +27,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.GeckoLib;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +36,6 @@ public class Naturalist {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static void init() {
-        GeckoLib.initialize();
         NaturalistRegistry.init();
         NaturalistBlockEntities.init();
         NaturalistSoundEvents.init();

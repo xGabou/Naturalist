@@ -34,8 +34,7 @@ public class FlyingWanderGoal extends Goal {
 
     }
 
-    @Nullable
-    private Vec3 findPos() {
+    public Vec3 findPos() {
         Vec3 vec32;
         vec32 = mob.getViewVector(0.0F);
 

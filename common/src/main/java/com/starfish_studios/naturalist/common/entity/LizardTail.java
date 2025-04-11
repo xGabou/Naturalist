@@ -46,6 +46,11 @@ public class LizardTail extends Mob implements NaturalistGeoEntity {
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return true;
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(VARIANT_ID, 0);
