@@ -8,11 +8,13 @@ import com.starfish_studios.naturalist.core.registry.NaturalistMenus;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -114,5 +116,9 @@ public class CommonPlatformHelperImpl {
     public static void registerRecipes(String name, Supplier<RecipeType<?>> type, Supplier<RecipeSerializer<?>> serializer){
         Registry.register(BuiltInRegistries.RECIPE_TYPE, new ResourceLocation("naturalist", name), type.get());
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation("naturalist", name), serializer.get());
+    }
+
+    public static TagKey<Item> getShearsTag() {
+        return ConventionalItemTags.SHEARS;
     }
 }

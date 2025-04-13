@@ -6,6 +6,7 @@ import com.starfish_studios.naturalist.common.entity.core.SleepingAnimal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.*;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
+import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
 import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.core.registry.NaturalistSoundEvents;
@@ -412,7 +413,8 @@ public class Bear extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
     @Override
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (itemStack.is(Items.SHEARS) && this.readyForShearing()) {
+        var tag = CommonPlatformHelper.getShearsTag();
+        if (itemStack.is(tag) && this.readyForShearing()) {
             if (!this.isSleeping()) {
                 this.setLastHurtByMob(player);
             }

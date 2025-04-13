@@ -4,6 +4,7 @@ import com.starfish_studios.naturalist.core.registry.NaturalistMenus;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -110,6 +111,11 @@ public class CommonPlatformHelper {
 
     @ExpectPlatform
     public static void registerRecipes(String name, Supplier<RecipeType<?>> type, Supplier<RecipeSerializer<?>> serializer) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static TagKey<Item> getShearsTag() {
         throw new AssertionError();
     }
 }

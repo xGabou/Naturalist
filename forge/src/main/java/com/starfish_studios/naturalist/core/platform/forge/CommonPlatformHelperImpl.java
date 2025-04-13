@@ -5,6 +5,7 @@ import com.starfish_studios.naturalist.core.registry.NaturalistMenus;
 import com.starfish_studios.naturalist.util.forge.NaturalistBrewingRecipe;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.network.NetworkHooks;
@@ -119,5 +121,9 @@ public class CommonPlatformHelperImpl {
     public static void registerRecipes(String name, Supplier<RecipeType<?>> type, Supplier<RecipeSerializer<?>> serializer) {
         RECIPE_TYPES.register(name, type);
         RECIPE_SERIALIZERS.register(name, serializer);
+    }
+
+    public static TagKey<Item> getShearsTag() {
+        return Tags.Items.SHEARS;
     }
 }

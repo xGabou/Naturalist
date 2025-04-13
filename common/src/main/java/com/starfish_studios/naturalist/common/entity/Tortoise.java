@@ -7,6 +7,7 @@ import com.starfish_studios.naturalist.common.entity.core.ai.goal.HideGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.goal.LayEggGoal;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.MMPathNavigatorGround;
 import com.starfish_studios.naturalist.common.entity.core.ai.navigation.SmartBodyHelper;
+import com.starfish_studios.naturalist.core.platform.CommonPlatformHelper;
 import com.starfish_studios.naturalist.core.registry.NaturalistEntityTypes;
 import com.starfish_studios.naturalist.core.registry.NaturalistRegistry;
 import com.starfish_studios.naturalist.core.registry.NaturalistSoundEvents;
@@ -37,7 +38,6 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -194,7 +194,7 @@ public class Tortoise extends TamableAnimal implements NaturalistGeoEntity, Hidi
             if (this.isFood(itemStack) && (this.getHealth() < this.getMaxHealth() || !this.isTame())) {
                 return InteractionResult.SUCCESS;
             }
-            if (itemStack.getItem() instanceof ShearsItem) {
+            if (itemStack.is(CommonPlatformHelper.getShearsTag())) {
                 return InteractionResult.SUCCESS;
             }
             return InteractionResult.PASS;
