@@ -405,8 +405,8 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
         private int preferredAltitude = -1;
 
         //Min and Max is bound by heightmap and max build height
-        private static final int MIN_ALTITUDE_ABOVE_GROUND = 16;
-        private static final int MAX_ALTITUDE_ABOVE_GROUND = 40;
+        private static final int MIN_ALTITUDE_ABOVE_GROUND = 8;
+        private static final int MAX_ALTITUDE_ABOVE_GROUND = 20;
         //Extra offset from max build height
         private static final int ALTITUDE_MARGIN_FROM_BUILD_LIMIT = 32;
 
