@@ -194,9 +194,9 @@ public class Tortoise extends TamableAnimal implements NaturalistGeoEntity, Hidi
             if (this.isFood(itemStack) && (this.getHealth() < this.getMaxHealth() || !this.isTame())) {
                 return InteractionResult.SUCCESS;
             }
-            if (itemStack.is(CommonPlatformHelper.getShearsTag())) {
-                return InteractionResult.SUCCESS;
-            }
+//            if (itemStack.is(CommonPlatformHelper.getShearsTag())) {
+//                return InteractionResult.SUCCESS;
+//            }
             return InteractionResult.PASS;
         }
         if (this.isTame()) {

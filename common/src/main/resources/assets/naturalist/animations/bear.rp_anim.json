@@ -10,11 +10,6 @@
 			}
 		},
 		"animation.sf_nba.bear.sleep": {
-			"sound_effects": {
-				"0.0":{
-					"effect": "sleep"
-				}
-			},
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -78,20 +73,6 @@
 			"animation_length": 1
 		},
 		"animation.sf_nba.bear.walk": {
-			"sound_effects": {
-				"0.0":{
-					"effect": "step"
-				},
-				"0.25":{
-					"effect": "step_-6dB"
-				},
-				"0.5":{
-					"effect": "step"
-				},
-				"0.75":{
-					"effect": "step_-6dB"
-				}
-			},
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -262,23 +243,9 @@
 			}
 		},
 		"animation.sf_nba.bear.run": {
-			"anim_time_update": "query.anim_time + query.delta_time * v.anim_speed_multiplier * Math.min(1, q.modified_move_speed / v.anim_speed_movement_max)",
-			"sound_effects": {
-				"0.25":{
-					"effect": "step_-6dB"
-				},
-				"0.33":{
-					"effect": "step"
-				},
-				"0.5":{
-					"effect": "step"
-				},
-				"0.92":{
-					"effect": "step"
-				}
-			},
 			"loop": true,
 			"animation_length": 1,
+			"anim_time_update": "query.anim_time + query.delta_time * v.anim_speed_multiplier * Math.min(1, q.modified_move_speed / v.anim_speed_movement_max)",
 			"bones": {
 				"mane": {
 					"position": [0, "Math.sin((query.anim_time - 0.2) * 720) * -0.5", 0]
@@ -415,11 +382,6 @@
 			}
 		},
 		"animation.sf_nba.bear.sniff": {
-			"sound_effects": {
-				"0.0":{
-					"effect": "sniff"
-				}
-			},
 			"loop": true,
 			"animation_length": 0.5,
 			"override_previous_animation": true,
@@ -437,11 +399,6 @@
 			}
 		},
 		"animation.sf_nba.bear.eat": {
-			"sound_effects": {
-				"0.0":{
-					"effect": "eat"
-				}
-			},
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -471,11 +428,6 @@
 			}
 		},
 		"animation.sf_nba.bear.attack": {
-			"sound_effects": {
-				"0.0":{
-					"effect": "attack"
-				}
-			},
 			"animation_length": 0.25,
 			"bones": {
 				"right_arm": {
