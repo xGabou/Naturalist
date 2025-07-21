@@ -104,12 +104,12 @@ public class Giraffe extends NaturalistAnimal implements NaturalistGeoEntity {
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.3D);
         } else {
             this.setSprinting(false);
         }
-        super.customServerAiStep();
     }
 
     @Nullable

@@ -142,12 +142,12 @@ public class Hippo extends NaturalistAnimal implements NaturalistGeoEntity {
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.0D);
         } else {
             this.setSprinting(false);
         }
-        super.customServerAiStep();
     }
 
     @Override

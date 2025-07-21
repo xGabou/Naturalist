@@ -156,11 +156,9 @@ public class Deer extends NaturalistAnimal implements NaturalistGeoEntity {
 
     @Override
     public void customServerAiStep() {
-        if (this.getMoveControl().hasWanted()) {
-            this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.5D);
-        } else {
-            super.customServerAiStep();
-        }
+        super.customServerAiStep();
+        this.setSprinting(this.getMoveControl().hasWanted() &&
+                this.getMoveControl().getSpeedModifier() >= 1.5D);
     }
 
 

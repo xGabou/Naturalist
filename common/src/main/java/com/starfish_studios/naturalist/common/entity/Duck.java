@@ -158,13 +158,13 @@ public class Duck extends NaturalistAnimal implements NaturalistGeoEntity {
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.2D);;
         } else {
             this.setSprinting(false);
             this.flapping = 0.9F;
         }
-        super.customServerAiStep();
     }
 
     @Override

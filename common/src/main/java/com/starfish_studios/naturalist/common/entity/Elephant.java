@@ -111,12 +111,12 @@ public class Elephant extends NaturalistAnimal implements NeutralMob, Naturalist
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.2D);
         } else {
             this.setSprinting(false);
         }
-        super.customServerAiStep();
     }
 
     @Override

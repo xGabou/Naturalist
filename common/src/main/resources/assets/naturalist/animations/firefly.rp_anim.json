@@ -21,11 +21,6 @@
 				"headRot": {
 					"rotation": [12.5, 0, 0]
 				}
-			},
-			"sound_effects": {
-				"0.0": {
-					"effect": "fly"
-				}
 			}
 		}
 	}

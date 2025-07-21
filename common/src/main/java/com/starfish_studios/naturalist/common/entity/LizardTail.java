@@ -75,13 +75,13 @@ public class LizardTail extends Mob implements NaturalistGeoEntity {
 
     @Override
     public void aiStep() {
+        super.aiStep();
         if (!this.isInWater() && this.onGround() && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.05f, 0.4f, (this.random.nextFloat() * 2.0f - 1.0f) * 0.05f));
             this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(SoundEvents.SALMON_FLOP, this.getSoundVolume(), this.getVoicePitch());
         }
-        super.aiStep();
     }
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {

@@ -83,18 +83,11 @@ shadowJar {
 remapJar {
     archiveFileName.set("${project.archives_name}-${project.mod_version}+fabric-1.20.1.jar")
     inputFile.set(shadowJar.archiveFile)
-    dependsOn shadowJar
-    archiveClassifier = "null"
 }
 
-jar {
-    archiveClassifier = "dev"
-}
-
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
 }
 
 sourceSets {

@@ -12,14 +12,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-// Credit to Mowzies Mobs
 public class MMPathNavigatorGround extends GroundPathNavigation {
     public MMPathNavigatorGround(@NotNull Mob entity, Level world) {
         super(entity, world);
     }
 
     @Override
-    protected PathFinder createPathFinder(int maxVisitedNodes) {
+    protected @NotNull PathFinder createPathFinder(int maxVisitedNodes) {
         this.nodeEvaluator = new WalkNodeEvaluator();
         this.nodeEvaluator.setCanPassDoors(true);
         return new MMPathFinder(this.nodeEvaluator, maxVisitedNodes);

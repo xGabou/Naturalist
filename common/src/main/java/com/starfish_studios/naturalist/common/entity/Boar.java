@@ -135,12 +135,12 @@ public class Boar extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.2D);
         } else {
             this.setSprinting(false);
         }
-        super.customServerAiStep();
     }
 
     @Nullable
@@ -173,6 +173,7 @@ public class Boar extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
 
     @Override
     public void thunderHit(@NotNull ServerLevel level, @NotNull LightningBolt lightning) {
+        super.thunderHit(level, lightning);
         if (level.getDifficulty() != Difficulty.PEACEFUL) {
             Zoglin zoglin = EntityType.ZOGLIN.create(level);
             assert zoglin != null;
@@ -186,8 +187,6 @@ public class Boar extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
             zoglin.setPersistenceRequired();
             level.addFreshEntity(zoglin);
             this.discard();
-        } else {
-            super.thunderHit(level, lightning);
         }
     }
 

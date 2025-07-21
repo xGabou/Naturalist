@@ -431,6 +431,7 @@ public class Butterfly extends NaturalistAnimal implements NaturalistGeoEntity, 
 
         @Override
         public void tick() {
+            super.tick();
             if (this.isReachedTarget()) {
                 if (this.ticksWaited >= 40) {
                     this.onReachedTarget();
@@ -438,7 +439,6 @@ public class Butterfly extends NaturalistAnimal implements NaturalistGeoEntity, 
                     ++this.ticksWaited;
                 }
             }
-            super.tick();
         }
 
         protected void onReachedTarget() {
@@ -461,8 +461,8 @@ public class Butterfly extends NaturalistAnimal implements NaturalistGeoEntity, 
 
         @Override
         public void start() {
-            this.ticksWaited = 0;
             super.start();
+            this.ticksWaited = 0;
         }
     }
 

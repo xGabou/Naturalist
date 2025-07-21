@@ -56,7 +56,7 @@ dependencies {
 
     modImplementation("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_forge_version}-forge")
-    modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+    modLocalRuntime "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
 

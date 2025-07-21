@@ -212,20 +212,20 @@ public class Rhino extends NaturalistAnimal implements NaturalistGeoEntity {
 
     @Override
     public void handleEntityEvent(byte id) {
+        super.handleEntityEvent(id);
         if (id == 39) {
             this.stunnedTick = 60;
         }
-        super.handleEntityEvent(id);
     }
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.5D);
         } else {
             this.setSprinting(false);
         }
-        super.customServerAiStep();
     }
 
     private boolean isWithinYRange(LivingEntity target) {

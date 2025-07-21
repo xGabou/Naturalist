@@ -226,6 +226,7 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
 
     @Override
     public void handleEntityEvent(byte id) {
+        super.handleEntityEvent(id);
         if (id == 45) {
             ItemStack itemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
             if (!itemStack.isEmpty()) {
@@ -234,8 +235,6 @@ public class Vulture extends PathfinderMob implements NaturalistGeoEntity, Flyin
                     this.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, itemStack), this.getX() + this.getLookAngle().x / 2.0, this.getY(), this.getZ() + this.getLookAngle().z / 2.0, vec3.x, vec3.y + 0.05, vec3.z);
                 }
             }
-        } else {
-            super.handleEntityEvent(id);
         }
     }
 

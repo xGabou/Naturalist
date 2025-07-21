@@ -114,12 +114,12 @@ public class Bear extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
 
     @Override
     public void customServerAiStep() {
+        super.customServerAiStep();
         if (this.getMoveControl().hasWanted()) {
             this.setSprinting(this.getMoveControl().getSpeedModifier() >= 1.25D);
         } else {
             this.setSprinting(false);
         }
-        super.customServerAiStep();
     }
 
     // BREEDING
@@ -721,8 +721,8 @@ public class Bear extends NaturalistAnimal implements NeutralMob, NaturalistGeoE
 
         @Override
         public void start() {
-            this.ticksWaited = 0;
             super.start();
+            this.ticksWaited = 0;
         }
 
         @Override

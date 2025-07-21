@@ -186,21 +186,21 @@ public class Snail extends ClimbingAnimal implements NaturalistGeoEntity, Bucket
 
     @Override
     public void travel(Vec3 vec3) {
+        super.travel(vec3);
         if (this.canHide()) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(0, 1, 0));
             vec3 = vec3.multiply(0, 1, 0);
         }
-        super.travel(vec3);
     }
 
     @Override
     public void aiStep() {
+        super.aiStep();
         if (this.canHide() || this.isImmobile()) {
             this.jumping = false;
             this.xxa = 0.0F;
             this.zza = 0.0F;
         }
-        super.aiStep();
         /* BlockPos pos = this.blockPosition();
         if (this.isAlive() && this.isLayingEgg() && this.layEggCounter >= 1 && this.layEggCounter % 5 == 0 && this.level().getBlockState(pos.below()).is(this.getEggLayableBlockTag())) {
             this.level().levelEvent(2001, pos, Block.getId(this.level().getBlockState(pos.below())));
